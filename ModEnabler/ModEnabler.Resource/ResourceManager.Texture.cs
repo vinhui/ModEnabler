@@ -70,7 +70,7 @@ namespace ModEnabler.Resource
 
         private static Texture2D LoadNormalMap(byte[] arr)
         {
-            byte[] headerText = new byte[] { 118, 105, 110, 104, 117, 105, 45, 110, 109 };
+            byte[] headerText = new byte[] { 0x76, 0x69, 0x6e, 0x68, 0x75, 0x69, 0x2d, 0x6e, 0x6d };
 
             if (Utils.CompareByteArr(arr, headerText, 0, headerText.Length))
             {
