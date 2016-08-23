@@ -33,7 +33,7 @@ namespace ModEnabler.Resource
 
                 if (data.frames == null || data.frames.Length == 0)
                 {
-                    Debug.LogErrorFormat("TextureSheet {0} is not of the correct format or contains no textures.", name);
+                    Debug.LogError("SpriteSheet '" + name + "' is not of the correct format or contains no textures");
                     return null;
                 }
 
