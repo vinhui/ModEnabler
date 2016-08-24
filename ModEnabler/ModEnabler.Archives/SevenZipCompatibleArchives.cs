@@ -4,6 +4,10 @@ using SharpCompress.Archive;
 
 namespace ModEnabler.Archives
 {
+    /// <summary>
+    /// Archive type that supports what seven zip also support.
+    /// It's a wrapper for https://github.com/adamhathcock/sharpcompress
+    /// </summary>
     public class SevenZipCompatibleArchives : Archive
     {
         protected Stream stream;
