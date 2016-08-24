@@ -77,7 +77,7 @@ namespace ModEnabler
             backgroundWorker.RunWorkerAsync();
             //LoadMod();
 
-            ThreadWaiter.Create(this, LoadingDone);
+            ModThreadWaiter.Create(this, LoadingDone);
         }
 
         private void LoadMod()
@@ -197,16 +197,25 @@ namespace ModEnabler
                 archive.Dispose();
         }
 
+        /// <summary>
+        /// Component to run the callback on the main thread
+        /// </summary>
         [ExecuteInEditMode]
-        public class ThreadWaiter : MonoBehaviour
+        public class ModThreadWaiter : MonoBehaviour
         {
             private Mod mod;
             private Action callback;
 
-            public static ThreadWaiter Create(Mod mod, Action callback)
+            /// <summary>
+            /// Create a new instance of the thread waiter
+            /// </summary>
+            /// <param name="mod">The mod to wait for</param>
+            /// <param name="callback">Function to call when it'd done loading</param>
+            /// <returns></returns>
+            public static ModThreadWaiter Create(Mod mod, Action callback)
             {
                 GameObject go = new GameObject("Thread Waiter");
-                ThreadWaiter tw = go.AddComponent<ThreadWaiter>();
+                ModThreadWaiter tw = go.AddComponent<ModThreadWaiter>();
                 tw.mod = mod;
                 tw.callback = callback;
                 return tw;
