@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ModEnabler.Resource.DataObjects;
+using UnityEngine;
 
 namespace ModEnabler.Resource
 {

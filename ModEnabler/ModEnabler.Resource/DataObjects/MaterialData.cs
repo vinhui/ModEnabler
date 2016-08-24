@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ModEnabler.Resource
+namespace ModEnabler.Resource.DataObjects
 {
     /// <summary>
     /// A material that is in json format
