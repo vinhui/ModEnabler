@@ -85,12 +85,12 @@ namespace ModEnabler.Resource.DataObjects
 
             var a = ps.collision;
             a.enabled = collision.enabled;
-            a.bounce = Helpers.Convert(collision.bounce);
+            a.bounce = ParticleSystemHelpers.Convert(collision.bounce);
             a.collidesWith = collision.collidesWith;
-            a.dampen = Helpers.Convert(collision.dampen);
+            a.dampen = ParticleSystemHelpers.Convert(collision.dampen);
             a.enableDynamicColliders = collision.enableDynamicColliders;
             a.enableInteriorCollisions = collision.enableInteriorCollisions;
-            a.lifetimeLoss = Helpers.Convert(collision.lifetimeLoss);
+            a.lifetimeLoss = ParticleSystemHelpers.Convert(collision.lifetimeLoss);
             a.maxCollisionShapes = collision.maxCollisionShapes;
             a.minKillSpeed = collision.minKillSpeed;
             a.mode = collision.mode;
@@ -104,16 +104,16 @@ namespace ModEnabler.Resource.DataObjects
 
             var b = ps.colorBySpeed;
             b.enabled = colorBySpeed.enabled;
-            b.color = Helpers.Convert(colorBySpeed.color);
+            b.color = ParticleSystemHelpers.Convert(colorBySpeed.color);
             b.range = colorBySpeed.range;
 
             var c = ps.colorOverLifetime;
             c.enabled = colorOverLifetime.enabled;
-            c.color = Helpers.Convert(colorOverLifetime.color);
+            c.color = ParticleSystemHelpers.Convert(colorOverLifetime.color);
 
             var d = ps.emission;
             d.enabled = emission.enabled;
-            d.rate = Helpers.Convert(emission.rate);
+            d.rate = ParticleSystemHelpers.Convert(emission.rate);
             d.type = emission.type;
 
             var e = ps.externalForces;
@@ -124,23 +124,23 @@ namespace ModEnabler.Resource.DataObjects
             f.enabled = forceOverLifetime.enabled;
             f.randomized = forceOverLifetime.randomized;
             f.space = forceOverLifetime.space;
-            f.x = Helpers.Convert(forceOverLifetime.x);
-            f.y = Helpers.Convert(forceOverLifetime.y);
-            f.z = Helpers.Convert(forceOverLifetime.z);
+            f.x = ParticleSystemHelpers.Convert(forceOverLifetime.x);
+            f.y = ParticleSystemHelpers.Convert(forceOverLifetime.y);
+            f.z = ParticleSystemHelpers.Convert(forceOverLifetime.z);
             ps.gravityModifier = gravityModifier;
 
             var g = ps.inheritVelocity;
             g.enabled = inheritVelocity.enabled;
-            g.curve = Helpers.Convert(inheritVelocity.curve);
+            g.curve = ParticleSystemHelpers.Convert(inheritVelocity.curve);
             g.mode = inheritVelocity.mode;
 
             var h = ps.limitVelocityOverLifetime;
             h.enabled = limitVelocityOverLifetime.enabled;
             h.dampen = limitVelocityOverLifetime.dampen;
-            h.limit = Helpers.Convert(limitVelocityOverLifetime.limit);
-            h.limitX = Helpers.Convert(limitVelocityOverLifetime.limitX);
-            h.limitY = Helpers.Convert(limitVelocityOverLifetime.limitY);
-            h.limitZ = Helpers.Convert(limitVelocityOverLifetime.limitZ);
+            h.limit = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limit);
+            h.limitX = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limitX);
+            h.limitY = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limitY);
+            h.limitZ = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limitZ);
             h.separateAxes = limitVelocityOverLifetime.separateAxes;
             h.space = limitVelocityOverLifetime.space;
 
@@ -154,16 +154,16 @@ namespace ModEnabler.Resource.DataObjects
             i.enabled = rotationBySpeed.enabled;
             i.range = rotationBySpeed.range;
             i.separateAxes = rotationBySpeed.separateAxes;
-            i.x = Helpers.Convert(rotationBySpeed.x);
-            i.y = Helpers.Convert(rotationBySpeed.y);
-            i.z = Helpers.Convert(rotationBySpeed.z);
+            i.x = ParticleSystemHelpers.Convert(rotationBySpeed.x);
+            i.y = ParticleSystemHelpers.Convert(rotationBySpeed.y);
+            i.z = ParticleSystemHelpers.Convert(rotationBySpeed.z);
 
             var j = ps.rotationOverLifetime;
             j.enabled = rotationOverLifetime.enabled;
             j.separateAxes = rotationOverLifetime.separateAxes;
-            j.x = Helpers.Convert(rotationOverLifetime.x);
-            j.y = Helpers.Convert(rotationOverLifetime.y);
-            j.z = Helpers.Convert(rotationOverLifetime.z);
+            j.x = ParticleSystemHelpers.Convert(rotationOverLifetime.x);
+            j.y = ParticleSystemHelpers.Convert(rotationOverLifetime.y);
+            j.z = ParticleSystemHelpers.Convert(rotationOverLifetime.z);
 
             ps.scalingMode = scalingMode;
 
@@ -189,11 +189,11 @@ namespace ModEnabler.Resource.DataObjects
             var l = ps.sizeBySpeed;
             l.enabled = sizeBySpeed.enabled;
             l.range = sizeBySpeed.range;
-            l.size = Helpers.Convert(sizeBySpeed.size);
+            l.size = ParticleSystemHelpers.Convert(sizeBySpeed.size);
 
             var m = ps.sizeOverLifetime;
             m.enabled = sizeOverLifetime.enabled;
-            m.size = Helpers.Convert(sizeOverLifetime.size);
+            m.size = ParticleSystemHelpers.Convert(sizeOverLifetime.size);
 
             ps.startColor = startColor;
             ps.startDelay = startDelay;
@@ -222,7 +222,7 @@ namespace ModEnabler.Resource.DataObjects
             o.enabled = textureSheetAnimation.enabled;
             o.animation = textureSheetAnimation.animation;
             o.cycleCount = textureSheetAnimation.cycleCount;
-            o.frameOverTime = Helpers.Convert(textureSheetAnimation.frameOverTime);
+            o.frameOverTime = ParticleSystemHelpers.Convert(textureSheetAnimation.frameOverTime);
             o.numTilesX = textureSheetAnimation.numTilesX;
             o.numTilesY = textureSheetAnimation.numTilesY;
             o.rowIndex = textureSheetAnimation.rowIndex;
@@ -233,9 +233,9 @@ namespace ModEnabler.Resource.DataObjects
             var p = ps.velocityOverLifetime;
             p.enabled = velocityOverLifetime.enabled;
             p.space = velocityOverLifetime.space;
-            p.x = Helpers.Convert(velocityOverLifetime.x);
-            p.y = Helpers.Convert(velocityOverLifetime.y);
-            p.z = Helpers.Convert(velocityOverLifetime.z);
+            p.x = ParticleSystemHelpers.Convert(velocityOverLifetime.x);
+            p.y = ParticleSystemHelpers.Convert(velocityOverLifetime.y);
+            p.z = ParticleSystemHelpers.Convert(velocityOverLifetime.z);
 
             var pr = ps.GetComponent<ParticleSystemRenderer>();
             pr.renderMode = renderer.renderMode;
@@ -843,7 +843,7 @@ namespace ModEnabler.Resource.DataObjects
         }
     }
 
-    public static class Helpers
+    public static class ParticleSystemHelpers
     {
         public static ParticleSystem.MinMaxCurve Convert(ParticleSystemData.MinMaxCurve b)
         {
