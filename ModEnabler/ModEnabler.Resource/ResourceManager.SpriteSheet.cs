@@ -65,7 +65,7 @@ namespace ModEnabler.Resource
             }
         }
 
-        public static Sprite GetSpriteFromTextureSheet(string sheetName, string spriteName)
+        public static Sprite LoadSpriteFromSheet(string sheetName, string spriteName)
         {
             Dictionary<string, Sprite> sprites = LoadSpriteSheet(sheetName);
             if (sprites.ContainsKey(spriteName))
