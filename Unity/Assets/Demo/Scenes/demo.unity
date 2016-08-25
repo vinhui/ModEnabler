@@ -241,9 +241,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 144795376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e63460e4f78a5c498b58f8828e63530, type: 3}
+  m_Script: {fileID: 459781456, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileName: UI/metalPanel.png
+  spriteRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 100
+    height: 100
+  pivot: {x: 0, y: 0}
+  pixelsPerUnit: 500
+  extrude: 0
+  meshType: 1
+  border: {x: 12, y: 12, z: 12, w: 12}
 --- !u!1 &311213345
 GameObject:
   m_ObjectHideFlags: 0
