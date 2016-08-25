@@ -49,6 +49,9 @@ namespace ModEnabler
 
             if (asset == null)
             {
+                if (!AssetDatabase.IsValidFolder("Assets/ModEnabler/Resources"))
+                    AssetDatabase.CreateFolder("Assets/ModEnabler", "Resources");
+
                 AssetDatabase.CreateAsset(CreateInstance<ModsSettingsAsset>(), "Assets/ModEnabler/Resources/Settings.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
