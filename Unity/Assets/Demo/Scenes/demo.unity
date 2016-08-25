@@ -289,6 +289,7 @@ GameObject:
   - 64: {fileID: 321113952}
   - 114: {fileID: 321113951}
   - 114: {fileID: 321113946}
+  - 114: {fileID: 321113948}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -337,6 +338,18 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &321113948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 321113945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 716448202, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: Cube.mesh
 --- !u!33 &321113949
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -368,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: -151597204, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: cube.json
+  fileName: Cube.mesh
 --- !u!64 &321113952
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -507,7 +520,6 @@ GameObject:
   - 4: {fileID: 353690418}
   - 33: {fileID: 353690417}
   - 23: {fileID: 353690416}
-  - 64: {fileID: 353690415}
   - 114: {fileID: 353690413}
   - 114: {fileID: 353690412}
   m_Layer: 0
@@ -528,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: -151597204, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: monkey.json
+  fileName: Suzanne.mesh
 --- !u!114 &353690413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,18 +553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: red.json
---- !u!64 &353690415
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 353690411}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_Mesh: {fileID: 0}
 --- !u!23 &353690416
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Script: {fileID: -151597204, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: capsule.json
+  fileName: Capsule.mesh
 --- !u!114 &1751479952
 MonoBehaviour:
   m_ObjectHideFlags: 0
