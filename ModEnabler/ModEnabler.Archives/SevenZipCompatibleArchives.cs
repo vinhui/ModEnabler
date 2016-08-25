@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using SharpCompress.Archive;
+using System.Collections.Generic;
 using System.IO;
-using SharpCompress.Archive;
 
 namespace ModEnabler.Archives
 {
@@ -14,6 +14,7 @@ namespace ModEnabler.Archives
         protected IArchive archive;
 
         protected int _entryCount = 0;
+
         /// <summary>
         /// Get the amount of entries in the archive
         /// </summary>

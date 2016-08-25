@@ -196,8 +196,6 @@ namespace ModEnabler.Resource
 
         #endregion Default Type Writers
 
-
-
         #region Endianness
 
         public static byte[] ReadLittleEndian(this BinaryReader reader, int length)
