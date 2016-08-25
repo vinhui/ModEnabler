@@ -7,7 +7,7 @@ namespace ModEnabler.Resource.Components
     /// The base class for a component that needs to load something and then set that on another component
     /// </summary>
     /// <typeparam name="T">Type of the component you want to set something on</typeparam>
-    internal abstract class LoadResourceComponent<T> : MonoBehaviour
+    public abstract class LoadResourceComponent<T> : MonoBehaviour
     {
         /// <summary>
         /// Name of the file you should use
