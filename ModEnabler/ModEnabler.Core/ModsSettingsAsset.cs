@@ -15,7 +15,7 @@ namespace ModEnabler
         /// <summary>
         /// Extention of the external mod archives
         /// </summary>
-        public string modsSearchPattern = "*.tar";
+        public string modsSearchPattern = "*.zip";
 
         /// <summary>
         /// Name of the mod properties file
