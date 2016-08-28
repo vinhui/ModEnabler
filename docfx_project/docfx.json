@@ -71,5 +71,8 @@
 			"xrefmap-unityengine.yml",
 			"xrefmap-sharpcompress.yml",
 		],
+		"globalMetadata" : {
+			"_appTitle" : "Mod Enabler"
+		},
 	}
 }
