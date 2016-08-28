@@ -73,15 +73,15 @@ namespace ModEnabler.Archives
             return ArchiveEntry.Null;
         }
 
-        protected ArchiveEntry GetEntry(IArchiveEntry zipEntry)
+        protected ArchiveEntry GetEntry(IArchiveEntry sharpEntry)
         {
-            if (zipEntry != null && !zipEntry.IsDirectory)
+            if (sharpEntry != null && !sharpEntry.IsDirectory)
             {
                 ArchiveEntry archiveEntry = new ArchiveEntry();
-                archiveEntry.fullName = zipEntry.Key;
+                archiveEntry.fullName = sharpEntry.Key;
                 using (MemoryStream entryMemStream = new MemoryStream())
                 {
-                    var a = zipEntry.OpenEntryStream();
+                    var a = sharpEntry.OpenEntryStream();
                     archiveEntry.bytes = Utils.StreamToByteArray(a);
                 }
                 archiveEntry.fileLink = ArchiveEntry.Link.NoLink;
