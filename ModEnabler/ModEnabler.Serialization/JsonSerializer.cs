@@ -4,7 +4,7 @@ using System;
 namespace ModEnabler.Serialization
 {
     /// <summary>
-    /// Json serializer and deserializer
+    /// Json serializer and deserializer. Makes use of https://github.com/jacobdufault/fullserializer
     /// </summary>
     public class JsonSerializer : Serializer
     {
@@ -18,13 +18,7 @@ namespace ModEnabler.Serialization
         /// <returns>Returns the deserialized object</returns>
         public override T Deserialize<T>(string obj)
         {
-            obj = obj.Trim();
-            fsData data = fsJsonParser.Parse(obj);
-
-            object deserialized = null;
-            _serializer.TryDeserialize(data, typeof(T), ref deserialized).AssertSuccessWithoutWarnings();
-
-            return (T)deserialized;
+            return (T)Deserialize(typeof(T), obj);
         }
 
         /// <summary>
@@ -35,7 +29,7 @@ namespace ModEnabler.Serialization
         /// <returns>Returns the object in json format</returns>
         public override string Serialize<T>(T obj)
         {
-            return Serialize<T>(obj, false);
+            return Serialize(obj, false);
         }
 
         /// <summary>
