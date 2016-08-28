@@ -3,9 +3,9 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(MeshFilter))]
-    internal class LoadMeshResource : LoadResourceComponent<MeshFilter>
+    public class LoadMeshResource : LoadResourceComponent<MeshFilter>
     {
-        protected override void Set()
+        public override void Set()
         {
             var m = ResourceManager.LoadMesh(fileName);
             if (m != null)

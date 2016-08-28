@@ -2,9 +2,9 @@
 
 namespace ModEnabler.Resource.Components
 {
-    internal class LoadParticleSystemResource : LoadResourceComponent<ParticleSystem>
+    public class LoadParticleSystemResource : LoadResourceComponent<ParticleSystem>
     {
-        protected override void Set()
+        public override void Set()
         {
             ResourceManager.LoadParticleSystem(fileName, gameObject);
         }

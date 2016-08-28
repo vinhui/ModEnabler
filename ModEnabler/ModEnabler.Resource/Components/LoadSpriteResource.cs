@@ -3,7 +3,7 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    internal class LoadSpriteResource : LoadResourceComponent<SpriteRenderer>
+    public class LoadSpriteResource : LoadResourceComponent<SpriteRenderer>
     {
         [SerializeField]
         private Rect spriteRect;
@@ -23,7 +23,7 @@ namespace ModEnabler.Resource.Components
         [SerializeField]
         private Vector4 border;
 
-        protected override void Set()
+        public override void Set()
         {
             var s = ResourceManager.LoadSprite(fileName, spriteRect, pivot, pixelsPerUnit, extrude, meshType, border);
             if (s != null)

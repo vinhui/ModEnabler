@@ -3,9 +3,9 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(AudioSource))]
-    internal class LoadAudioClipResource : LoadResourceComponent<AudioSource>
+    public class LoadAudioClipResource : LoadResourceComponent<AudioSource>
     {
-        protected override void Set()
+        public override void Set()
         {
             var c = ResourceManager.LoadAudioClip(fileName);
             if (c != null)

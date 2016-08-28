@@ -3,9 +3,9 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(MeshCollider))]
-    internal class LoadMeshColliderResource : LoadResourceComponent<MeshCollider>
+    public class LoadMeshColliderResource : LoadResourceComponent<MeshCollider>
     {
-        protected override void Set()
+        public override void Set()
         {
             Mesh mesh = ResourceManager.LoadMesh(fileName);
 

@@ -70,6 +70,6 @@ namespace ModEnabler.Resource.Components
                 ModsManager.onModDeactivate.RemoveListener(setAction);
         }
 
-        protected abstract void Set();
+        public abstract void Set();
     }
 }

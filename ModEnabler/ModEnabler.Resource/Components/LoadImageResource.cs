@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(Image))]
-    internal class LoadImageResource : LoadResourceComponent<Image>
+    public class LoadImageResource : LoadResourceComponent<Image>
     {
         [SerializeField]
         private Rect spriteRect;
@@ -24,7 +24,7 @@ namespace ModEnabler.Resource.Components
         [SerializeField]
         private Vector4 border;
 
-        protected override void Set()
+        public override void Set()
         {
             var s = ResourceManager.LoadSprite(fileName, spriteRect, pivot, pixelsPerUnit, extrude, meshType, border);
             if (s != null)

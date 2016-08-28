@@ -3,9 +3,9 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(MeshRenderer))]
-    internal class LoadMaterialResource : LoadResourceComponent<MeshRenderer>
+    public class LoadMaterialResource : LoadResourceComponent<MeshRenderer>
     {
-        protected override void Set()
+        public override void Set()
         {
             var m = ResourceManager.LoadMaterial(fileName);
             if (m != null)

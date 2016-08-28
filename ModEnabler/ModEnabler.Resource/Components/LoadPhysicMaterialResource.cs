@@ -3,9 +3,9 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(Collider))]
-    internal class LoadPhysicMaterialResource : LoadResourceComponent<Collider>
+    public class LoadPhysicMaterialResource : LoadResourceComponent<Collider>
     {
-        protected override void Set()
+        public override void Set()
         {
             var m = ResourceManager.LoadPhysicMaterial(fileName);
             if (m != null)
