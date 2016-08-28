@@ -9,7 +9,7 @@ using Debug = UnityEngine.Debug;
 namespace ModEnabler
 {
     /// <summary>
-    /// Base class for everything mod related
+    /// Main class that brings it all together
     /// </summary>
     public static class ModsManager
     {
@@ -28,12 +28,29 @@ namespace ModEnabler
         public static ModsSettingsAsset settings { get; set; }
 
         /// <summary>
-        /// A full list of all the mods loaded
+        /// A full list of all the mods loaded (active AND inactive)
         /// </summary>
         public static IEnumerable<Mod> modsList { get { return _modsList; } }
 
         /// <summary>
-        /// Event for when all the mods are finished loading
+        /// Event for when all the mods are finished loading.
+        /// Won't be called after <see cref="modsLoaded"/> is set to true.
+        /// Example of how to use:
+        /// <code>
+        /// public class Test : MonoBehaviour
+        /// {
+        ///     private void Start()
+        ///     {
+        ///         if(!ModsManager.modsLoaded)
+        ///         {
+        ///             ModsManager.onModsLoaded.AddListener(Start);
+        ///             return;
+        ///         }
+        ///         
+        ///         Debug.Log("All mods are loaded at this point");
+        ///     }
+        /// }
+        /// </code>
         /// </summary>
         public static UnityEvent onModsLoaded { get; private set; }
 
@@ -57,6 +74,9 @@ namespace ModEnabler
         /// </summary>
         public static Serializer serializer { get { return settings.serializer; } }
 
+        /// <summary>
+        /// Check this to see if all the mods are already loaded
+        /// </summary>
         public static bool modsLoaded { get; private set; }
 
         static ModsManager()
@@ -180,7 +200,7 @@ namespace ModEnabler
         /// <summary>
         /// Get the contents of a file
         /// </summary>
-        /// <param name="path">Full path of the file (within the archives)</param>
+        /// <param name="path">Full path to the file (within the archives)</param>
         /// <returns>Returns the contents of the file in bytes, null if it doesn't exist</returns>
         public static byte[] GetFileContents(string path)
         {
@@ -192,7 +212,7 @@ namespace ModEnabler
         /// Get the contents of a file
         /// </summary>
         /// <param name="path">Full path of the file (within the archives)</param>
-        /// <param name="mod">The mod that the file exists in</param>
+        /// <param name="mod">The mod that the returned file is in</param>
         /// <returns>Returns the contents of the file in bytes, null if it doesn't exist</returns>
         public static byte[] GetFileContents(string path, out Mod mod)
         {
@@ -228,7 +248,7 @@ namespace ModEnabler
         /// Get the contents of a file, in UTF8 format
         /// </summary>
         /// <param name="path">Full path of the file</param>
-        /// <param name="mod">The mod that the file exists in</param>
+        /// <param name="mod">The mod that the returned file is in</param>
         /// <returns>Returns the contents of the file as string, null if it doesn't exist</returns>
         public static string GetFileContentsString(string path, out Mod mod)
         {
@@ -253,7 +273,7 @@ namespace ModEnabler
         /// Get all the files from a folder
         /// </summary>
         /// <param name="folder">Full path to the folder</param>
-        /// <returns>Returns a dictionary of file paths and the mod the file is in</returns>
+        /// <returns>Returns a dictionary of file paths and the <see cref="Mod"/> the file is in</returns>
         public static Dictionary<Mod, Archives.ArchiveEntry[]> GetFilesInFolder(string folder)
         {
             Dictionary<Mod, List<Archives.ArchiveEntry>> entries = new Dictionary<Mod, List<Archives.ArchiveEntry>>();

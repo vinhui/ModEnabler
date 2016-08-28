@@ -14,6 +14,9 @@ namespace ModEnabler
     /// </summary>
     public class Mod : Comparer<Mod>, IDisposable
     {
+        /// <summary>
+        /// Internal name of the mod, the filename
+        /// </summary>
         public string internalName { get; private set; }
 
         /// <summary>
@@ -33,7 +36,7 @@ namespace ModEnabler
 
         /// <summary>
         /// Is this mod currently active.
-        /// You should use <c>ModsManager.ActivateMod()</c> or <c>ModsManager.DeactivateMod()</c> to enable or disable this mod, otherwise it won't send the events!
+        /// You should use <see cref="ModsManager.ActivateMod(Mod)"/> or <see cref="ModsManager.DeactivateMod(Mod)"/> to enable or disable this mod, otherwise it won't send the events!
         /// </summary>
         public bool active { get; set; }
 
@@ -110,7 +113,7 @@ namespace ModEnabler
             }
         }
 
-        public void LoadingDone()
+        private void LoadingDone()
         {
             if (archive != null)
             {
@@ -131,7 +134,7 @@ namespace ModEnabler
         /// Get a file from this mod
         /// </summary>
         /// <param name="path">Full path to the file</param>
-        /// <returns>If it will return null if it doesn't exist</returns>
+        /// <returns>The array will be null if the file doesn't exist</returns>
         public byte[] GetFile(string path)
         {
             if (archive != null)
@@ -147,7 +150,7 @@ namespace ModEnabler
         /// Get all the entries that are inside a folder
         /// </summary>
         /// <param name="path">Full path to the folder</param>
-        /// <returns>Returns an array of entries</returns>
+        /// <returns>Returns a list of entries</returns>
         public IEnumerable<ArchiveEntry> GetFilesInFolder(string path)
         {
             if (archive != null)
@@ -157,10 +160,10 @@ namespace ModEnabler
         }
 
         /// <summary>
-        /// Get a file from this mod as a string
+        /// Get the contents of a file as string
         /// </summary>
         /// <param name="path">Full path to the file</param>
-        /// <returns>If it will return null if it doesn't exist</returns>
+        /// <returns>Will return null if the file doesn't exist</returns>
         public string GetFileAsString(string path)
         {
             byte[] bytes = GetFile(path);
@@ -210,8 +213,8 @@ namespace ModEnabler
             /// Create a new instance of the thread waiter
             /// </summary>
             /// <param name="mod">The mod to wait for</param>
-            /// <param name="callback">Function to call when it'd done loading</param>
-            /// <returns></returns>
+            /// <param name="callback">Function to call when it's done loading</param>
+            /// <returns>Returns the instance of the created thread waiter</returns>
             public static ModThreadWaiter Create(Mod mod, Action callback)
             {
                 GameObject go = new GameObject("Thread Waiter");
