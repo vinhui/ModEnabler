@@ -69,6 +69,7 @@
 		"noLangKeyword" : false,
 		"xref" : [
 			"xrefmap-unityengine.yml",
+			"xrefmap-sharpcompress.yml",
 		],
 	}
 }

@@ -1,0 +1,9 @@
+### YamlMime:XRefMap
+sorted: false
+references:
+- uid: SharpCompress
+  href: https://github.com/adamhathcock/sharpcompress
+- uid: SharpCompress.Archive.IArchive
+  href: https://github.com/adamhathcock/sharpcompress/blob/master/src/SharpCompress/Archive/IArchive.cs
+- uid: SharpCompress.Archive.IArchiveEntry
+  href: https://github.com/adamhathcock/sharpcompress/blob/master/src/SharpCompress/Archive/IArchiveEntry.cs
