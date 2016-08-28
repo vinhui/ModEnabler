@@ -167,7 +167,15 @@ references:
   href: https://docs.unity3d.com/ScriptReference/Object.GetInstanceID.html
 - uid: UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion)
   href: https://docs.unity3d.com/ScriptReference/Object.Instantiate.html
+- uid: UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)
+  href: https://docs.unity3d.com/ScriptReference/Object.Instantiate.html
 - uid: UnityEngine.Object.Instantiate(UnityEngine.Object)
+  href: https://docs.unity3d.com/ScriptReference/Object.Instantiate.html
+- uid: UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Transform)
+  href: https://docs.unity3d.com/ScriptReference/Object.Instantiate.html
+- uid: UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Transform,System.Boolean)
+  href: https://docs.unity3d.com/ScriptReference/Object.Instantiate.html
+- uid: UnityEngine.Object.Instantiate``1(``0)
   href: https://docs.unity3d.com/ScriptReference/Object.Instantiate.html
 - uid: UnityEngine.Object.FindObjectsOfType``1
   href: https://docs.unity3d.com/ScriptReference/Object.FindObjectsOfType.html
@@ -239,6 +247,10 @@ references:
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html
 - uid: UnityEngine.Component.GetComponentsInChildren``1(System.Boolean)
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html
+- uid: UnityEngine.Component.GetComponentsInChildren``1(System.Boolean,System.Collections.Generic.List{``0})
+  href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html
+- uid: UnityEngine.Component.GetComponentsInChildren``1(System.Collections.Generic.List{``0})
+  href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html
 - uid: UnityEngine.Component.GetComponentInParent(System.Type)
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponentInParent.html
 - uid: UnityEngine.Component.GetComponentInParent``1
@@ -249,11 +261,17 @@ references:
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInParent.html
 - uid: UnityEngine.Component.GetComponentsInParent``1(System.Boolean)
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInParent.html
+- uid: UnityEngine.Component.GetComponentsInParent``1(System.Boolean,System.Collections.Generic.List{``0})
+  href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInParent.html
 - uid: UnityEngine.Component.GetComponentsInParent``1
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponentsInParent.html
 - uid: UnityEngine.Component.GetComponents(System.Type)
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponents.html
 - uid: UnityEngine.Component.GetComponents``1
+  href: https://docs.unity3d.com/ScriptReference/Component.GetComponents.html
+- uid: UnityEngine.Component.GetComponents(System.Type,System.Collections.Generic.List{UnityEngine.Component})
+  href: https://docs.unity3d.com/ScriptReference/Component.GetComponents.html
+- uid: UnityEngine.Component.GetComponents``1(System.Collections.Generic.List{``0})
   href: https://docs.unity3d.com/ScriptReference/Component.GetComponents.html
 - uid: UnityEngine.Component.CompareTag(System.String)
   href: https://docs.unity3d.com/ScriptReference/Component.CompareTag.html
@@ -371,3 +389,11 @@ references:
   href: https://docs.unity3d.com/ScriptReference/ScriptableObject.CreateInstance.html
 - uid: UnityEngine.SpriteMeshType
   href: https://docs.unity3d.com/ScriptReference/SpriteMeshType.html
+- uid: UnityEngine.Events.UnityEvent`1.AddListener(UnityEngine.Events.UnityAction{`0})
+  href: https://docs.unity3d.com/ScriptReference/Events.UnityEvent.AddListener.html
+- uid: UnityEngine.Events.UnityEvent`1.RemoveListener(UnityEngine.Events.UnityAction{`0})
+  href: https://docs.unity3d.com/ScriptReference/Events.UnityEvent.RemoveListener.html
+- uid: UnityEngine.Events.UnityEvent`1.FindMethod_Impl(System.String,System.Object)
+  href: https://docs.unity3d.com/ScriptReference/Events.UnityEvent.html
+- uid: UnityEngine.Events.UnityEvent`1.Invoke(`0)
+  href: https://docs.unity3d.com/ScriptReference/Events.UnityEvent.Invoke.html
