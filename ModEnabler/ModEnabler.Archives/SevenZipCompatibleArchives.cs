@@ -5,14 +5,22 @@ using System.IO;
 namespace ModEnabler.Archives
 {
     /// <summary>
-    /// Archive type that supports what seven zip also support.
+    /// Archive type that supports what seven zip supports.
     /// It's a wrapper for https://github.com/adamhathcock/sharpcompress
     /// </summary>
     public class SevenZipCompatibleArchives : Archive
     {
+        /// <summary>
+        /// The file stream
+        /// </summary>
         protected Stream stream;
+        /// <summary>
+        /// Reference to the sharpcompress archive
+        /// </summary>
         protected IArchive archive;
-
+        /// <summary>
+        /// Amount of entries inside this archive
+        /// </summary>
         protected int _entryCount = 0;
 
         /// <summary>
@@ -73,6 +81,11 @@ namespace ModEnabler.Archives
             return ArchiveEntry.Null;
         }
 
+        /// <summary>
+        /// Convert the sharpcompress entry to our <see cref="ArchiveEntry"/>
+        /// </summary>
+        /// <param name="sharpEntry">SharpCompress entry item</param>
+        /// <returns>Returns the converted type</returns>
         protected ArchiveEntry GetEntry(IArchiveEntry sharpEntry)
         {
             if (sharpEntry != null && !sharpEntry.IsDirectory)

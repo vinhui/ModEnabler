@@ -3,14 +3,14 @@
 namespace ModEnabler.Archives
 {
     /// <summary>
-    /// Am entry of an archive
+    /// An entry of an archive
     /// </summary>
     public struct ArchiveEntry
     {
         private bool _isNull;
 
         /// <summary>
-        /// The name of the entry (without path, including extention)
+        /// The name of the entry (without path, includes extention)
         /// </summary>
         public string name
         {
@@ -21,7 +21,7 @@ namespace ModEnabler.Archives
         }
 
         /// <summary>
-        /// Return a null entry
+        /// Returns an null entry
         /// </summary>
         public static ArchiveEntry Null
         {
@@ -45,7 +45,7 @@ namespace ModEnabler.Archives
         }
 
         /// <summary>
-        /// Full path and name of the entry
+        /// Full name of the entry
         /// </summary>
         public string fullName;
 
@@ -55,7 +55,7 @@ namespace ModEnabler.Archives
         public byte[] bytes;
 
         /// <summary>
-        /// If the file a link to another file
+        /// If the file links to another file
         /// </summary>
         internal Link fileLink;
 
