@@ -354,6 +354,21 @@ namespace ModEnabler
             {
                 Dispose();
             }
+
+#if DEBUG
+            private void OnGUI()
+            {
+                GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+                GUILayout.BeginVertical();
+                GUILayout.FlexibleSpace();
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                GUILayout.Label("Mod Enabler Debug, Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                GUILayout.EndHorizontal();
+                GUILayout.EndVertical();
+                GUILayout.EndArea();
+            }
+#endif
         }
 
         /// <summary>
