@@ -37,6 +37,15 @@
 				"dest" : "api",
 				"exclude" : [
 				]
+			},{
+				"files" : [
+					"**.yml",
+					"**.md"
+				],
+				"src" : "wiki",
+				"dest" : "wiki",
+				"exclude" : [
+				]
 			},
 		],
 		"resource" : [{
