@@ -1,7 +1,9 @@
 ---
 uid: index.md
-title: Wiki Home
+title: Wiki
 ---
+
+# Wiki
 
 Welcome to the wiki of Mod Enabler, an Unity asset for asset modding.
 
