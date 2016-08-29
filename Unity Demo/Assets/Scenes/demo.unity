@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 459781456, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: UI/metalPanel.png
+  fileName: UI/panel.png
   spriteRect:
     serializedVersion: 2
     x: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
     width: 100
     height: 100
   pivot: {x: 0, y: 0}
-  pixelsPerUnit: 500
+  pixelsPerUnit: 250
   extrude: 0
   meshType: 1
   border: {x: 12, y: 12, z: 12, w: 12}
@@ -301,9 +301,8 @@ GameObject:
   - 64: {fileID: 321113952}
   - 114: {fileID: 321113951}
   - 114: {fileID: 321113946}
-  - 114: {fileID: 321113948}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Item1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,18 +349,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!114 &321113948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321113945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 716448202, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fileName: Cube.mesh
 --- !u!33 &321113949
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -393,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: -151597204, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: Cube.mesh
+  fileName: Item1.mesh
 --- !u!64 &321113952
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -434,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: -1796641895, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: carefree.ogg
+  fileName: background.ogg
 --- !u!82 &330674312
 AudioSource:
   m_ObjectHideFlags: 0
@@ -535,7 +522,7 @@ GameObject:
   - 114: {fileID: 353690413}
   - 114: {fileID: 353690412}
   m_Layer: 0
-  m_Name: Monkey
+  m_Name: Item2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -552,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: -151597204, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: Suzanne.mesh
+  fileName: Item2.mesh
 --- !u!114 &353690413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,7 +1060,7 @@ GameObject:
   - 114: {fileID: 1751479952}
   - 114: {fileID: 1751479951}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Item3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: -151597204, guid: 844b6cf6d67158543b5d86b40e3ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: Capsule.mesh
+  fileName: Item3.mesh
 --- !u!114 &1751479952
 MonoBehaviour:
   m_ObjectHideFlags: 0
