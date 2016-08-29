@@ -22,6 +22,3 @@ Bolt_DebugStart_Build/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
-#[Mm]ods/**/
-*.tar
-*.zip
