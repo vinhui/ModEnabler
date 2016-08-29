@@ -9,5 +9,5 @@ You can load files as text with `ResourceManager.LoadText()`. If you don't want 
 
 When the text is actually an serialized object, you can deserialize it with `ModsManager.serializer.Deserialize<>()`.
 
-  [settings]: settings "wikilink"
+  [settings]: xref:settings.md
   [UTF-8]: https://en.wikipedia.org/wiki/UTF-8
