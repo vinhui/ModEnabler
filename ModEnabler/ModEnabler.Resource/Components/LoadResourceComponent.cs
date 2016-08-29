@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace ModEnabler.Resource.Components
@@ -41,6 +42,8 @@ namespace ModEnabler.Resource.Components
             setAction = (m) => { Set(); };
 
             componentToSet = GetComponent<T>();
+
+            RuntimeHelpers.RunClassConstructor(typeof(ResourceManager).TypeHandle);
 
             if (ModsManager.modsLoaded)
                 Set();
