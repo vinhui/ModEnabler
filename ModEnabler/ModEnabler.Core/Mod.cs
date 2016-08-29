@@ -43,6 +43,7 @@ namespace ModEnabler
         private Stream stream;
         internal bool isDoneLoading { get; private set; }
         private Action<Mod> callback;
+        private BackgroundWorker backgroundWorker;
 
         /// <summary>
         /// Create a new mod object
@@ -73,7 +74,7 @@ namespace ModEnabler
             this.stream = stream;
             this.callback = callback;
 
-            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerReportsProgress = false;
             backgroundWorker.WorkerSupportsCancellation = false;
             backgroundWorker.DoWork += (sender, args) => LoadMod();
@@ -120,6 +121,9 @@ namespace ModEnabler
                 while (archive.errorMessages.Count > 0)
                     Debug.Log(archive.errorMessages.Dequeue());
             }
+
+            if (backgroundWorker != null)
+                backgroundWorker.Dispose();
 
             ArchiveEntry propertiesEntry = archive[ModsManager.settings.modPropertiesFile];
             if (!propertiesEntry.isNull)
@@ -198,6 +202,9 @@ namespace ModEnabler
 
             if (archive != null)
                 archive.Dispose();
+
+            if (backgroundWorker != null)
+                backgroundWorker.Dispose();
         }
 
         /// <summary>
