@@ -78,21 +78,27 @@ namespace ModEnabler.Resource
         /// <summary>
         /// Clear the entire cache
         /// </summary>
-        internal static void Clear()
+        public static void Clear()
         {
-            ResourceCache.cacheList.Clear();
+            if (ModsManager.settings.debugLogging)
+                Debug.Log("Clearing resources cache");
+
+            cacheList.Clear();
         }
 
         /// <summary>
         /// Clear all the items that are in <paramref name="mod"/>
         /// </summary>
         /// <param name="mod">The mode to clear the cache for</param>
-        internal static void Clear(Mod mod)
+        public static void Clear(Mod mod)
         {
             if (mod == null)
                 return;
 
-            foreach (CacheTypeItem cacheItem in ResourceCache.cacheList)
+            if (ModsManager.settings.debugLogging)
+                Debug.Log("Clearing resource cache for mod " + mod.internalName);
+
+            foreach (CacheTypeItem cacheItem in cacheList)
             {
                 for (int i = cacheItem.entries.Count - 1; i >= 0; i--)
                 {
