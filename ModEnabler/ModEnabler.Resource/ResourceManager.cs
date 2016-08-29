@@ -9,7 +9,7 @@ namespace ModEnabler.Resource
         {
             // Initialize some stuff on first use
 
-            ModsManager.onModsReloaded.AddListener(() =>
+            ModsManager.onPreModsLoaded.AddListener(() =>
             {
                 ResourceCache.Clear();
             });

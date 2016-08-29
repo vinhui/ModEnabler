@@ -10,7 +10,6 @@ public class ReflectionProbeRefresh : MonoBehaviour
     {
         this.reflectionProbe = this.GetComponent<ReflectionProbe>();
 
-        ModsManager.onModsReloaded.AddListener(this.Refresh);
         ModsManager.onModActivate.AddListener((mod) => { this.Refresh(); });
         ModsManager.onModDeactivate.AddListener((mod) => { this.Refresh(); });
 

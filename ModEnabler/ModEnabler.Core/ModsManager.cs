@@ -57,7 +57,7 @@ namespace ModEnabler
         /// <summary>
         /// Event for when all the mods get reloaded
         /// </summary>
-        public static UnityEvent onModsReloaded { get; private set; }
+        public static UnityEvent onPreModsLoaded { get; private set; }
 
         /// <summary>
         /// Event for when a mod gets activated
@@ -91,7 +91,7 @@ namespace ModEnabler
             }
 
             onModsLoaded = new UnityEvent();
-            onModsReloaded = new UnityEvent();
+            onPreModsLoaded = new UnityEvent();
             onModActivate = new ModEvent();
             onModDeactivate = new ModEvent();
 
@@ -124,12 +124,17 @@ namespace ModEnabler
             if (settings.debugLogging)
                 Debug.Log("Reloading all mods");
 
+            modsLoaded = false;
+
+            onPreModsLoaded.Invoke();
             Dispose();
 
             _modsList = new List<Mod>();
 
-            LoadBuiltInMods();
-            LoadExternalMods();
+            if (settings.load[(int)LoadingType.BuiltInAtInit])
+                LoadBuiltInMods();
+            if (settings.load[(int)LoadingType.ExternalAtInit])
+                LoadExternalMods();
         }
 
         /// <summary>

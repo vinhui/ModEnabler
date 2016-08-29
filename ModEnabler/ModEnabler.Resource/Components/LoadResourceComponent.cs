@@ -49,7 +49,6 @@ namespace ModEnabler.Resource.Components
                 Set();
             else
                 ModsManager.onModsLoaded.AddListener(Set);
-            ModsManager.onModsReloaded.AddListener(Set);
             ModsManager.onModActivate.AddListener(setAction);
             ModsManager.onModDeactivate.AddListener(setAction);
         }
@@ -65,8 +64,6 @@ namespace ModEnabler.Resource.Components
             // Some cleanup here
             if (ModsManager.onModsLoaded != null)
                 ModsManager.onModsLoaded.RemoveListener(Set);
-            if (ModsManager.onModsReloaded != null)
-                ModsManager.onModsReloaded.RemoveListener(Set);
             if (ModsManager.onModActivate != null && setAction != null)
                 ModsManager.onModActivate.RemoveListener(setAction);
             if (ModsManager.onModDeactivate != null && setAction != null)
