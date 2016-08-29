@@ -12,14 +12,17 @@ namespace ModEnabler.Resource
             ModsManager.onPreModsLoaded.AddListener(() =>
             {
                 ResourceCache.Clear();
+                Resources.UnloadUnusedAssets();
             });
             ModsManager.onModActivate.AddListener((m) =>
             {
                 ResourceCache.Clear();
+                Resources.UnloadUnusedAssets();
             });
             ModsManager.onModDeactivate.AddListener((m) =>
             {
                 ResourceCache.Clear(m);
+                Resources.UnloadUnusedAssets();
             });
         }
 
