@@ -124,6 +124,8 @@ namespace ModEnabler
             if (settings.debugLogging)
                 Debug.Log("Reloading all mods");
 
+            Dispose();
+
             _modsList = new List<Mod>();
 
             LoadBuiltInMods();
