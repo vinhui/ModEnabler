@@ -14,10 +14,12 @@ namespace ModEnabler.Archives
         /// The file stream
         /// </summary>
         protected Stream stream;
+
         /// <summary>
         /// Reference to the sharpcompress archive
         /// </summary>
         protected IArchive archive;
+
         /// <summary>
         /// Amount of entries inside this archive
         /// </summary>

@@ -46,7 +46,7 @@ namespace ModEnabler
         ///             ModsManager.onModsLoaded.AddListener(Start);
         ///             return;
         ///         }
-        ///         
+        ///
         ///         Debug.Log("All mods are loaded at this point");
         ///     }
         /// }
