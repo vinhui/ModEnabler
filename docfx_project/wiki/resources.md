@@ -8,7 +8,7 @@ title: Resources
 Importing Resources
 -------------------
 
-There are several components to load a resource onto the object the component is on. For example the `LoadMeshResource` component. The following components are available:
+There are several components to load a resource onto the object the component is on. The following components are available:
 
 -   LoadAudioClipResource
 -   LoadImageResource
