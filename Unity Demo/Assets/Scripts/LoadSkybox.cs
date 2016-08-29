@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class LoadSkybox : LoadResourceComponent<Transform>
 {
-    protected override void Set()
+    public override void Set()
     {
         RenderSettings.skybox = ResourceManager.LoadMaterial(base.fileName);
     }
