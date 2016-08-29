@@ -31,9 +31,9 @@ public class ModsListUI : MonoBehaviour
             // Toggle the mod's active state
             bool active = item.active;
             active = GUILayout.Toggle(active, " Active");
+            // The check it so that we dont flood the system, otherwise it would set the state every frame
             if (item.active != active)
             {
-                // The check is so that we dont flood the system, otherwise it would set the state every frame
                 if (active)
                     ModsManager.ActivateMod(item);
                 else
