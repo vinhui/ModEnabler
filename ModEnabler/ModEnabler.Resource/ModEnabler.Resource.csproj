@@ -54,6 +54,7 @@
     <Compile Include="Components\LoadResourceComponent.cs" />
     <Compile Include="Components\LoadParticleSystemResource.cs" />
     <Compile Include="Components\LoadSpriteResource.cs" />
+    <Compile Include="DataObjects\AnimationClipData.cs" />
     <Compile Include="DataObjects\AudioData.cs" />
     <Compile Include="DataObjects\MaterialData.cs" />
     <Compile Include="DataObjects\MeshData.cs" />
