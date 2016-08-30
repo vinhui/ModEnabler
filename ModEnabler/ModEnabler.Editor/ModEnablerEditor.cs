@@ -298,7 +298,7 @@ internal class ModEnablerEditor : EditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
-    private static void SuccessDialog(string path)
+    private void SuccessDialog(string path)
     {
         EditorUtility.DisplayDialog(
             "Exported",
@@ -328,7 +328,7 @@ internal class ModEnablerEditor : EditorWindow
 
     #endregion UI
 
-    private static void Write(string data, string path)
+    private void Write(string data, string path)
     {
         File.WriteAllText(path, data.Trim(), ModsManager.settings.encoding);
 
@@ -336,7 +336,7 @@ internal class ModEnablerEditor : EditorWindow
         DisposeModsManager();
     }
 
-    private static void Write(byte[] data, string path)
+    private void Write(byte[] data, string path)
     {
         File.WriteAllBytes(path, data);
 
@@ -345,7 +345,7 @@ internal class ModEnablerEditor : EditorWindow
 
     #region Material Export
 
-    private static MaterialData ExportMaterial(Material mat)
+    private MaterialData ExportMaterial(Material mat)
     {
         MaterialData mData = new MaterialData(mat);
         List<MaterialData.ShaderProperty> shaderProperties = new List<MaterialData.ShaderProperty>();
@@ -363,7 +363,7 @@ internal class ModEnablerEditor : EditorWindow
         return mData;
     }
 
-    private static List<MaterialData.ShaderProperty> GetColors(SerializedProperty root, Material mat)
+    private List<MaterialData.ShaderProperty> GetColors(SerializedProperty root, Material mat)
     {
         SerializedProperty props = root.FindPropertyRelative("m_Colors");
         List<MaterialData.ShaderProperty> shaderProperties = new List<MaterialData.ShaderProperty>(props.arraySize);
@@ -385,7 +385,7 @@ internal class ModEnablerEditor : EditorWindow
         return shaderProperties;
     }
 
-    private static List<MaterialData.ShaderProperty> GetFloats(SerializedProperty root, Material mat)
+    private List<MaterialData.ShaderProperty> GetFloats(SerializedProperty root, Material mat)
     {
         SerializedProperty props = root.FindPropertyRelative("m_Floats");
         List<MaterialData.ShaderProperty> shaderProperties = new List<MaterialData.ShaderProperty>(props.arraySize);
@@ -406,7 +406,7 @@ internal class ModEnablerEditor : EditorWindow
         return shaderProperties;
     }
 
-    private static List<MaterialData.ShaderProperty> GetTextures(SerializedProperty root, Material mat)
+    private List<MaterialData.ShaderProperty> GetTextures(SerializedProperty root, Material mat)
     {
         SerializedProperty props = root.FindPropertyRelative("m_TexEnvs");
         List<MaterialData.ShaderProperty> shaderProperties = new List<MaterialData.ShaderProperty>(props.arraySize * 3);
