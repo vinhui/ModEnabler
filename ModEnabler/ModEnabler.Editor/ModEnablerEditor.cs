@@ -24,7 +24,8 @@ internal class ModEnablerEditor : EditorWindow
         Material,
         ParticleSystem,
         Normalmap,
-        PhysicMaterial
+        PhysicMaterial,
+        AnimationClip,
     }
 
     #region Menu Items
@@ -170,6 +171,33 @@ internal class ModEnablerEditor : EditorWindow
         window.OnEnable();
     }
 
+    [MenuItem("Mod Enabler/Import Animation Clip", priority = 101)]
+    internal static void ImportAnimationClip()
+    {
+        string loadPath = EditorUtility.OpenFilePanel(
+                   "Import Animation Clip",
+                   Application.dataPath,
+                   "json");
+
+        if (!string.IsNullOrEmpty(loadPath))
+        {
+            AnimationClipData jsonClip = ModsManager.serializer.Deserialize<AnimationClipData>(File.ReadAllText(loadPath));
+            AnimationClip animationClip = jsonClip.ToUnity();
+            AssetDatabase.CreateAsset(animationClip, "Assets/" + Path.GetFileNameWithoutExtension(loadPath) + ".asset");
+
+            DisposeModsManager();
+        }
+    }
+
+    [MenuItem("Mod Enabler/Export Animation Clip", priority = 102)]
+    internal static void ExportAnimationClip()
+    {
+        ModEnablerEditor window = (ModEnablerEditor)GetWindow(typeof(ModEnablerEditor), true, "Animation Clip Exporter", true);
+        window.exportType = ExportType.AnimationClip;
+        window.Show();
+        window.OnEnable();
+    }
+
     #endregion Menu Items
 
     #region UI
@@ -196,6 +224,10 @@ internal class ModEnablerEditor : EditorWindow
 
             case ExportType.PhysicMaterial:
                 exportT = typeof(PhysicMaterial);
+                break;
+
+            case ExportType.AnimationClip:
+                exportT = typeof(AnimationClip);
                 break;
 
             default:
@@ -261,6 +293,11 @@ internal class ModEnablerEditor : EditorWindow
                     case ExportType.PhysicMaterial:
                         foreach (var i in selectedObjects.Where(x => x != null))
                             Write(ModsManager.serializer.Serialize(new PhysicMaterialData((PhysicMaterial)i)), Path.Combine(savePath, i.name + "." + ext));
+                        break;
+
+                    case ExportType.AnimationClip:
+                        foreach (var i in selectedObjects.Where(x => x != null))
+                            Write(ModsManager.serializer.Serialize(ExportAnimationClip((AnimationClip)i)), Path.Combine(savePath, i.name + "." + ext));
                         break;
 
                     default:
@@ -514,6 +551,36 @@ internal class ModEnablerEditor : EditorWindow
     }
 
     #endregion Normalmap Export
+
+    #region Animation Export
+
+    private static AnimationClipData ExportAnimationClip(AnimationClip clip)
+    {
+        AnimationClipData animData = new AnimationClipData();
+        animData.name = clip.name;
+        animData.legacy = clip.legacy;
+        animData.localBounds = clip.localBounds;
+        animData.wrapMode = clip.wrapMode;
+
+        EditorCurveBinding[] bindings = AnimationUtility.GetCurveBindings(clip);
+        animData.curves = new AnimationClipData.ClipCurveData[bindings.Length];
+
+        for (int i = 0; i < bindings.Length; i++)
+        {
+            AnimationCurve curve = AnimationUtility.GetEditorCurve(clip, bindings[i]);
+            animData.curves[i] = new AnimationClipData.ClipCurveData()
+            {
+                relativePath = bindings[i].path,
+                propertyName = bindings[i].propertyName,
+                type = bindings[i].type.FullName + ", " + bindings[i].type.Assembly.FullName,
+                curve = new AnimationClipData.AnimationCurveData(curve)
+            };
+        }
+
+        return animData;
+    }
+
+    #endregion Animation Export
 
     private static void DisposeModsManager()
     {
