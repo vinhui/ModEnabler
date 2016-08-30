@@ -515,8 +515,8 @@ namespace ModEnabler.Resource.DataObjects
         {
             public float constantMax;
             public float constantMin;
-            public AnimCurve curveMax;
-            public AnimCurve curveMin;
+            public AnimationClipData.AnimationCurveData curveMax;
+            public AnimationClipData.AnimationCurveData curveMin;
             public float curveScalar;
             public ParticleSystemCurveMode mode;
 
@@ -526,8 +526,8 @@ namespace ModEnabler.Resource.DataObjects
                 {
                     constantMax = a.constantMax,
                     constantMin = a.constantMin,
-                    curveMax = a.curveMax,
-                    curveMin = a.curveMin,
+                    curveMax = new AnimationClipData.AnimationCurveData(a.curveMax),
+                    curveMin = new AnimationClipData.AnimationCurveData(a.curveMin),
                     curveScalar = a.curveScalar,
                     mode = a.mode
                 };
@@ -778,69 +778,6 @@ namespace ModEnabler.Resource.DataObjects
                 };
             }
         }
-
-        public struct AnimCurve
-        {
-            public KeyFrame[] keys;
-
-            public static implicit operator AnimationCurve(AnimCurve a)
-            {
-                if (a.keys == null)
-                    return null;
-
-                AnimationCurve b = new AnimationCurve();
-                foreach (var item in a.keys)
-                    b.AddKey(item);
-
-                return b;
-            }
-
-            public static implicit operator AnimCurve(AnimationCurve a)
-            {
-                AnimCurve b = new AnimCurve();
-                if (a != null && a.keys != null && a.keys.Length > 0)
-                {
-                    b.keys = new KeyFrame[a.length];
-                    for (int i = 0; i < b.keys.Length; i++)
-                        b.keys[i] = a.keys[i];
-                }
-
-                return b;
-            }
-        }
-
-        public struct KeyFrame
-        {
-            public float time;
-            public float value;
-            public int tangentMode;
-            public float inTangent;
-            public float outTangent;
-
-            public static implicit operator UnityEngine.Keyframe(KeyFrame a)
-            {
-                return new Keyframe
-                {
-                    inTangent = a.inTangent,
-                    outTangent = a.outTangent,
-                    tangentMode = a.tangentMode,
-                    time = a.time,
-                    value = a.value
-                };
-            }
-
-            public static implicit operator KeyFrame(UnityEngine.Keyframe a)
-            {
-                return new KeyFrame
-                {
-                    inTangent = a.inTangent,
-                    outTangent = a.outTangent,
-                    tangentMode = a.tangentMode,
-                    time = a.time,
-                    value = a.value
-                };
-            }
-        }
     }
 
     public static class ParticleSystemHelpers
@@ -853,10 +790,10 @@ namespace ModEnabler.Resource.DataObjects
                     return new ParticleSystem.MinMaxCurve(b.constantMax);
 
                 case ParticleSystemCurveMode.Curve:
-                    return new ParticleSystem.MinMaxCurve(b.curveScalar, b.curveMax);
+                    return new ParticleSystem.MinMaxCurve(b.curveScalar, b.curveMax.ToUnity());
 
                 case ParticleSystemCurveMode.TwoCurves:
-                    return new ParticleSystem.MinMaxCurve(b.curveScalar, b.curveMin, b.curveMax);
+                    return new ParticleSystem.MinMaxCurve(b.curveScalar, b.curveMin.ToUnity(), b.curveMax.ToUnity());
 
                 case ParticleSystemCurveMode.TwoConstants:
                     return new ParticleSystem.MinMaxCurve(b.constantMin, b.constantMax);
