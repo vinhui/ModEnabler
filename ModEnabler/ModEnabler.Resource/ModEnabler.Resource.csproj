@@ -72,6 +72,7 @@
     <Compile Include="ResourceManager.ParticleSystem.cs" />
     <Compile Include="ResourceManager.Sprite.cs" />
     <Compile Include="ResourceManager.SpriteSheet.cs" />
+    <Compile Include="ResourceManager.Animation.cs" />
     <Compile Include="ResourceManager.Text.cs" />
     <Compile Include="ResourceManager.Texture.cs" />
     <Compile Include="Utils.cs" />
