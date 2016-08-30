@@ -23,6 +23,7 @@ There are several components to load a resource onto the object the component is
 
 A list of currently supported resource types:
 
+-	[Animations]
 -   [Audio]
 -   [Textures, Sprites and Normal Maps]
 -   [Materials]
@@ -38,6 +39,7 @@ When loading any resource via the ResourceManager, the resource will be cached. 
 
 Be sure there is a call to the ResourceManager before using `ModsManager.onModsReloaded()`, `ModsManager.onModActivate()` or `ModsManager.onModDeactivate()`. Otherwise the cache will be cleared after you added a listener and when calling the ResourceManager from the listener, you will get out of date resources.
 
+  [Animations]: xref:resources.animations.md
   [Audio]: xref:resources.audio.md
   [Textures, Sprites and Normal Maps]: xref:resources.textures.md
   [Materials]: xref:resources.materials.md

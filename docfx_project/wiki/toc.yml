@@ -3,6 +3,8 @@
 - name: Resources
   href: resources.md
   items:
+    - name: Animations
+      href: resources.animations.md
     - name: Audio
       href: resources.audio.md
     - name: Materials
