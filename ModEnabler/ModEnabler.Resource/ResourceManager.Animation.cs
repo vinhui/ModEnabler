@@ -8,15 +8,15 @@ namespace ModEnabler.Resource
         /// <summary>
         /// Load an animation clip
         /// </summary>
-        /// <param name="name">Full name and path of the file</param>
+        /// <param name="name">Full name of the clip</param>
         /// <returns>Returns null if the file doesn't exist or failed to load</returns>
         public static AnimationClip LoadAnimationClip(string name)
         {
-            return GetResource(name, "", (bytes) =>
+            return GetResource(name, ModsManager.settings.animationClipsDirectory, (bytes) =>
             {
                 AnimationClipData animationData = ModsManager.serializer.Deserialize<AnimationClipData>(BytesToString(bytes));
                 return animationData.ToUnity();
-            }, "AnimationClip");
+            }, "Animation Clip");
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace ModEnabler.Resource
             {
                 AnimationClipData.AnimationCurveData curveData = ModsManager.serializer.Deserialize<AnimationClipData.AnimationCurveData>(BytesToString(bytes));
                 return curveData.ToUnity();
-            }, "AnimationCurve");
+            }, "Animation Curve");
         }
     }
 }

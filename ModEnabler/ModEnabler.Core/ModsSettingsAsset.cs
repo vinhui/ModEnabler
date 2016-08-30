@@ -58,6 +58,11 @@ namespace ModEnabler
         public string particleSystemsDirectory = "ParticleSystems";
 
         /// <summary>
+        /// Name of the directory that contains all the animation clips
+        /// </summary>
+        public string animationClipsDirectory = "AnimationClips";
+
+        /// <summary>
         /// See <see cref="LoadingType"/>
         /// </summary>
         public bool[] load = new bool[4] { true, true, true, false };

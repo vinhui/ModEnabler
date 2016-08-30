@@ -132,6 +132,7 @@ namespace ModEnabler
             targetAsset.audioDirectory = EditorGUILayout.TextField("Audio Directory", targetAsset.audioDirectory);
             targetAsset.particleSystemsDirectory = EditorGUILayout.TextField("Particle Systems Directory", targetAsset.particleSystemsDirectory);
             targetAsset.physicMaterialsDirectory = EditorGUILayout.TextField("Physic Materials Directory", targetAsset.physicMaterialsDirectory);
+            targetAsset.animationClipsDirectory = EditorGUILayout.TextField("Animation Clips Directory", targetAsset.animationClipsDirectory);
 
             EditorGUILayout.HelpBox("These " + targetAsset.load.Length + " options only apply at the initialization.", MessageType.Info);
             for (int i = 0; i < targetAsset.load.Length; i++)
