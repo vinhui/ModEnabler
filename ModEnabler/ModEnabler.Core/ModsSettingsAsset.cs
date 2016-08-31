@@ -10,7 +10,6 @@ namespace ModEnabler
     /// </summary>
     [Serializable]
     [HelpURL("http://modenabler.greenzonegames.com/wiki/settings.html")]
-    [CreateAssetMenu]
     public class ModsSettingsAsset : ScriptableObject
     {
         /// <summary>
