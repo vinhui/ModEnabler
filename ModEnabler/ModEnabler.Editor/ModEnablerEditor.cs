@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+[InitializeOnLoad]
 internal class ModEnablerEditor : EditorWindow
 {
     internal ExportType exportType;
@@ -26,6 +27,11 @@ internal class ModEnablerEditor : EditorWindow
         Normalmap,
         PhysicMaterial,
         AnimationClip,
+    }
+
+    static ModEnablerEditor()
+    {
+        CheckIcon();
     }
 
     #region Menu Items
@@ -585,5 +591,59 @@ internal class ModEnablerEditor : EditorWindow
     private static void DisposeModsManager()
     {
         typeof(ModsManager).GetMethod("Dispose", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, null);
+    }
+
+    private static void CheckIcon()
+    {
+        if (!AssetDatabase.IsValidFolder("Assets/Gizmos"))
+            AssetDatabase.CreateFolder("Assets", "Gizmos");
+        if (!AssetDatabase.IsValidFolder("Assets/Gizmos/ModEnabler"))
+            AssetDatabase.CreateFolder("Assets/Gizmos", "ModEnabler");
+        if (!AssetDatabase.IsValidFolder("Assets/Gizmos/ModEnabler/Resource"))
+            AssetDatabase.CreateFolder("Assets/Gizmos/ModEnabler", "Resource");
+        if (!AssetDatabase.IsValidFolder("Assets/Gizmos/ModEnabler/Resource/Components"))
+            AssetDatabase.CreateFolder("Assets/Gizmos/ModEnabler/Resource", "Components");
+
+        Assembly current = Assembly.GetExecutingAssembly();
+
+        byte[] buffer = new byte[4 * 1024];
+        using (Stream iconStream = current.GetManifestResourceStream(current.GetName().Name + ".Icon.png"))
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = iconStream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+
+                byte[] pngFile = ms.ToArray();
+
+                WriteGizmo(pngFile, "ModsSettingsAsset Icon.png");
+
+                foreach (var type in typeof(ResourceManager).Assembly.GetTypes())
+                {
+                    if (type.Namespace == "ModEnabler.Resource.Components")
+                    {
+                        string fileName = type.Name + " Icon.png";
+                        string assetPath = "ModEnabler/Resource/Components/" + fileName;
+
+                        WriteGizmo(pngFile, assetPath);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void WriteGizmo(byte[] file, string path)
+    {
+        string fullPath = Path.Combine(Application.dataPath, Path.Combine("Gizmos/", path));
+        string assetPath = "Assets/Gizmos/" + path;
+
+        if (AssetDatabase.LoadAssetAtPath<Object>(assetPath) == null)
+        {
+            File.WriteAllBytes(fullPath, file);
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceSynchronousImport);
+        }
     }
 }
