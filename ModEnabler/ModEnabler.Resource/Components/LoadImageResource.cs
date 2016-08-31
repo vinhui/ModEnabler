@@ -4,6 +4,7 @@ using UnityEngine.UI;
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(Image))]
+    [HelpURL("http://modenabler.greenzonegames.com/wiki/resources.textures.html")]
     public class LoadImageResource : LoadResourceComponent<Image>
     {
         [SerializeField]

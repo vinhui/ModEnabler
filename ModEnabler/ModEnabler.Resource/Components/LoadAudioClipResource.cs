@@ -3,6 +3,7 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(AudioSource))]
+    [HelpURL("http://modenabler.greenzonegames.com/wiki/resources.audio.html")]
     public class LoadAudioClipResource : LoadResourceComponent<AudioSource>
     {
         public override void Set()

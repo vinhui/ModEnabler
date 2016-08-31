@@ -3,6 +3,7 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(MeshCollider))]
+    [HelpURL("http://modenabler.greenzonegames.com/wiki/resources.meshes.html")]
     public class LoadMeshColliderResource : LoadResourceComponent<MeshCollider>
     {
         public override void Set()

@@ -3,6 +3,7 @@
 namespace ModEnabler.Resource.Components
 {
     [RequireComponent(typeof(SpriteRenderer))]
+    [HelpURL("http://modenabler.greenzonegames.com/wiki/resources.materials.html")]
     public class LoadSpriteResource : LoadResourceComponent<SpriteRenderer>
     {
         [SerializeField]
