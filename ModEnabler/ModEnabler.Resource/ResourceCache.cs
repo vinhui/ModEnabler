@@ -121,13 +121,13 @@ namespace ModEnabler.Resource
         }
     }
 
-    internal class CacheEntry
+    public class CacheEntry
     {
-        internal string name { get; private set; }
+        public string name { get; private set; }
 
-        internal object value { get; private set; }
+        public object value { get; private set; }
 
-        internal Mod mod { get; private set; }
+        public Mod mod { get; private set; }
 
         /// <summary>
         /// You should never have to create this manually
@@ -144,7 +144,7 @@ namespace ModEnabler.Resource
         /// </summary>
         /// <typeparam name="T">Type to cast it to</typeparam>
         /// <returns>Returns the value in type <typeparamref name="T"/></returns>
-        internal T GetValue<T>()
+        public T GetValue<T>()
         {
             if (value != null)
             {
