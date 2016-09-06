@@ -43,7 +43,7 @@ namespace ModEnabler.Resource
             {
                 if (cacheItem.type == typeof(T))
                 {
-                    cacheItem.entries.Add(new CacheEntry(name, value, mod));
+                    cacheItem.entries.Add(new ResourceCacheEntry(name, value, mod));
                     return;
                 }
             }
@@ -55,7 +55,7 @@ namespace ModEnabler.Resource
         /// <typeparam name="T">Type of the item</typeparam>
         /// <param name="name">Name of the item</param>
         /// <returns>Returns null if it's not in the cache</returns>
-        public static CacheEntry GetEntry<T>(string name)
+        public static ResourceCacheEntry GetEntry<T>(string name)
         {
             if (string.IsNullOrEmpty(name))
                 return null;
@@ -65,7 +65,7 @@ namespace ModEnabler.Resource
                 if (cacheTypeItem.type != typeof(T))
                     continue;
 
-                foreach (CacheEntry cacheEntry in cacheTypeItem.entries)
+                foreach (ResourceCacheEntry cacheEntry in cacheTypeItem.entries)
                 {
                     if (cacheEntry.name == name)
                         return cacheEntry;
@@ -111,60 +111,13 @@ namespace ModEnabler.Resource
         private class CacheTypeItem
         {
             internal Type type;
-            internal List<CacheEntry> entries;
+            internal List<ResourceCacheEntry> entries;
 
             internal CacheTypeItem(Type type)
             {
                 this.type = type;
-                entries = new List<CacheEntry>();
+                entries = new List<ResourceCacheEntry>();
             }
-        }
-    }
-
-    public class CacheEntry
-    {
-        public string name { get; private set; }
-
-        public object value { get; private set; }
-
-        public Mod mod { get; private set; }
-
-        /// <summary>
-        /// You should never have to create this manually
-        /// </summary>
-        internal CacheEntry(string name, object value, Mod origin)
-        {
-            this.name = name;
-            this.value = value;
-            mod = origin;
-        }
-
-        /// <summary>
-        /// Get the value of the entry
-        /// </summary>
-        /// <typeparam name="T">Type to cast it to</typeparam>
-        /// <returns>Returns the value in type <typeparamref name="T"/></returns>
-        public T GetValue<T>()
-        {
-            if (value != null)
-            {
-                if (value is T)
-                    return (T)value;
-                else
-                {
-                    try
-                    {
-                        return (T)Convert.ChangeType(value, typeof(T));
-                    }
-                    catch (InvalidCastException e)
-                    {
-                        Debug.LogError("Failed to cast object to " + typeof(T));
-                        Debug.LogError(e.Message);
-                    }
-                }
-            }
-
-            return default(T);
         }
     }
 }

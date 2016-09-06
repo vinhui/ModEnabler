@@ -31,7 +31,7 @@ namespace ModEnabler.Resource
             if (!dir.EndsWith("/") && !string.IsNullOrEmpty(dir))
                 dir += "/";
 
-            CacheEntry cacheEntry = (useCache ? ResourceCache.GetEntry<T>(name) : null);
+            ResourceCacheEntry cacheEntry = (useCache ? ResourceCache.GetEntry<T>(name) : null);
 
             if (cacheEntry == null)
             {

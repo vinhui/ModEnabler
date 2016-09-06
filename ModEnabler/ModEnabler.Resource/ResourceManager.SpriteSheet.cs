@@ -13,7 +13,7 @@ namespace ModEnabler.Resource
         /// <returns></returns>
         public static Dictionary<string, Sprite> LoadSpriteSheet(string name)
         {
-            CacheEntry cache = ResourceCache.GetEntry<Dictionary<string, Sprite>>(name);
+            ResourceCacheEntry cache = ResourceCache.GetEntry<Dictionary<string, Sprite>>(name);
             if (cache == null)
             {
                 Mod mod;
@@ -43,7 +43,7 @@ namespace ModEnabler.Resource
                 for (int i = 0; i < data.frames.Length; i++)
                 {
                     TextureSheetData.FrameData currFame = data.frames[i];
-                    CacheEntry spriteCache = ResourceCache.GetEntry<Sprite>(currFame.filename);
+                    ResourceCacheEntry spriteCache = ResourceCache.GetEntry<Sprite>(currFame.filename);
                     if (spriteCache == null)
                     {
                         Sprite sprite = Sprite.Create(texture, currFame.frame.ToUnity(data.meta.size.h), currFame.pivot);
