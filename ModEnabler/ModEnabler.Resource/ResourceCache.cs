@@ -7,7 +7,7 @@ namespace ModEnabler.Resource
     /// <summary>
     /// This class is responsible for caching all the resources that are used
     /// </summary>
-    internal static class ResourceCache
+    public static class ResourceCache
     {
         private static List<CacheTypeItem> cacheList = new List<CacheTypeItem>();
 
@@ -18,7 +18,7 @@ namespace ModEnabler.Resource
         /// <returns>True if it's in the cache, else false</returns>
         private static bool ContainsType(Type t)
         {
-            foreach (CacheTypeItem item in ResourceCache.cacheList)
+            foreach (CacheTypeItem item in cacheList)
             {
                 if (item.type == t)
                     return true;
@@ -34,12 +34,12 @@ namespace ModEnabler.Resource
         /// <param name="name">Name of the item</param>
         /// <param name="value">The item itself</param>
         /// <param name="mod">The mod that the item is from</param>
-        internal static void Add<T>(string name, T value, Mod mod)
+        public static void Add<T>(string name, T value, Mod mod)
         {
-            if (!ResourceCache.ContainsType(typeof(T)))
-                ResourceCache.cacheList.Add(new CacheTypeItem(typeof(T)));
+            if (!ContainsType(typeof(T)))
+                cacheList.Add(new CacheTypeItem(typeof(T)));
 
-            foreach (var cacheItem in ResourceCache.cacheList)
+            foreach (var cacheItem in cacheList)
             {
                 if (cacheItem.type == typeof(T))
                 {
@@ -55,12 +55,12 @@ namespace ModEnabler.Resource
         /// <typeparam name="T">Type of the item</typeparam>
         /// <param name="name">Name of the item</param>
         /// <returns>Returns null if it's not in the cache</returns>
-        internal static CacheEntry GetEntry<T>(string name)
+        public static CacheEntry GetEntry<T>(string name)
         {
             if (string.IsNullOrEmpty(name))
                 return null;
 
-            foreach (CacheTypeItem cacheTypeItem in ResourceCache.cacheList)
+            foreach (CacheTypeItem cacheTypeItem in cacheList)
             {
                 if (cacheTypeItem.type != typeof(T))
                     continue;
@@ -89,7 +89,7 @@ namespace ModEnabler.Resource
         /// <summary>
         /// Clear all the items that are in <paramref name="mod"/>
         /// </summary>
-        /// <param name="mod">The mode to clear the cache for</param>
+        /// <param name="mod">The mod to clear the cache for</param>
         public static void Clear(Mod mod)
         {
             if (mod == null)
