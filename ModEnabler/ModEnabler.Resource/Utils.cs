@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ModEnabler.Resource
 {
-    internal static class Utils
+    public static class Utils
     {
         #region Unity Type Readers
 
