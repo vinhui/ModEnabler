@@ -1,6 +1,7 @@
 ﻿using ModEnabler.Archives;
 using ModEnabler.Serialization;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -62,15 +63,23 @@ namespace ModEnabler
 
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            archiveTypes = assemblies
-                .SelectMany(x => x.GetTypes())
-                .Where(x => x.IsSubclassOf(typeof(Archive)) && !x.IsAbstract)
-                .ToArray();
-
-            serializerTypes = assemblies
-                .SelectMany(x => x.GetTypes())
-                .Where(x => x.IsSubclassOf(typeof(Serializer)) && !x.IsAbstract)
-                .ToArray();
+            List<Type> aTypes = new List<Type>();
+            List<Type> sTypes = new List<Type>();
+            foreach (var asm in assemblies)
+            {
+                foreach (var t in asm.GetTypes())
+                {
+                    if (!t.IsAbstract)
+                    {
+                        if (t.IsSubclassOf(typeof(Archive)))
+                            aTypes.Add(t);
+                        else if (t.IsSubclassOf(typeof(Serializer)))
+                            sTypes.Add(t);
+                    }
+                }
+            }
+            archiveTypes = aTypes.ToArray();
+            serializerTypes = sTypes.ToArray();
 
             selectedArchiveIndex = Array.IndexOf(archiveTypes.Select(x => x.FullName).ToArray(), target.archiveTypeString);
             selectedSerializerIndex = Array.IndexOf(serializerTypes.Select(x => x.FullName).ToArray(), target.serializerTypeString);
