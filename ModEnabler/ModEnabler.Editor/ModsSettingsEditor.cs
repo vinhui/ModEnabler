@@ -30,10 +30,6 @@ namespace ModEnabler
             Selection.activeObject = AssetDatabase.LoadAssetAtPath<Object>("Assets/ModEnabler/Resources/Settings.asset");
         }
 
-        private void OnEnable()
-        {
-        }
-
         /// <summary>
         /// Make sure all the files and folders are in the right place, if not, create them
         /// </summary>
@@ -64,23 +60,16 @@ namespace ModEnabler
             Array.Sort(encodingTypes);
             selectedEncodingIndex = Array.IndexOf(encodingTypes, target.encodingText);
 
-            archiveTypes = typeof(Archive)
-                .Assembly
-                .GetTypes()
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            archiveTypes = assemblies
+                .SelectMany(x => x.GetTypes())
                 .Where(x => x.IsSubclassOf(typeof(Archive)) && !x.IsAbstract)
-                //.Union(typeof(Cubem.GameManager)
-                //    .Assembly
-                //    .GetTypes()
-                //    .Where(x => x.IsSubclassOf(typeof(Archive)) && !x.IsAbstract))
                 .ToArray();
-            serializerTypes = typeof(Serializer)
-                .Assembly
-                .GetTypes()
+
+            serializerTypes = assemblies
+                .SelectMany(x => x.GetTypes())
                 .Where(x => x.IsSubclassOf(typeof(Serializer)) && !x.IsAbstract)
-                //.Union(typeof(Cubem.GameManager)
-                //    .Assembly
-                //    .GetTypes()
-                //    .Where(x => x.IsSubclassOf(typeof(Serializer)) && !x.IsAbstract))
                 .ToArray();
 
             selectedArchiveIndex = Array.IndexOf(archiveTypes.Select(x => x.FullName).ToArray(), target.archiveTypeString);
