@@ -20,6 +20,7 @@ MonoBehaviour:
   audioDirectory: Audio
   physicMaterialsDirectory: PhysicMaterials
   particleSystemsDirectory: ParticleSystems
+  animationClipsDirectory: AnimationClips
   load: 01010100
   debugLogging: 1
   encodingText: utf-8
