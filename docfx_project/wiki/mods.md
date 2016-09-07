@@ -26,22 +26,22 @@ You can find a list of supported archive formats [here]. You can set the expecte
 Paths
 -----
 
-By default the built-in mods should be located in `Assets/[Resources]/Mods/`. The folder for external mods should be in the next to the [Assets] folder. For example:
+By default the built-in mods should be located in [Resources] folder, e.g. `Assets/Resources/Mods/`. The folder for external mods should be in the next to the [Assets] folder. For example:
 
     -- Assets
        |-- Resources
        |   |-- Mods
        |   |   |-- default.bytes
     -- Mods
-       |-- test.tar
+       |-- test.zip
     -- ProjectSettings
 
-The external mods folder will be created on first run. The name for the mods folder can be changed in the [settings](xref:settings.md).
+The external mods folder will be created on first run. The name for the mods folder can be changed in the [settings].
 
 Loading Order
 -------------
 
-The built-in mods (mods in the resources folder) are loaded first, this way their files will have the lowest priority and files in external mods will be used if available. If a mod contains a file that also exists in another mod (with the same path), the file will be taken from the mod with the lowest alphabetical name. So for example, if we have mod "Alpha.tar" looking like:
+The built-in mods (mods in the resources folder) are loaded first, this way their files will have the lowest priority and files in external mods will be used if available. If a mod contains a file that also exists in another mod (with the same path), the file will be taken from the mod with the lowest alphabetical name. So for example, if we have mod "Alpha.zip" looking like:
 
     -- Textures
        |-- Skybox
@@ -56,14 +56,14 @@ The built-in mods (mods in the resources folder) are loaded first, this way thei
        |-- bricks.png
     -- mod.properties
 
-And mod "Zulu.tar" looking like this:
+And mod "Zulu.zip" looking like this:
 
     -- Textures
        |-- UI
        |   |-- panel.png
     -- mod.properties
 
-And the requested file being "Textures/UI/panel.png", the file will be taken from mod "Zulu.tar".
+And the requested file being "Textures/UI/panel.png", the file will be taken from mod "Zulu.zip".
 
   [settings]: xref:settings.md
   [here]: https://github.com/adamhathcock/sharpcompress/wiki/Supported-Formats
