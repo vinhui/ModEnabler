@@ -23,12 +23,6 @@ namespace ModEnabler
 
         private bool firstRun = true;
 
-        private static FieldInfo archiveTypeStringField;
-        private static FieldInfo archiveAssemblyField;
-        private static FieldInfo serializerTypeStringField;
-        private static FieldInfo serializerAssemblyField;
-        private static MethodInfo clearCacheMethod;
-
         [MenuItem("Mod Enabler/Settings")]
         internal static void ShowSettings()
         {
@@ -65,11 +59,6 @@ namespace ModEnabler
         private static void RefreshArchiveTypes(ModsSettingsAsset target)
         {
             Type targetAssetType = target.GetType();
-            archiveTypeStringField = targetAssetType.GetField("archiveTypeString", BindingFlags.NonPublic | BindingFlags.Instance);
-            archiveAssemblyField = targetAssetType.GetField("archiveAssembly", BindingFlags.NonPublic | BindingFlags.Instance);
-            serializerTypeStringField = targetAssetType.GetField("serializerTypeString", BindingFlags.NonPublic | BindingFlags.Instance);
-            serializerAssemblyField = targetAssetType.GetField("serializerAssembly", BindingFlags.NonPublic | BindingFlags.Instance);
-            clearCacheMethod = targetAssetType.GetMethod("ClearCache", BindingFlags.NonPublic | BindingFlags.Instance);
 
             encodingTypes = Encoding.GetEncodings().Select(x => x.Name).ToArray();
             Array.Sort(encodingTypes);
@@ -94,8 +83,8 @@ namespace ModEnabler
                 //    .Where(x => x.IsSubclassOf(typeof(Serializer)) && !x.IsAbstract))
                 .ToArray();
 
-            selectedArchiveIndex = Array.IndexOf(archiveTypes.Select(x => x.FullName).ToArray(), archiveTypeStringField.GetValue(target));
-            selectedSerializerIndex = Array.IndexOf(serializerTypes.Select(x => x.FullName).ToArray(), serializerTypeStringField.GetValue(target));
+            selectedArchiveIndex = Array.IndexOf(archiveTypes.Select(x => x.FullName).ToArray(), target.archiveTypeString);
+            selectedSerializerIndex = Array.IndexOf(serializerTypes.Select(x => x.FullName).ToArray(), target.serializerTypeString);
 
             if (selectedArchiveIndex == -1)
                 selectedArchiveIndex = 0;
@@ -183,9 +172,9 @@ namespace ModEnabler
 
                 if (prevSelectedArchive != selectedArchiveIndex)
                 {
-                    archiveTypeStringField.SetValue(targetAsset, archiveTypes[selectedArchiveIndex].FullName);
-                    archiveAssemblyField.SetValue(targetAsset, archiveTypes[selectedArchiveIndex].Assembly.FullName);
-                    clearCacheMethod.Invoke(targetAsset, null);
+                    targetAsset.archiveTypeString = archiveTypes[selectedArchiveIndex].FullName;
+                    targetAsset.archiveAssembly = archiveTypes[selectedArchiveIndex].Assembly.FullName;
+                    targetAsset.ClearCache();
                 }
             }
             else
@@ -198,9 +187,9 @@ namespace ModEnabler
 
                 if (prevSelectedSerializer != selectedSerializerIndex)
                 {
-                    serializerTypeStringField.SetValue(targetAsset, serializerTypes[selectedSerializerIndex].FullName);
-                    serializerAssemblyField.SetValue(targetAsset, serializerTypes[selectedSerializerIndex].Assembly.FullName);
-                    clearCacheMethod.Invoke(targetAsset, null);
+                    targetAsset.serializerTypeString = serializerTypes[selectedSerializerIndex].FullName;
+                    targetAsset.serializerAssembly = serializerTypes[selectedSerializerIndex].Assembly.FullName;
+                    targetAsset.ClearCache();
                 }
             }
             else

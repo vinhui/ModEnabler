@@ -91,10 +91,10 @@ namespace ModEnabler
         public string encodingText = "utf-8";
 
         [SerializeField]
-        private string archiveAssembly = "ModEnabler.Archives, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+        internal string archiveAssembly = "ModEnabler.Archives, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 
         [SerializeField]
-        private string archiveTypeString = "ModEnabler.Archives.SevenZipCompatibleArchives";
+        internal string archiveTypeString = "ModEnabler.Archives.SevenZipCompatibleArchives";
 
         private Type archiveTypeCache;
 
@@ -116,10 +116,10 @@ namespace ModEnabler
         }
 
         [SerializeField]
-        private string serializerAssembly = "ModEnabler.Serialization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+        internal string serializerAssembly = "ModEnabler.Serialization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 
         [SerializeField]
-        private string serializerTypeString = "ModEnabler.Serialization.JsonSerializer";
+        internal string serializerTypeString = "ModEnabler.Serialization.JsonSerializer";
 
         private Serializer serializerCache;
 
@@ -137,7 +137,7 @@ namespace ModEnabler
             }
         }
 
-        private void ClearCache()
+        internal void ClearCache()
         {
             archiveTypeCache = null;
             serializerCache = null;
