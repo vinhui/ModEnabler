@@ -6,30 +6,30 @@ class MeshData(object):
 
 	def __init__(self, *args, **kwargs):
 		self.name = "ModdedMesh"
-		self.bindposes = []				# Matrix4x4[]
-		self.boneWeights = []			# BoneWeight[]
-		self.colors32 = []				# Color32[]
-		self.normals = []				# Vector3[]
-		self.tangents = []				# Vector4[]
-		self.triangles = []				# int[]
-		self.uv = []					# Vector2[]
-		self.uv2 = []					# Vector2[]
-		self.uv3 = []					# Vector2[]
-		self.uv4 = []					# Vector2[]
-		self.vertices = []				# Vector3[]
-		self.optimize = True			# bool
-		self.calculateNormals = False	# bool
+		self.bindposes = []				
+		self.boneWeights = []			
+		self.colors32 = []				
+		self.normals = []				
+		self.tangents = []				
+		self.triangles = []				
+		self.uv = []					
+		self.uv2 = []					
+		self.uv3 = []					
+		self.uv4 = []					
+		self.vertices = []				
+		self.optimize = True			
+		self.calculateNormals = False	
 
 	def Serialize(self):
 		asciiName = self.name.encode('ascii')			if self.name is not None else "ModdedMesh".encode('ascii')
 		nameLength = len(asciiName)
 		bindposeCount = len(self.bindposes)				if self.bindposes is not None else 0
-		boneWeightCount = len(self.boneWeights)				if self.boneWeights is not None else 0
-		colorCount = len(self.colors32)				if self.colors32 is not None else 0
+		boneWeightCount = len(self.boneWeights)			if self.boneWeights is not None else 0
+		colorCount = len(self.colors32)					if self.colors32 is not None else 0
 		normalCount = len(self.normals)					if self.normals is not None else 0
 		tangentCount = len(self.tangents)				if self.tangents is not None else 0
 		triangleCount = len(self.triangles)				if self.triangles is not None else 0
-		uvCount = len(self.uv)						if self.uv is not None else 0
+		uvCount = len(self.uv)							if self.uv is not None else 0
 		uv2Count = len(self.uv2)						if self.uv2 is not None else 0
 		uv3Count = len(self.uv3)						if self.uv3 is not None else 0
 		uv4Count = len(self.uv4)						if self.uv4 is not None else 0
@@ -92,6 +92,10 @@ class MeshData(object):
 
 	@staticmethod
 	def Convert(mesh):
+		if len(mesh.vertices) > 65535:
+			print("Mesh had more than 65535 vertices, not exporting it")
+			return None
+
 		meshData = MeshData()
 		meshData.name = mesh.name
 		meshData.colors32 = mesh.colors
