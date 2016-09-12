@@ -25,7 +25,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MeshData.py">
+    <Compile Include="meshSerialization.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model_Converter.py" />

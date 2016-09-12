@@ -1,5 +1,6 @@
 from pyassimp import *
-from MeshData import MeshData
+from meshSerialization import *
+from datetime import datetime
 import sys
 import os
 
@@ -29,23 +30,21 @@ def parseFile(file):
 	scene = load(file, postprocess.aiProcess_Triangulate)
 
 	for i, mesh in enumerate(scene.meshes):
-		print("Parsing mesh '" + mesh.name + "' from file '" + file + "'")
-		m = MeshData.Convert(mesh)
-		bytes = m.Serialize()
-		writeFile(parseName(file, mesh.name), bytes)
+		global optimize, calculateNormals
+
+		print("Serializing '" + mesh.name + "'")
+		startTime = datetime.now()
+
+		f = open(parseName(file, mesh.name), 'wb')
+		serialize(f, mesh, optimize, calculateNormals)
+		f.close()
+		
+		delta = datetime.now() - startTime
+		print("Converting mesh is done, it took " + str(delta.microseconds / 1000) + "ms")
+
 
 def parseName(baseFile, meshName):
 	return os.path.splitext(baseFile)[0] + "-" + meshName + ".mesh"
-
-def writeFile(file, bytes):
-	if bytes is None:
-		print("Not saving '" + file + "', file would be empty")
-		return
-
-	print("Saving to '" + file + "'")
-	f = open(file, 'wb')
-	f.write(bytes)
-	f.close()
 
 print("Starting program")
 
