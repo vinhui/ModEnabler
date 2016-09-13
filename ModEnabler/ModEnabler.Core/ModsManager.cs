@@ -355,7 +355,7 @@ namespace ModEnabler
                 Dispose();
             }
 
-#if DEBUG
+#if FALSE
             private void OnGUI()
             {
                 GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
