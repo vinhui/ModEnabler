@@ -16,6 +16,7 @@ Bolt_DebugStart_Build/
 *.booproj
 *.mdb
 *.mdb.meta
+*.zip
 
 # Unity3D generated meta files
 *.pidb.meta
