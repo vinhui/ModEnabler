@@ -5,7 +5,7 @@ title: Meshes
 
 # Meshes
 
-[Meshes] are made in a custom format since they can become quite big in file size. The format of the file is the following:
+[Meshes] are made in a custom format since they can become quite big in file size. You can export meshes from within Unity using the "Mod Enabler" option from the toolbar. You can also use [this](https://github.com/vinhui/ModEnabler-ModelConverter) simple [python](http://python.org/) program to export your meshes, it makes use of [Assimp](http://www.assimp.org/) for loading the models. The format of the file is the following:
 
 | Type                            | Length (in bytes)      | Content           |
 |---------------------------------|------------------------|-------------------|
@@ -37,15 +37,9 @@ title: Meshes
 | Vector2 (2 float32)             | 4 bytes per vector \*  | UV4               |
 | Vector3 (3 float32)             | 6 bytes per vector \*  | Vertices          |
 
-*\* The amount of items is defined with the count above*
+_ \* The amount of items is defined with the count above_
 
-The header consists of the following bytes
-
-``` cs
-0x76, 0x69, 0x6e, 0x68, 0x75, 0x69, 0x2d, 0x6d, 0x65, 0x73, 0x68
-```
-
-and is always the same for meshes. All the values are [Little-Endian].
+The header consists of the following bytes `0x76, 0x69, 0x6e, 0x68, 0x75, 0x69, 0x2d, 0x6d, 0x65, 0x73, 0x68` and is always the same for meshes. All the values are [Little-Endian].
 
   [Meshes]: https://docs.unity3d.com/ScriptReference/Mesh.html
   [Little-Endian]: https://en.wikipedia.org/wiki/Endianness
