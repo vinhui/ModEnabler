@@ -9,11 +9,11 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ModEnabler
+namespace ModEnabler.Editor
 {
     [InitializeOnLoad]
     [CustomEditor(typeof(ModsSettingsAsset))]
-    internal class ModsSettingsEditor : Editor
+    internal class ModsSettingsEditor : UnityEditor.Editor
     {
         private static string[] encodingTypes;
         private static int selectedEncodingIndex;
