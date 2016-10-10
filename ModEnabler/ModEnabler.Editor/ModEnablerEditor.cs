@@ -343,7 +343,7 @@ namespace ModEnabler.Editor
             EditorGUILayout.EndHorizontal();
         }
 
-        private void SuccessDialog(string path)
+        private void ExportSuccessDialog(string path)
         {
             EditorUtility.DisplayDialog(
                 "Exported",
@@ -377,7 +377,7 @@ namespace ModEnabler.Editor
         {
             File.WriteAllText(path, data.Trim(), ModsManager.settings.encoding);
 
-            SuccessDialog(path);
+            ExportSuccessDialog(path);
             DisposeModsManager();
         }
 
@@ -385,7 +385,7 @@ namespace ModEnabler.Editor
         {
             File.WriteAllBytes(path, data);
 
-            SuccessDialog(path);
+            ExportSuccessDialog(path);
         }
 
         private static void DisposeModsManager()
