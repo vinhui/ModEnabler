@@ -15,7 +15,7 @@ namespace ModEnabler.Resource.Components
         /// </summary>
         [SerializeField]
         [Tooltip("Name of the file you want to load")]
-        protected string fileName;
+        public string fileName;
 
         /// <summary>
         /// The component you should set some field of
