@@ -45,8 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\AnimationUtils.cs" />
+    <Compile Include="ConvertScene.cs" />
+    <Compile Include="Utils\MaterialUtils.cs" />
     <Compile Include="ModEnablerEditor.cs" />
     <Compile Include="ModsSettingsEditor.cs" />
+    <Compile Include="Utils\NormalmapUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
