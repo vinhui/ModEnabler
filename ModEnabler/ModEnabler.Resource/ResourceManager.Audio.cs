@@ -14,7 +14,7 @@ namespace ModEnabler.Resource
         {
             return GetResource(name, ModsManager.settings.audioDirectory, (bytes) =>
             {
-                return new AudioData(bytes).ToUnity();
+                return AudioData.ToUnity(bytes);
             }, "Audio Clip");
         }
     }

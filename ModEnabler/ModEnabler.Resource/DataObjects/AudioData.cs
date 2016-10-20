@@ -6,38 +6,27 @@ using UnityEngine;
 namespace ModEnabler.Resource.DataObjects
 {
     [Serializable]
-    public struct AudioData
+    public static class AudioData
     {
-        private const int intByteLength = 4;
-
-        public int channels;
-        public int frequency;
-        public float[] samples;
-
-        public AudioData(AudioClip clip)
+        public static AudioClip ToUnity(byte[] bytes)
         {
-            channels = clip.channels;
-            frequency = clip.frequency;
-            samples = new float[clip.samples * channels];
-            clip.GetData(samples, 0);
-        }
+            AudioClip clip;
 
-        public AudioData(byte[] bytes)
-        {
             using (MemoryStream memStream = new MemoryStream(bytes))
             using (VorbisReader vorbisReader = new VorbisReader(memStream, false))
             {
-                channels = vorbisReader.Channels;
-                frequency = vorbisReader.SampleRate;
-                samples = new float[vorbisReader.TotalSamples];
-                vorbisReader.ReadSamples(samples, 0, (int)vorbisReader.TotalSamples);
-            }
-        }
+                clip = AudioClip.Create("ModdedAudio", (int)vorbisReader.TotalSamples, vorbisReader.Channels, vorbisReader.SampleRate, false);
 
-        public AudioClip ToUnity()
-        {
-            AudioClip clip = AudioClip.Create("ModdedAudio", samples.Length, channels, frequency, false);
-            clip.SetData(samples, 0);
+                var buffer = new float[1024 * 8];
+                int count;
+                int pos = 0;
+                while ((count = vorbisReader.ReadSamples(buffer, 0, buffer.Length)) > 0)
+                {
+                    clip.SetData(buffer, pos);
+                    pos = (int)vorbisReader.DecodedPosition;
+                }
+            }
+
             return clip;
         }
     }
