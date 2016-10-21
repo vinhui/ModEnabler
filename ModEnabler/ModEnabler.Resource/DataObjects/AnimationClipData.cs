@@ -46,9 +46,18 @@ namespace ModEnabler.Resource.DataObjects
 
             public AnimationCurveData(AnimationCurve curve)
             {
-                postWrapMode = curve.postWrapMode;
-                preWrapMode = curve.preWrapMode;
-                keys = curve.keys;
+                if (curve != null)
+                {
+                    postWrapMode = curve.postWrapMode;
+                    preWrapMode = curve.preWrapMode;
+                    keys = curve.keys;
+                }
+                else
+                {
+                    postWrapMode = WrapMode.Clamp;
+                    preWrapMode = WrapMode.Clamp;
+                    keys = null;
+                }
             }
 
             public AnimationCurve ToUnity()
