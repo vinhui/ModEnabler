@@ -290,7 +290,7 @@ namespace ModEnabler.Editor
 
                         case ExportType.Normalmap:
                             foreach (var i in selectedObjects.Where(x => x != null))
-                                Write(NormalmapUtils.ToNormapMap((Texture)i), Path.Combine(Path.GetDirectoryName(savePath), i.name + "." + ext));
+                                Write(NormalmapUtils.ToNormapMap((Texture)i), Path.Combine(savePath, i.name + "." + ext));
                             break;
 
                         case ExportType.PhysicMaterial:
