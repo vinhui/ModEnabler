@@ -13,6 +13,8 @@ namespace ModEnabler
     /// </summary>
     public static class ModsManager
     {
+        public const string version = "1.1";
+
         private static List<Mod> _modsList;
 
         private static int loadingQueue;

@@ -197,7 +197,7 @@ namespace ModEnabler.Editor
             EditorUtility.SetDirty(targetAsset);
 
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Version: " + typeof(ModsManager).Assembly.GetName().Version);
+            GUILayout.Label("Version: " + ModsManager.version);
         }
     }
 }
