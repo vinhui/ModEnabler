@@ -55,8 +55,6 @@ namespace ModEnabler.Editor
         /// <param name="target"></param>
         private static void RefreshArchiveTypes(ModsSettingsAsset target)
         {
-            Type targetAssetType = target.GetType();
-
             encodingTypes = Encoding.GetEncodings().Select(x => x.Name).ToArray();
             Array.Sort(encodingTypes);
             selectedEncodingIndex = Array.IndexOf(encodingTypes, target.encodingText);

@@ -277,8 +277,6 @@ namespace ModEnabler.Resource.DataObjects
 
             if (calculateNormals)
                 mesh.RecalculateNormals();
-            if (optimize)
-                ;
 
             return mesh;
         }

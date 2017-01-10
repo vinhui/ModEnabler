@@ -20,15 +20,15 @@ namespace ModEnabler.Resource
                 {
                     if (rect.width > tex.width || rect.width < 0)
                     {
-                        rect.width = tex.width;
-                        Debug.LogWarning("The prefered with exceeds the width of the texture! (texture: '" + name + "'; prefered width: " + rect.width + "; texture width: " + tex.width);
+                        Debug.LogWarning("The prefered with exceeds the width of the texture! (texture: '" + name + "'; prefered width: " + rect.width + "; texture width: " + tex.width + ")");
                         Debug.LogWarning("Setting the width of the sprite to the texture width!");
+                        rect.width = tex.width;
                     }
                     if (rect.height > tex.height || rect.height < 0)
                     {
-                        rect.height = tex.height;
-                        Debug.LogWarning("The prefered height exceeds the height of the texture! (texture: '" + name + "'; prefered height: " + rect.width + "; texture height: " + tex.width);
+                        Debug.LogWarning("The prefered height exceeds the height of the texture! (texture: '" + name + "'; prefered height: " + rect.height + "; texture height: " + tex.height + ")");
                         Debug.LogWarning("Setting the height of the sprite to the texture height!");
+                        rect.height = tex.height;
                     }
 
                     try

@@ -18,9 +18,8 @@ namespace ModEnabler.Resource.DataObjects
                 clip = AudioClip.Create("ModdedAudio", (int)vorbisReader.TotalSamples, vorbisReader.Channels, vorbisReader.SampleRate, false);
 
                 var buffer = new float[1024 * 8];
-                int count;
                 int pos = 0;
-                while ((count = vorbisReader.ReadSamples(buffer, 0, buffer.Length)) > 0)
+                while (vorbisReader.ReadSamples(buffer, 0, buffer.Length) > 0)
                 {
                     clip.SetData(buffer, pos);
                     pos = (int)vorbisReader.DecodedPosition;
