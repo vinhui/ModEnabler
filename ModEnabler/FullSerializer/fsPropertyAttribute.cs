@@ -7,24 +7,24 @@ namespace FullSerializer
     /// property should use during serialization.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-    internal sealed class fsPropertyAttribute : Attribute
+    public sealed class fsPropertyAttribute : Attribute
     {
         /// <summary>
         /// The name of that the property will use in JSON serialization.
         /// </summary>
-        internal string Name;
+        public string Name;
 
         /// <summary>
         /// Use a custom converter for the given type. Specify the converter to use using typeof.
         /// </summary>
-        internal Type Converter;
+        public Type Converter;
 
-        internal fsPropertyAttribute()
+        public fsPropertyAttribute()
             : this(string.Empty)
         {
         }
 
-        internal fsPropertyAttribute(string name)
+        public fsPropertyAttribute(string name)
         {
             Name = name;
         }

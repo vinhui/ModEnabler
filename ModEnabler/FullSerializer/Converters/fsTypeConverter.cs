@@ -2,31 +2,31 @@
 
 namespace FullSerializer.Internal
 {
-    internal class fsTypeConverter : fsConverter
+    public class fsTypeConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return typeof(Type).IsAssignableFrom(type);
         }
 
-        internal override bool RequestCycleSupport(Type type)
+        public override bool RequestCycleSupport(Type type)
         {
             return false;
         }
 
-        internal override bool RequestInheritanceSupport(Type type)
+        public override bool RequestInheritanceSupport(Type type)
         {
             return false;
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             var type = (Type)instance;
             serialized = new fsData(type.FullName);
             return fsResult.Success;
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             if (data.IsString == false)
             {
@@ -41,7 +41,7 @@ namespace FullSerializer.Internal
             return fsResult.Success;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return storageType;
         }

@@ -10,16 +10,16 @@ namespace FullSerializer
     /// </summary>
     /// <remarks>Due to the way that direct converters operate, inheritance is *not* supported. Direct converters
     /// will only be used with the exact ModelType object.</remarks>
-    internal abstract class fsDirectConverter : fsBaseConverter
+    public abstract class fsDirectConverter : fsBaseConverter
     {
-        internal abstract Type ModelType { get; }
+        public abstract Type ModelType { get; }
     }
 
-    internal abstract class fsDirectConverter<TModel> : fsDirectConverter
+    public abstract class fsDirectConverter<TModel> : fsDirectConverter
     {
-        internal override Type ModelType { get { return typeof(TModel); } }
+        public override Type ModelType { get { return typeof(TModel); } }
 
-        internal sealed override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public sealed override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             var serializedDictionary = new Dictionary<string, fsData>();
             var result = DoSerialize((TModel)instance, serializedDictionary);
@@ -27,7 +27,7 @@ namespace FullSerializer
             return result;
         }
 
-        internal sealed override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public sealed override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             var result = fsResult.Success;
             if ((result += CheckType(data, fsDataType.Object)).Failed)

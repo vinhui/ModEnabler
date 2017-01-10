@@ -31,7 +31,7 @@ namespace FullSerializer
         /// Adds a new message to this result.
         /// </summary>
         /// <param name="message"></param>
-        internal void AddMessage(string message)
+        public void AddMessage(string message)
         {
             if (_messages == null)
             {
@@ -45,7 +45,7 @@ namespace FullSerializer
         /// Adds only the messages from the other result into this result, ignoring
         /// the success/failure status of the other result.
         /// </summary>
-        internal void AddMessages(fsResult result)
+        public void AddMessages(fsResult result)
         {
             if (result._messages == null)
             {
@@ -68,7 +68,7 @@ namespace FullSerializer
         /// Note that you can use += instead of this method so that you don't bury
         /// the actual method call that is generating the other fsResult.
         /// </remarks>
-        internal fsResult Merge(fsResult other)
+        public fsResult Merge(fsResult other)
         {
             // Copy success over
             _success = _success && other._success;
@@ -96,7 +96,7 @@ namespace FullSerializer
         /// <summary>
         /// Create a result that is successful but contains the given warning message.
         /// </summary>
-        internal static fsResult Warn(string warning)
+        public static fsResult Warn(string warning)
         {
             return new fsResult
             {
@@ -108,7 +108,7 @@ namespace FullSerializer
         /// <summary>
         /// Create a result that failed.
         /// </summary>
-        internal static fsResult Fail(string warning)
+        public static fsResult Fail(string warning)
         {
             return new fsResult
             {

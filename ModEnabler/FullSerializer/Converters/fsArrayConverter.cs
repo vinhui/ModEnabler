@@ -3,24 +3,24 @@ using System.Collections;
 
 namespace FullSerializer.Internal
 {
-    internal class fsArrayConverter : fsConverter
+    public class fsArrayConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return type.IsArray;
         }
 
-        internal override bool RequestCycleSupport(Type storageType)
+        public override bool RequestCycleSupport(Type storageType)
         {
             return false;
         }
 
-        internal override bool RequestInheritanceSupport(Type storageType)
+        public override bool RequestInheritanceSupport(Type storageType)
         {
             return false;
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             // note: IList[index] is **significantly** faster than Array.Get, so make sure we use
             //       that instead.
@@ -50,7 +50,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             var result = fsResult.Success;
 
@@ -88,7 +88,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return fsMetaType.Get(storageType).CreateInstance();
         }

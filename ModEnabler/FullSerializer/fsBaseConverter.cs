@@ -10,12 +10,12 @@ namespace FullSerializer
     /// </summary>
     /// <remarks>You do not want to derive from this class - there is no way to actually use it within
     /// the serializer.. Instead, derive from either fsConverter or fsDirectConverter</remarks>
-    internal abstract class fsBaseConverter
+    public abstract class fsBaseConverter
     {
         /// <summary>
         /// The serializer that was owns this converter.
         /// </summary>
-        internal fsSerializer Serializer;
+        public fsSerializer Serializer;
 
         /// <summary>
         /// Construct an object instance that will be passed to TryDeserialize. This should **not**
@@ -24,7 +24,7 @@ namespace FullSerializer
         /// <param name="data">The data the object was serialized with.</param>
         /// <param name="storageType">The field/property type that is storing the instance.</param>
         /// <returns>An object instance</returns>
-        internal virtual object CreateInstance(fsData data, Type storageType)
+        public virtual object CreateInstance(fsData data, Type storageType)
         {
             if (RequestCycleSupport(storageType))
             {
@@ -43,7 +43,7 @@ namespace FullSerializer
         /// </summary>
         /// <param name="storageType">The field/property type that is currently storing the object
         /// that is being serialized.</param>
-        internal virtual bool RequestCycleSupport(Type storageType)
+        public virtual bool RequestCycleSupport(Type storageType)
         {
             if (storageType == typeof(string))
                 return false;
@@ -56,7 +56,7 @@ namespace FullSerializer
         /// </summary>
         /// <param name="storageType">The field/property type that is currently storing the object
         /// that is being serialized.</param>
-        internal virtual bool RequestInheritanceSupport(Type storageType)
+        public virtual bool RequestInheritanceSupport(Type storageType)
         {
             return storageType.Resolve().IsSealed == false;
         }
@@ -68,7 +68,7 @@ namespace FullSerializer
         /// <param name="serialized">The serialized state.</param>
         /// <param name="storageType">The field/property type that is storing this instance.</param>
         /// <returns>If serialization was successful.</returns>
-        internal abstract fsResult TrySerialize(object instance, out fsData serialized, Type storageType);
+        public abstract fsResult TrySerialize(object instance, out fsData serialized, Type storageType);
 
         /// <summary>
         /// Deserialize data into the object instance.
@@ -77,7 +77,7 @@ namespace FullSerializer
         /// <param name="instance">The object instance to deserialize into.</param>
         /// <param name="storageType">The field/property type that is storing the instance.</param>
         /// <returns>True if serialization was successful, false otherwise.</returns>
-        internal abstract fsResult TryDeserialize(fsData data, ref object instance, Type storageType);
+        public abstract fsResult TryDeserialize(fsData data, ref object instance, Type storageType);
 
         protected fsResult FailExpectedType(fsData data, params fsDataType[] types)
         {

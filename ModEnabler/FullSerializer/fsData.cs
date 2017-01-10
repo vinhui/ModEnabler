@@ -37,7 +37,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a fsData instance that holds null.
         /// </summary>
-        internal fsData()
+        public fsData()
         {
             _value = null;
         }
@@ -45,7 +45,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a fsData instance that holds a boolean.
         /// </summary>
-        internal fsData(bool boolean)
+        public fsData(bool boolean)
         {
             _value = boolean;
         }
@@ -53,7 +53,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a fsData instance that holds a double.
         /// </summary>
-        internal fsData(double f)
+        public fsData(double f)
         {
             _value = f;
         }
@@ -61,7 +61,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a new fsData instance that holds an integer.
         /// </summary>
-        internal fsData(Int64 i)
+        public fsData(Int64 i)
         {
             _value = i;
         }
@@ -69,7 +69,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a fsData instance that holds a string.
         /// </summary>
-        internal fsData(string str)
+        public fsData(string str)
         {
             _value = str;
         }
@@ -77,7 +77,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a fsData instance that holds a dictionary of values.
         /// </summary>
-        internal fsData(Dictionary<string, fsData> dict)
+        public fsData(Dictionary<string, fsData> dict)
         {
             _value = dict;
         }
@@ -85,7 +85,7 @@ namespace FullSerializer
         /// <summary>
         /// Creates a fsData instance that holds a list of values.
         /// </summary>
-        internal fsData(List<fsData> list)
+        public fsData(List<fsData> list)
         {
             _value = list;
         }
@@ -93,7 +93,7 @@ namespace FullSerializer
         /// <summary>
         /// Helper method to create a fsData instance that holds a dictionary.
         /// </summary>
-        internal static fsData CreateDictionary()
+        public static fsData CreateDictionary()
         {
             return new fsData(new Dictionary<string, fsData>(
                 fsConfig.IsCaseSensitive ? StringComparer.CurrentCulture : StringComparer.CurrentCultureIgnoreCase));
@@ -102,7 +102,7 @@ namespace FullSerializer
         /// <summary>
         /// Helper method to create a fsData instance that holds a list.
         /// </summary>
-        internal static fsData CreateList()
+        public static fsData CreateList()
         {
             return new fsData(new List<fsData>());
         }
@@ -110,23 +110,23 @@ namespace FullSerializer
         /// <summary>
         /// Helper method to create a fsData instance that holds a list with the initial capacity.
         /// </summary>
-        internal static fsData CreateList(int capacity)
+        public static fsData CreateList(int capacity)
         {
             return new fsData(new List<fsData>(capacity));
         }
 
-        internal readonly static fsData True = new fsData(true);
-        internal readonly static fsData False = new fsData(false);
-        internal readonly static fsData Null = new fsData();
+        public readonly static fsData True = new fsData(true);
+        public readonly static fsData False = new fsData(false);
+        public readonly static fsData Null = new fsData();
 
         #endregion Constructors
 
-        #region Internal Helper Methods
+        #region public Helper Methods
 
         /// <summary>
-        /// Transforms the internal fsData instance into a dictionary.
+        /// Transforms the public fsData instance into a dictionary.
         /// </summary>
-        internal void BecomeDictionary()
+        public void BecomeDictionary()
         {
             _value = new Dictionary<string, fsData>();
         }
@@ -134,18 +134,18 @@ namespace FullSerializer
         /// <summary>
         /// Returns a shallow clone of this data instance.
         /// </summary>
-        internal fsData Clone()
+        public fsData Clone()
         {
             var clone = new fsData();
             clone._value = _value;
             return clone;
         }
 
-        #endregion Internal Helper Methods
+        #endregion public Helper Methods
 
         #region Casting Predicates
 
-        internal fsDataType Type
+        public fsDataType Type
         {
             get
             {
@@ -171,7 +171,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to null.
         /// </summary>
-        internal bool IsNull
+        public bool IsNull
         {
             get
             {
@@ -182,7 +182,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to a double.
         /// </summary>
-        internal bool IsDouble
+        public bool IsDouble
         {
             get
             {
@@ -193,7 +193,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to an Int64.
         /// </summary>
-        internal bool IsInt64
+        public bool IsInt64
         {
             get
             {
@@ -204,7 +204,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to a boolean.
         /// </summary>
-        internal bool IsBool
+        public bool IsBool
         {
             get
             {
@@ -215,7 +215,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to a string.
         /// </summary>
-        internal bool IsString
+        public bool IsString
         {
             get
             {
@@ -226,7 +226,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to a Dictionary.
         /// </summary>
-        internal bool IsDictionary
+        public bool IsDictionary
         {
             get
             {
@@ -237,7 +237,7 @@ namespace FullSerializer
         /// <summary>
         /// Returns true if this fsData instance maps back to a List.
         /// </summary>
-        internal bool IsList
+        public bool IsList
         {
             get
             {
@@ -253,7 +253,7 @@ namespace FullSerializer
         /// Casts this fsData to a double. Throws an exception if it is not a double.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal double AsDouble
+        public double AsDouble
         {
             get
             {
@@ -265,7 +265,7 @@ namespace FullSerializer
         /// Casts this fsData to an Int64. Throws an exception if it is not an Int64.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal Int64 AsInt64
+        public Int64 AsInt64
         {
             get
             {
@@ -277,7 +277,7 @@ namespace FullSerializer
         /// Casts this fsData to a boolean. Throws an exception if it is not a boolean.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal bool AsBool
+        public bool AsBool
         {
             get
             {
@@ -289,7 +289,7 @@ namespace FullSerializer
         /// Casts this fsData to a string. Throws an exception if it is not a string.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string AsString
+        public string AsString
         {
             get
             {
@@ -302,7 +302,7 @@ namespace FullSerializer
         /// Dictionary.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal Dictionary<string, fsData> AsDictionary
+        public Dictionary<string, fsData> AsDictionary
         {
             get
             {
@@ -314,7 +314,7 @@ namespace FullSerializer
         /// Casts this fsData to a List. Throws an exception if it is not a List.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal List<fsData> AsList
+        public List<fsData> AsList
         {
             get
             {
@@ -323,7 +323,7 @@ namespace FullSerializer
         }
 
         /// <summary>
-        /// Internal helper method to cast the underlying storage to the given type or throw a
+        /// public helper method to cast the underlying storage to the given type or throw a
         /// pretty printed exception on failure.
         /// </summary>
         private T Cast<T>()

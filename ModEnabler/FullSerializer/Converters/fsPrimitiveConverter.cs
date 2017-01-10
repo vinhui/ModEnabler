@@ -2,9 +2,9 @@
 
 namespace FullSerializer.Internal
 {
-    internal class fsPrimitiveConverter : fsConverter
+    public class fsPrimitiveConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return
                 type.Resolve().IsPrimitive ||
@@ -12,12 +12,12 @@ namespace FullSerializer.Internal
                 type == typeof(decimal);
         }
 
-        internal override bool RequestCycleSupport(Type storageType)
+        public override bool RequestCycleSupport(Type storageType)
         {
             return false;
         }
 
-        internal override bool RequestInheritanceSupport(Type storageType)
+        public override bool RequestInheritanceSupport(Type storageType)
         {
             return false;
         }
@@ -48,7 +48,7 @@ namespace FullSerializer.Internal
                    type == typeof(char);
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             var instanceType = instance.GetType();
 
@@ -86,7 +86,7 @@ namespace FullSerializer.Internal
             return fsResult.Fail("Unhandled primitive type " + instance.GetType());
         }
 
-        internal override fsResult TryDeserialize(fsData storage, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData storage, ref object instance, Type storageType)
         {
             var result = fsResult.Success;
 

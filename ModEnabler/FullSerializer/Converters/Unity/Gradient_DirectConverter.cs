@@ -14,7 +14,7 @@ namespace FullSerializer
 
 namespace FullSerializer.Internal.DirectConverters
 {
-    internal class Gradient_DirectConverter : fsDirectConverter<Gradient>
+    public class Gradient_DirectConverter : fsDirectConverter<Gradient>
     {
         protected override fsResult DoSerialize(Gradient model, Dictionary<string, fsData> serialized)
         {
@@ -41,7 +41,7 @@ namespace FullSerializer.Internal.DirectConverters
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return new Gradient();
         }

@@ -7,31 +7,31 @@ namespace FullSerializer.Internal
     /// <summary>
     /// Serializes and deserializes enums by their current name.
     /// </summary>
-    internal class fsEnumConverter : fsConverter
+    public class fsEnumConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return type.Resolve().IsEnum;
         }
 
-        internal override bool RequestCycleSupport(Type storageType)
+        public override bool RequestCycleSupport(Type storageType)
         {
             return false;
         }
 
-        internal override bool RequestInheritanceSupport(Type storageType)
+        public override bool RequestInheritanceSupport(Type storageType)
         {
             return false;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             // In .NET compact, Enum.ToObject(Type, Object) is defined but the overloads like
             // Enum.ToObject(Type, int) are not -- so we get around this by boxing the value.
             return Enum.ToObject(storageType, (object)0);
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             if (fsConfig.SerializeEnumsAsInteger)
             {
@@ -66,7 +66,7 @@ namespace FullSerializer.Internal
             return fsResult.Success;
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             if (data.IsString)
             {

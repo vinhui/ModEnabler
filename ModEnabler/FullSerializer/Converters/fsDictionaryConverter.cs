@@ -8,19 +8,19 @@ namespace FullSerializer.Internal
     // While the generic IEnumerable converter can handle dictionaries, we process them separately here because
     // we support a few more advanced use-cases with dictionaries, such as inline strings. Further, dictionary
     // processing in general is a bit more advanced because a few of the collection implementations are buggy.
-    internal class fsDictionaryConverter : fsConverter
+    public class fsDictionaryConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return typeof(IDictionary).IsAssignableFrom(type);
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return fsMetaType.Get(storageType).CreateInstance();
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance_, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance_, Type storageType)
         {
             var instance = (IDictionary)instance_;
             var result = fsResult.Success;
@@ -83,7 +83,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override fsResult TrySerialize(object instance_, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance_, out fsData serialized, Type storageType)
         {
             serialized = fsData.Null;
 

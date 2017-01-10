@@ -14,18 +14,18 @@ namespace FullSerializer
     /// doesn't exist.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct)]
-    internal sealed class fsForwardAttribute : Attribute
+    public sealed class fsForwardAttribute : Attribute
     {
         /// <summary>
         /// The name of the member we should serialize as.
         /// </summary>
-        internal string MemberName;
+        public string MemberName;
 
         /// <summary>
         /// Forward object serialization to an instance member. See class comment.
         /// </summary>
         /// <param name="memberName">The name of the member that we should serialize this object as.</param>
-        internal fsForwardAttribute(string memberName)
+        public fsForwardAttribute(string memberName)
         {
             MemberName = memberName;
         }
@@ -34,16 +34,16 @@ namespace FullSerializer
 
 namespace FullSerializer.Internal
 {
-    internal class fsForwardConverter : fsConverter
+    public class fsForwardConverter : fsConverter
     {
         private string _memberName;
 
-        internal fsForwardConverter(fsForwardAttribute attribute)
+        public fsForwardConverter(fsForwardAttribute attribute)
         {
             _memberName = attribute.MemberName;
         }
 
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             throw new NotSupportedException("Please use the [fsForward(...)] attribute.");
         }
@@ -64,7 +64,7 @@ namespace FullSerializer.Internal
             return fsResult.Fail("No property named \"" + _memberName + "\" on " + instance.GetType().CSharpName());
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             serialized = fsData.Null;
             var result = fsResult.Success;
@@ -77,7 +77,7 @@ namespace FullSerializer.Internal
             return Serializer.TrySerialize(property.StorageType, actualInstance, out serialized);
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             var result = fsResult.Success;
 
@@ -93,7 +93,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return fsMetaType.Get(storageType).CreateInstance();
         }

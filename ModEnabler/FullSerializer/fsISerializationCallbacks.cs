@@ -44,24 +44,24 @@ namespace FullSerializer
 
 namespace FullSerializer.Internal
 {
-    internal class fsSerializationCallbackProcessor : fsObjectProcessor
+    public class fsSerializationCallbackProcessor : fsObjectProcessor
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return typeof(fsISerializationCallbacks).IsAssignableFrom(type);
         }
 
-        internal override void OnBeforeSerialize(Type storageType, object instance)
+        public override void OnBeforeSerialize(Type storageType, object instance)
         {
             ((fsISerializationCallbacks)instance).OnBeforeSerialize(storageType);
         }
 
-        internal override void OnAfterSerialize(Type storageType, object instance, ref fsData data)
+        public override void OnAfterSerialize(Type storageType, object instance, ref fsData data)
         {
             ((fsISerializationCallbacks)instance).OnAfterSerialize(storageType, ref data);
         }
 
-        internal override void OnBeforeDeserializeAfterInstanceCreation(Type storageType, object instance, ref fsData data)
+        public override void OnBeforeDeserializeAfterInstanceCreation(Type storageType, object instance, ref fsData data)
         {
             if (instance is fsISerializationCallbacks == false)
             {
@@ -71,7 +71,7 @@ namespace FullSerializer.Internal
             ((fsISerializationCallbacks)instance).OnBeforeDeserialize(storageType, ref data);
         }
 
-        internal override void OnAfterDeserialize(Type storageType, object instance)
+        public override void OnAfterDeserialize(Type storageType, object instance)
         {
             ((fsISerializationCallbacks)instance).OnAfterDeserialize(storageType);
         }
@@ -79,19 +79,19 @@ namespace FullSerializer.Internal
 
 #if !NO_UNITY
 
-    internal class fsSerializationCallbackReceiverProcessor : fsObjectProcessor
+    public class fsSerializationCallbackReceiverProcessor : fsObjectProcessor
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return typeof(ISerializationCallbackReceiver).IsAssignableFrom(type);
         }
 
-        internal override void OnBeforeSerialize(Type storageType, object instance)
+        public override void OnBeforeSerialize(Type storageType, object instance)
         {
             ((ISerializationCallbackReceiver)instance).OnBeforeSerialize();
         }
 
-        internal override void OnAfterDeserialize(Type storageType, object instance)
+        public override void OnAfterDeserialize(Type storageType, object instance)
         {
             ((ISerializationCallbackReceiver)instance).OnAfterDeserialize();
         }

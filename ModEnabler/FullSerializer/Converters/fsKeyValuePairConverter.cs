@@ -4,26 +4,26 @@ using System.Reflection;
 
 namespace FullSerializer.Internal
 {
-    internal class fsKeyValuePairConverter : fsConverter
+    public class fsKeyValuePairConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return
                 type.Resolve().IsGenericType &&
                 type.GetGenericTypeDefinition() == typeof(KeyValuePair<,>);
         }
 
-        internal override bool RequestCycleSupport(Type storageType)
+        public override bool RequestCycleSupport(Type storageType)
         {
             return false;
         }
 
-        internal override bool RequestInheritanceSupport(Type storageType)
+        public override bool RequestInheritanceSupport(Type storageType)
         {
             return false;
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             var result = fsResult.Success;
 
@@ -44,7 +44,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             PropertyInfo keyProperty = storageType.GetDeclaredProperty("Key");
             PropertyInfo valueProperty = storageType.GetDeclaredProperty("Value");

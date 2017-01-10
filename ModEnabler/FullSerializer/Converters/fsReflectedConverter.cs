@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace FullSerializer.Internal
 {
-    internal class fsReflectedConverter : fsConverter
+    public class fsReflectedConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             if (type.Resolve().IsArray ||
                 typeof(ICollection).IsAssignableFrom(type))
@@ -16,7 +16,7 @@ namespace FullSerializer.Internal
             return true;
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             serialized = fsData.CreateDictionary();
             var result = fsResult.Success;
@@ -46,7 +46,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             var result = fsResult.Success;
 
@@ -94,7 +94,7 @@ namespace FullSerializer.Internal
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             fsMetaType metaType = fsMetaType.Get(storageType);
             return metaType.CreateInstance();

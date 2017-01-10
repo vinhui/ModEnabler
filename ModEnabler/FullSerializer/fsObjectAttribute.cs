@@ -7,7 +7,7 @@ namespace FullSerializer
     /// on each of the fields for more information.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    internal sealed class fsObjectAttribute : Attribute
+    public sealed class fsObjectAttribute : Attribute
     {
         /// <summary>
         /// The previous model that should be used if an old version of this
@@ -16,7 +16,7 @@ namespace FullSerializer
         /// instance of the given type. Use of this parameter *requires* that
         /// the VersionString parameter is also set.
         /// </summary>
-        internal Type[] PreviousModels;
+        public Type[] PreviousModels;
 
         /// <summary>
         /// The version string to use for this model. This should be unique among all
@@ -24,32 +24,32 @@ namespace FullSerializer
         /// is set, then this attribute must also be set. A good valid example for this
         /// is "v1", "v2", "v3", ...
         /// </summary>
-        internal string VersionString;
+        public string VersionString;
 
         /// <summary>
         /// This controls the behavior for member serialization.
         /// The default behavior is fsMemberSerialization.Default.
         /// </summary>
-        internal fsMemberSerialization MemberSerialization = fsMemberSerialization.Default;
+        public fsMemberSerialization MemberSerialization = fsMemberSerialization.Default;
 
         /// <summary>
         /// Specify a custom converter to use for serialization. The converter type needs
         /// to derive from fsBaseConverter. This defaults to null.
         /// </summary>
-        internal Type Converter;
+        public Type Converter;
 
         /// <summary>
         /// Specify a custom processor to use during serialization. The processor type needs
         /// to derive from fsObjectProcessor and the call to CanProcess is not invoked. This
         /// defaults to null.
         /// </summary>
-        internal Type Processor;
+        public Type Processor;
 
-        internal fsObjectAttribute()
+        public fsObjectAttribute()
         {
         }
 
-        internal fsObjectAttribute(string versionString, params Type[] previousModels)
+        public fsObjectAttribute(string versionString, params Type[] previousModels)
         {
             VersionString = versionString;
             PreviousModels = previousModels;

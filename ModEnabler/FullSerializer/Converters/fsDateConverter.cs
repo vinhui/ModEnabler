@@ -6,7 +6,7 @@ namespace FullSerializer.Internal
     /// <summary>
     /// Supports serialization for DateTime, DateTimeOffset, and TimeSpan.
     /// </summary>
-    internal class fsDateConverter : fsConverter
+    public class fsDateConverter : fsConverter
     {
         // The format strings that we use when serializing DateTime and DateTimeOffset types.
         private const string DefaultDateTimeFormatString = @"o";
@@ -21,7 +21,7 @@ namespace FullSerializer.Internal
             }
         }
 
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             return
                 type == typeof(DateTime) ||
@@ -29,7 +29,7 @@ namespace FullSerializer.Internal
                 type == typeof(TimeSpan);
         }
 
-        internal override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance, out fsData serialized, Type storageType)
         {
             if (instance is DateTime)
             {
@@ -55,7 +55,7 @@ namespace FullSerializer.Internal
             throw new InvalidOperationException("FullSerializer Internal Error -- Unexpected serialization type");
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType)
         {
             if (data.IsString == false)
             {

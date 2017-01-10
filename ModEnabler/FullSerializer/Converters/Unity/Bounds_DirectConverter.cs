@@ -14,7 +14,7 @@ namespace FullSerializer
 
 namespace FullSerializer.Internal.DirectConverters
 {
-    internal class Bounds_DirectConverter : fsDirectConverter<Bounds>
+    public class Bounds_DirectConverter : fsDirectConverter<Bounds>
     {
         protected override fsResult DoSerialize(Bounds model, Dictionary<string, fsData> serialized)
         {
@@ -41,7 +41,7 @@ namespace FullSerializer.Internal.DirectConverters
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return new Bounds();
         }

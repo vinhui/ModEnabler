@@ -8,21 +8,21 @@ namespace FullSerializer.Internal
     /// <summary>
     /// Provides serialization support for anything which extends from `IEnumerable` and has an `Add` method.
     /// </summary>
-    internal class fsIEnumerableConverter : fsConverter
+    public class fsIEnumerableConverter : fsConverter
     {
-        internal override bool CanProcess(Type type)
+        public override bool CanProcess(Type type)
         {
             if (typeof(IEnumerable).IsAssignableFrom(type) == false)
                 return false;
             return GetAddMethod(type) != null;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return fsMetaType.Get(storageType).CreateInstance();
         }
 
-        internal override fsResult TrySerialize(object instance_, out fsData serialized, Type storageType)
+        public override fsResult TrySerialize(object instance_, out fsData serialized, Type storageType)
         {
             var instance = (IEnumerable)instance_;
             var result = fsResult.Success;
@@ -60,7 +60,7 @@ namespace FullSerializer.Internal
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Stack<>);
         }
 
-        internal override fsResult TryDeserialize(fsData data, ref object instance_, Type storageType)
+        public override fsResult TryDeserialize(fsData data, ref object instance_, Type storageType)
         {
             var instance = (IEnumerable)instance_;
             var result = fsResult.Success;

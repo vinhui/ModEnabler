@@ -14,7 +14,7 @@ namespace FullSerializer
 
 namespace FullSerializer.Internal.DirectConverters
 {
-    internal class LayerMask_DirectConverter : fsDirectConverter<LayerMask>
+    public class LayerMask_DirectConverter : fsDirectConverter<LayerMask>
     {
         protected override fsResult DoSerialize(LayerMask model, Dictionary<string, fsData> serialized)
         {
@@ -36,7 +36,7 @@ namespace FullSerializer.Internal.DirectConverters
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return new LayerMask();
         }

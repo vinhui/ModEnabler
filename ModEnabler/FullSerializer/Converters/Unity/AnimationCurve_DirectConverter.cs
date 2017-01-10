@@ -46,7 +46,7 @@ namespace FullSerializer.Internal.DirectConverters
             return result;
         }
 
-        internal override object CreateInstance(fsData data, Type storageType)
+        public override object CreateInstance(fsData data, Type storageType)
         {
             return new AnimationCurve();
         }
