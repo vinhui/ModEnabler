@@ -1,32 +1,24 @@
-﻿using System;
+﻿using FullSerializer;
+using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace ModEnabler.Resource.DataObjects
 {
     [Serializable]
     public struct ParticleSystemData
     {
-        public CollisionModule collision;
-        public ColorBySpeedModule colorBySpeed;
-        public ColorOverLifetimeModule colorOverLifetime;
-        public EmissionModule emission;
-        public ExternalForcesModule externalForces;
-        public ForceOverLifetimeModule forceOverLifetime;
+#if UNITY_5_5_OR_NEWER
+        public MainModule main;
+#else
         public float gravityModifier;
-        public InheritVelocityModule inheritVelocity;
-        public LimitVelocityOverLifetimeModule limitVelocityOverLifetime;
         public bool loop;
         public int maxParticles;
         public float playbackSpeed;
         public bool playOnAwake;
-        public uint randomSeed;
-        public RotationBySpeedModule rotationBySpeed;
-        public RotationOverLifetimeModule rotationOverLifetime;
         public ParticleSystemScalingMode scalingMode;
-        public ShapeModule shape;
         public ParticleSystemSimulationSpace simulationSpace;
-        public SizeBySpeedModule sizeBySpeed;
-        public SizeOverLifetimeModule sizeOverLifetime;
         public Color startColor;
         public float startDelay;
         public float startLifetime;
@@ -34,35 +26,40 @@ namespace ModEnabler.Resource.DataObjects
         public Vector3 startRotation3D;
         public float startSize;
         public float startSpeed;
+#endif
+        public uint randomSeed;
+        public float time;
+
+        public CollisionModule collision;
+        public ColorBySpeedModule colorBySpeed;
+        public ColorOverLifetimeModule colorOverLifetime;
+        public EmissionModule emission;
+        public ExternalForcesModule externalForces;
+        public ForceOverLifetimeModule forceOverLifetime;
+        public InheritVelocityModule inheritVelocity;
+        public LimitVelocityOverLifetimeModule limitVelocityOverLifetime;
+        public RotationBySpeedModule rotationBySpeed;
+        public RotationOverLifetimeModule rotationOverLifetime;
+        public ShapeModule shape;
+        public SizeBySpeedModule sizeBySpeed;
+        public SizeOverLifetimeModule sizeOverLifetime;
         public SubEmittersModule subEmitters;
         public TextureSheetAnimationModule textureSheetAnimation;
-        public float time;
         public VelocityOverLifetimeModule velocityOverLifetime;
         public Renderer renderer;
 
         public ParticleSystemData(ParticleSystem ps)
         {
-            collision = ps.collision;
-            colorBySpeed = ps.colorBySpeed;
-            colorOverLifetime = ps.colorOverLifetime;
-            emission = ps.emission;
-            externalForces = ps.externalForces;
-            forceOverLifetime = ps.forceOverLifetime;
+#if UNITY_5_5_OR_NEWER
+            main = ps.main;
+#else
             gravityModifier = ps.gravityModifier;
-            inheritVelocity = ps.inheritVelocity;
-            limitVelocityOverLifetime = ps.limitVelocityOverLifetime;
             loop = ps.loop;
             maxParticles = ps.maxParticles;
             playbackSpeed = ps.playbackSpeed;
             playOnAwake = ps.playOnAwake;
-            randomSeed = ps.randomSeed;
-            rotationBySpeed = ps.rotationBySpeed;
-            rotationOverLifetime = ps.rotationOverLifetime;
             scalingMode = ps.scalingMode;
-            shape = ps.shape;
             simulationSpace = ps.simulationSpace;
-            sizeBySpeed = ps.sizeBySpeed;
-            sizeOverLifetime = ps.sizeOverLifetime;
             startColor = ps.startColor;
             startDelay = ps.startDelay;
             startLifetime = ps.startLifetime;
@@ -70,6 +67,22 @@ namespace ModEnabler.Resource.DataObjects
             startRotation3D = ps.startRotation3D;
             startSize = ps.startSize;
             startSpeed = ps.startSpeed;
+#endif
+
+            collision = ps.collision;
+            colorBySpeed = ps.colorBySpeed;
+            colorOverLifetime = ps.colorOverLifetime;
+            emission = ps.emission;
+            externalForces = ps.externalForces;
+            forceOverLifetime = ps.forceOverLifetime;
+            inheritVelocity = ps.inheritVelocity;
+            limitVelocityOverLifetime = ps.limitVelocityOverLifetime;
+            randomSeed = ps.randomSeed;
+            rotationBySpeed = ps.rotationBySpeed;
+            rotationOverLifetime = ps.rotationOverLifetime;
+            shape = ps.shape;
+            sizeBySpeed = ps.sizeBySpeed;
+            sizeOverLifetime = ps.sizeOverLifetime;
             subEmitters = ps.subEmitters;
             textureSheetAnimation = ps.textureSheetAnimation;
             time = ps.time;
@@ -83,118 +96,16 @@ namespace ModEnabler.Resource.DataObjects
             if (ps == null)
                 ps = go.AddComponent<ParticleSystem>();
 
-            var a = ps.collision;
-            a.enabled = collision.enabled;
-            a.bounce = ParticleSystemHelpers.Convert(collision.bounce);
-            a.collidesWith = collision.collidesWith;
-            a.dampen = ParticleSystemHelpers.Convert(collision.dampen);
-            a.enableDynamicColliders = collision.enableDynamicColliders;
-            a.enableInteriorCollisions = collision.enableInteriorCollisions;
-            a.lifetimeLoss = ParticleSystemHelpers.Convert(collision.lifetimeLoss);
-            a.maxCollisionShapes = collision.maxCollisionShapes;
-            a.minKillSpeed = collision.minKillSpeed;
-            a.mode = collision.mode;
-            a.quality = collision.quality;
-            a.radiusScale = collision.radiusScale;
-            a.sendCollisionMessages = collision.sendCollisionMessages;
-            a.type = collision.type;
-            a.voxelSize = collision.voxelSize;
-            a.radiusScale = collision.radiusScale;
-            a.radiusScale = collision.radiusScale;
+            ps.randomSeed = randomSeed;
+            ps.time = time;
 
-            var b = ps.colorBySpeed;
-            b.enabled = colorBySpeed.enabled;
-            b.color = ParticleSystemHelpers.Convert(colorBySpeed.color);
-            b.range = colorBySpeed.range;
-
-            var c = ps.colorOverLifetime;
-            c.enabled = colorOverLifetime.enabled;
-            c.color = ParticleSystemHelpers.Convert(colorOverLifetime.color);
-
-            var d = ps.emission;
-            d.enabled = emission.enabled;
-            d.rate = ParticleSystemHelpers.Convert(emission.rate);
-            d.type = emission.type;
-
-            var e = ps.externalForces;
-            e.enabled = externalForces.enabled;
-            e.multiplier = externalForces.multiplier;
-
-            var f = ps.forceOverLifetime;
-            f.enabled = forceOverLifetime.enabled;
-            f.randomized = forceOverLifetime.randomized;
-            f.space = forceOverLifetime.space;
-            f.x = ParticleSystemHelpers.Convert(forceOverLifetime.x);
-            f.y = ParticleSystemHelpers.Convert(forceOverLifetime.y);
-            f.z = ParticleSystemHelpers.Convert(forceOverLifetime.z);
-            ps.gravityModifier = gravityModifier;
-
-            var g = ps.inheritVelocity;
-            g.enabled = inheritVelocity.enabled;
-            g.curve = ParticleSystemHelpers.Convert(inheritVelocity.curve);
-            g.mode = inheritVelocity.mode;
-
-            var h = ps.limitVelocityOverLifetime;
-            h.enabled = limitVelocityOverLifetime.enabled;
-            h.dampen = limitVelocityOverLifetime.dampen;
-            h.limit = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limit);
-            h.limitX = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limitX);
-            h.limitY = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limitY);
-            h.limitZ = ParticleSystemHelpers.Convert(limitVelocityOverLifetime.limitZ);
-            h.separateAxes = limitVelocityOverLifetime.separateAxes;
-            h.space = limitVelocityOverLifetime.space;
-
+#if !UNITY_5_5_OR_NEWER
             ps.loop = loop;
             ps.maxParticles = maxParticles;
             ps.playbackSpeed = playbackSpeed;
             ps.playOnAwake = playOnAwake;
-            ps.randomSeed = randomSeed;
-
-            var i = ps.rotationBySpeed;
-            i.enabled = rotationBySpeed.enabled;
-            i.range = rotationBySpeed.range;
-            i.separateAxes = rotationBySpeed.separateAxes;
-            i.x = ParticleSystemHelpers.Convert(rotationBySpeed.x);
-            i.y = ParticleSystemHelpers.Convert(rotationBySpeed.y);
-            i.z = ParticleSystemHelpers.Convert(rotationBySpeed.z);
-
-            var j = ps.rotationOverLifetime;
-            j.enabled = rotationOverLifetime.enabled;
-            j.separateAxes = rotationOverLifetime.separateAxes;
-            j.x = ParticleSystemHelpers.Convert(rotationOverLifetime.x);
-            j.y = ParticleSystemHelpers.Convert(rotationOverLifetime.y);
-            j.z = ParticleSystemHelpers.Convert(rotationOverLifetime.z);
-
             ps.scalingMode = scalingMode;
-
-            var k = ps.shape;
-            k.enabled = shape.enabled;
-            k.angle = shape.angle;
-            k.arc = shape.arc;
-            k.box = shape.box;
-            k.length = shape.length;
-            if (!string.IsNullOrEmpty(shape.mesh))
-                k.mesh = ResourceManager.LoadMesh(shape.mesh);
-            k.meshRenderer = go.GetComponent<MeshRenderer>();
-            k.meshShapeType = shape.meshShapeType;
-            k.normalOffset = shape.normalOffset;
-            k.radius = shape.radius;
-            k.randomDirection = shape.randomDirection;
-            k.shapeType = shape.shapeType;
-            k.useMeshColors = shape.useMeshColors;
-            k.useMeshMaterialIndex = shape.useMeshMaterialIndex;
-
             ps.simulationSpace = simulationSpace;
-
-            var l = ps.sizeBySpeed;
-            l.enabled = sizeBySpeed.enabled;
-            l.range = sizeBySpeed.range;
-            l.size = ParticleSystemHelpers.Convert(sizeBySpeed.size);
-
-            var m = ps.sizeOverLifetime;
-            m.enabled = sizeOverLifetime.enabled;
-            m.size = ParticleSystemHelpers.Convert(sizeOverLifetime.size);
-
             ps.startColor = startColor;
             ps.startDelay = startDelay;
             ps.startLifetime = startLifetime;
@@ -202,61 +113,167 @@ namespace ModEnabler.Resource.DataObjects
             ps.startRotation3D = startRotation3D;
             ps.startSize = startSize;
             ps.startSpeed = startSpeed;
-
-            var n = ps.subEmitters;
-            if (!string.IsNullOrEmpty(subEmitters.birth0))
-                n.birth0 = ResourceManager.LoadParticleSystem(subEmitters.birth0, go);
-            if (!string.IsNullOrEmpty(subEmitters.birth1))
-                n.birth1 = ResourceManager.LoadParticleSystem(subEmitters.birth1, go);
-            if (!string.IsNullOrEmpty(subEmitters.collision0))
-                n.collision0 = ResourceManager.LoadParticleSystem(subEmitters.collision0, go);
-            if (!string.IsNullOrEmpty(subEmitters.collision1))
-                n.collision1 = ResourceManager.LoadParticleSystem(subEmitters.collision1, go);
-            if (!string.IsNullOrEmpty(subEmitters.death0))
-                n.death0 = ResourceManager.LoadParticleSystem(subEmitters.death0, go);
-            if (!string.IsNullOrEmpty(subEmitters.death1))
-                n.death1 = ResourceManager.LoadParticleSystem(subEmitters.death1, go);
-            n.enabled = subEmitters.enabled;
-
-            var o = ps.textureSheetAnimation;
-            o.enabled = textureSheetAnimation.enabled;
-            o.animation = textureSheetAnimation.animation;
-            o.cycleCount = textureSheetAnimation.cycleCount;
-            o.frameOverTime = ParticleSystemHelpers.Convert(textureSheetAnimation.frameOverTime);
-            o.numTilesX = textureSheetAnimation.numTilesX;
-            o.numTilesY = textureSheetAnimation.numTilesY;
-            o.rowIndex = textureSheetAnimation.rowIndex;
-            o.useRandomRow = textureSheetAnimation.useRandomRow;
-
+            ps.randomSeed = randomSeed;
             ps.time = time;
+#endif
 
-            var p = ps.velocityOverLifetime;
-            p.enabled = velocityOverLifetime.enabled;
-            p.space = velocityOverLifetime.space;
-            p.x = ParticleSystemHelpers.Convert(velocityOverLifetime.x);
-            p.y = ParticleSystemHelpers.Convert(velocityOverLifetime.y);
-            p.z = ParticleSystemHelpers.Convert(velocityOverLifetime.z);
+            #region Modules
 
-            var pr = ps.GetComponent<ParticleSystemRenderer>();
-            pr.renderMode = renderer.renderMode;
-            pr.normalDirection = renderer.normalDirection;
-            if (!string.IsNullOrEmpty(renderer.material))
-                pr.material = ResourceManager.LoadMaterial(renderer.material);
-            if (!string.IsNullOrEmpty(renderer.mesh))
-                pr.mesh = ResourceManager.LoadMesh(renderer.mesh);
-            pr.sortMode = renderer.sortMode;
-            pr.sortingFudge = renderer.sortingFudge;
-            pr.shadowCastingMode = renderer.shadowCastingMode;
-            pr.receiveShadows = renderer.receiveShadows;
-            pr.minParticleSize = renderer.minParticleSize;
-            pr.maxParticleSize = renderer.maxParticleSize;
-            pr.sortingLayerName = renderer.sortingLayerName;
-            pr.sortingOrder = renderer.sortingOrder;
-            pr.alignment = renderer.alignment;
-            pr.pivot = renderer.pivot;
+#if UNITY_5_5_OR_NEWER
+            main.ToUnity(ps.main);
+#endif
+            collision.ToUnity(ps.collision);
+            colorBySpeed.ToUnity(ps.colorBySpeed);
+            colorOverLifetime.ToUnity(ps.colorOverLifetime);
+            emission.ToUnity(ps.emission);
+            externalForces.ToUnity(ps.externalForces);
+            forceOverLifetime.ToUnity(ps.forceOverLifetime);
+            inheritVelocity.ToUnity(ps.inheritVelocity);
+            limitVelocityOverLifetime.ToUnity(ps.limitVelocityOverLifetime);
+            rotationBySpeed.ToUnity(ps.rotationBySpeed);
+            rotationOverLifetime.ToUnity(ps.rotationOverLifetime);
+            shape.ToUnity(ps.shape, go);
+            sizeBySpeed.ToUnity(ps.sizeBySpeed);
+            sizeOverLifetime.ToUnity(ps.sizeOverLifetime);
+            subEmitters.ToUnity(ps.subEmitters, go);
+            textureSheetAnimation.ToUnity(ps.textureSheetAnimation);
+            velocityOverLifetime.ToUnity(ps.velocityOverLifetime);
+            renderer.ToUnity(ps.GetComponent<ParticleSystemRenderer>());
+
+            #endregion Modules
 
             return ps;
         }
+
+#if UNITY_5_5_OR_NEWER
+
+        public struct MainModule
+        {
+            private Transform customSimulationSpace;
+            private float duration;
+            private MinMaxCurve gravityModifier;
+            private float gravityModifierMultiplier;
+            private bool loop;
+            private int maxParticles;
+            private bool playOnAwake;
+            private bool prewarm;
+            private float randomizeRotationDirection;
+            private ParticleSystemScalingMode scalingMode;
+            private ParticleSystemSimulationSpace simulationSpace;
+            private float simulationSpeed;
+            private MinMaxGradient startColor;
+            private MinMaxCurve startDelay;
+            private float startDelayMultiplier;
+            private MinMaxCurve startLifetime;
+            private float startLifetimeMultiplier;
+            private MinMaxCurve startRotation;
+            private bool startRotation3D;
+            private float startRotationMultiplier;
+            private MinMaxCurve startRotationX;
+            private float startRotationXMultiplier;
+            private MinMaxCurve startRotationY;
+            private float startRotationYMultiplier;
+            private MinMaxCurve startRotationZ;
+            private float startRotationZMultiplier;
+            private MinMaxCurve startSize;
+            private bool startSize3D;
+            private float startSizeMultiplier;
+            private MinMaxCurve startSizeX;
+            private float startSizeXMultiplier;
+            private MinMaxCurve startSizeY;
+            private float startSizeYMultiplier;
+            private MinMaxCurve startSizeZ;
+            private float startSizeZMultiplier;
+            private MinMaxCurve startSpeed;
+            private float startSpeedMultiplier;
+
+            public static implicit operator MainModule(ParticleSystem.MainModule a)
+            {
+                return new MainModule
+                {
+                    customSimulationSpace = a.customSimulationSpace,
+                    duration = a.duration,
+                    gravityModifier = a.gravityModifier,
+                    gravityModifierMultiplier = a.gravityModifierMultiplier,
+                    loop = a.loop,
+                    maxParticles = a.maxParticles,
+                    playOnAwake = a.playOnAwake,
+                    prewarm = a.prewarm,
+                    randomizeRotationDirection = a.randomizeRotationDirection,
+                    scalingMode = a.scalingMode,
+                    simulationSpace = a.simulationSpace,
+                    simulationSpeed = a.simulationSpeed,
+                    startColor = a.startColor,
+                    startDelay = a.startDelay,
+                    startDelayMultiplier = a.startDelayMultiplier,
+                    startLifetime = a.startLifetime,
+                    startLifetimeMultiplier = a.startLifetimeMultiplier,
+                    startRotation = a.startRotation,
+                    startRotation3D = a.startRotation3D,
+                    startRotationMultiplier = a.startRotationMultiplier,
+                    startRotationX = a.startRotationX,
+                    startRotationXMultiplier = a.startRotationXMultiplier,
+                    startRotationY = a.startRotationY,
+                    startRotationYMultiplier = a.startRotationYMultiplier,
+                    startRotationZ = a.startRotationZ,
+                    startRotationZMultiplier = a.startRotationZMultiplier,
+                    startSize = a.startSize,
+                    startSize3D = a.startSize3D,
+                    startSizeMultiplier = a.startSizeMultiplier,
+                    startSizeX = a.startSizeX,
+                    startSizeXMultiplier = a.startSizeXMultiplier,
+                    startSizeY = a.startSizeY,
+                    startSizeYMultiplier = a.startSizeYMultiplier,
+                    startSizeZ = a.startSizeZ,
+                    startSizeZMultiplier = a.startSizeZMultiplier,
+                    startSpeed = a.startSpeed,
+                    startSpeedMultiplier = a.startSpeedMultiplier,
+                };
+            }
+
+            public void ToUnity(ParticleSystem.MainModule a)
+            {
+                a.customSimulationSpace = customSimulationSpace;
+                a.duration = duration;
+                a.gravityModifier = ParticleSystemHelpers.Convert(gravityModifier);
+                a.gravityModifierMultiplier = gravityModifierMultiplier;
+                a.loop = loop;
+                a.maxParticles = maxParticles;
+                a.playOnAwake = playOnAwake;
+                a.prewarm = prewarm;
+                a.randomizeRotationDirection = randomizeRotationDirection;
+                a.scalingMode = scalingMode;
+                a.simulationSpace = simulationSpace;
+                a.simulationSpeed = simulationSpeed;
+                a.startColor = ParticleSystemHelpers.Convert(startColor);
+                a.startDelay = ParticleSystemHelpers.Convert(startDelay);
+                a.startDelayMultiplier = startDelayMultiplier;
+                a.startLifetime = ParticleSystemHelpers.Convert(startLifetime);
+                a.startLifetimeMultiplier = startLifetimeMultiplier;
+                a.startRotation = ParticleSystemHelpers.Convert(startRotation);
+                a.startRotation3D = startRotation3D;
+                a.startRotationMultiplier = startRotationMultiplier;
+                a.startRotationX = ParticleSystemHelpers.Convert(startRotationX);
+                a.startRotationXMultiplier = startRotationXMultiplier;
+                a.startRotationY = ParticleSystemHelpers.Convert(startRotationY);
+                a.startRotationYMultiplier = startRotationYMultiplier;
+                a.startRotationZ = ParticleSystemHelpers.Convert(startRotationZ);
+                a.startRotationZMultiplier = startRotationZMultiplier;
+                a.startSize = ParticleSystemHelpers.Convert(startSize);
+                a.startSize3D = startSize3D;
+                a.startSizeMultiplier = startSizeMultiplier;
+                a.startSizeX = ParticleSystemHelpers.Convert(startSizeX);
+                a.startSizeXMultiplier = startSizeXMultiplier;
+                a.startSizeY = ParticleSystemHelpers.Convert(startSizeY);
+                a.startSizeYMultiplier = startSizeYMultiplier;
+                a.startSizeZ = ParticleSystemHelpers.Convert(startSizeZ);
+                a.startSizeZMultiplier = startSizeZMultiplier;
+                a.startSpeed = ParticleSystemHelpers.Convert(startSpeed);
+                a.startSpeedMultiplier = startSpeedMultiplier;
+            }
+        }
+
+#endif
 
         public struct Renderer
         {
@@ -266,7 +283,7 @@ namespace ModEnabler.Resource.DataObjects
             public string mesh;
             public ParticleSystemSortMode sortMode;
             public float sortingFudge;
-            public UnityEngine.Rendering.ShadowCastingMode shadowCastingMode;
+            public ShadowCastingMode shadowCastingMode;
             public bool receiveShadows;
             public float minParticleSize;
             public float maxParticleSize;
@@ -303,6 +320,53 @@ namespace ModEnabler.Resource.DataObjects
                 sortingOrder = renderer.sortingOrder;
                 alignment = renderer.alignment;
                 pivot = renderer.pivot;
+            }
+
+            public void ToUnity(ParticleSystemRenderer a)
+            {
+                a.renderMode = renderMode;
+                a.normalDirection = normalDirection;
+                if (!string.IsNullOrEmpty(material))
+                    a.material = ResourceManager.LoadMaterial(material);
+                if (!string.IsNullOrEmpty(mesh))
+                    a.mesh = ResourceManager.LoadMesh(mesh);
+                a.sortMode = sortMode;
+                a.sortingFudge = sortingFudge;
+                a.shadowCastingMode = shadowCastingMode;
+                a.receiveShadows = receiveShadows;
+                a.minParticleSize = minParticleSize;
+                a.maxParticleSize = maxParticleSize;
+                a.sortingLayerName = sortingLayerName;
+                a.sortingOrder = sortingOrder;
+                a.alignment = alignment;
+                a.pivot = pivot;
+            }
+        }
+
+        public struct Burst
+        {
+            public short maxCount;
+            public short minCount;
+            public float time;
+
+            public static implicit operator Burst(ParticleSystem.Burst a)
+            {
+                return new Burst
+                {
+                    maxCount = a.maxCount,
+                    minCount = a.minCount,
+                    time = a.time
+                };
+            }
+
+            public static implicit operator ParticleSystem.Burst(Burst a)
+            {
+                return new ParticleSystem.Burst
+                {
+                    maxCount = a.maxCount,
+                    minCount = a.minCount,
+                    time = a.time
+                };
             }
         }
 
@@ -345,6 +409,27 @@ namespace ModEnabler.Resource.DataObjects
                     voxelSize = a.voxelSize
                 };
             }
+
+            public void ToUnity(ParticleSystem.CollisionModule a)
+            {
+                a.enabled = enabled;
+                a.bounce = ParticleSystemHelpers.Convert(bounce);
+                a.collidesWith = collidesWith;
+                a.dampen = ParticleSystemHelpers.Convert(dampen);
+                a.enableDynamicColliders = enableDynamicColliders;
+                a.enableInteriorCollisions = enableInteriorCollisions;
+                a.lifetimeLoss = ParticleSystemHelpers.Convert(lifetimeLoss);
+                a.maxCollisionShapes = maxCollisionShapes;
+                a.minKillSpeed = minKillSpeed;
+                a.mode = mode;
+                a.quality = quality;
+                a.radiusScale = radiusScale;
+                a.sendCollisionMessages = sendCollisionMessages;
+                a.type = type;
+                a.voxelSize = voxelSize;
+                a.radiusScale = radiusScale;
+                a.radiusScale = radiusScale;
+            }
         }
 
         public struct ColorBySpeedModule
@@ -362,6 +447,13 @@ namespace ModEnabler.Resource.DataObjects
                     range = a.range
                 };
             }
+
+            public void ToUnity(ParticleSystem.ColorBySpeedModule a)
+            {
+                a.color = ParticleSystemHelpers.Convert(color);
+                a.enabled = enabled;
+                a.range = range;
+            }
         }
 
         public struct ColorOverLifetimeModule
@@ -377,22 +469,62 @@ namespace ModEnabler.Resource.DataObjects
                     enabled = a.enabled
                 };
             }
+
+            public void ToUnity(ParticleSystem.ColorOverLifetimeModule a)
+            {
+                a.color = ParticleSystemHelpers.Convert(color);
+                a.enabled = enabled;
+            }
         }
 
         public struct EmissionModule
         {
             public bool enabled;
+#if UNITY_5_5_OR_NEWER
+            public MinMaxCurve rateOverDistance;
+            public float rateOverDistanceMultiplier;
+            public MinMaxCurve rateOverTime;
+            public float rateOverTimeMultiplier;
+#else
             public MinMaxCurve rate;
             public ParticleSystemEmissionType type;
+            public Burst[] bursts;
+#endif
 
             public static implicit operator EmissionModule(ParticleSystem.EmissionModule a)
             {
+                ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[a.burstCount];
+                a.GetBursts(bursts);
+
                 return new EmissionModule()
                 {
                     enabled = a.enabled,
+#if UNITY_5_5_OR_NEWER
+                    rateOverDistance = a.rateOverDistance,
+                    rateOverDistanceMultiplier = a.rateOverDistanceMultiplier,
+                    rateOverTime = a.rateOverTime,
+                    rateOverTimeMultiplier = a.rateOverTimeMultiplier
+#else
                     rate = a.rate,
-                    type = a.type
+                    type = a.type,
+                    bursts = bursts.Cast<Burst>().ToArray(),
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.EmissionModule a)
+            {
+                a.enabled = enabled;
+#if UNITY_5_5_OR_NEWER
+                a.rateOverDistance = ParticleSystemHelpers.Convert(rateOverDistance);
+                a.rateOverDistanceMultiplier = rateOverDistanceMultiplier;
+                a.rateOverTime = ParticleSystemHelpers.Convert(rateOverTime);
+                a.rateOverTimeMultiplier = rateOverTimeMultiplier;
+#else
+                a.rate = ParticleSystemHelpers.Convert(rate);
+                a.type = type;
+                a.SetBursts(bursts.Cast<ParticleSystem.Burst>().ToArray());
+#endif
             }
         }
 
@@ -408,6 +540,7 @@ namespace ModEnabler.Resource.DataObjects
             public Color32 startColor;
             public float startLifetime;
             public float startSize;
+            public Vector3 startSize3D;
             public Vector3 velocity;
 
             public static implicit operator EmitParams(ParticleSystem.EmitParams a)
@@ -424,8 +557,25 @@ namespace ModEnabler.Resource.DataObjects
                     startColor = a.startColor,
                     startLifetime = a.startLifetime,
                     startSize = a.startSize,
+                    startSize3D = a.startSize3D,
                     velocity = a.velocity
                 };
+            }
+
+            public void ToUnity(ParticleSystem.EmitParams a)
+            {
+                a.angularVelocity = angularVelocity;
+                a.angularVelocity3D = angularVelocity3D;
+                a.axisOfRotation = axisOfRotation;
+                a.position = position;
+                a.randomSeed = randomSeed;
+                a.rotation = rotation;
+                a.rotation3D = rotation3D;
+                a.startColor = startColor;
+                a.startLifetime = startLifetime;
+                a.startSize = startSize;
+                a.startSize3D = startSize3D;
+                a.velocity = velocity;
             }
         }
 
@@ -442,6 +592,12 @@ namespace ModEnabler.Resource.DataObjects
                     multiplier = a.multiplier
                 };
             }
+
+            public void ToUnity(ParticleSystem.ExternalForcesModule a)
+            {
+                a.enabled = enabled;
+                a.multiplier = multiplier;
+            }
         }
 
         public struct ForceOverLifetimeModule
@@ -452,6 +608,11 @@ namespace ModEnabler.Resource.DataObjects
             public MinMaxCurve x;
             public MinMaxCurve y;
             public MinMaxCurve z;
+#if UNITY_5_5_OR_NEWER
+            public float xMultiplier;
+            public float yMultiplier;
+            public float zMultiplier;
+#endif
 
             public static implicit operator ForceOverLifetimeModule(ParticleSystem.ForceOverLifetimeModule a)
             {
@@ -462,14 +623,37 @@ namespace ModEnabler.Resource.DataObjects
                     space = a.space,
                     x = a.x,
                     y = a.y,
-                    z = a.z
+                    z = a.z,
+#if UNITY_5_5_OR_NEWER
+                    xMultiplier = a.xMultiplier,
+                    yMultiplier = a.yMultiplier,
+                    zMultiplier = a.zMultiplier,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.ForceOverLifetimeModule a)
+            {
+                a.enabled = enabled;
+                a.randomized = randomized;
+                a.space = space;
+                a.x = ParticleSystemHelpers.Convert(x);
+                a.y = ParticleSystemHelpers.Convert(y);
+                a.z = ParticleSystemHelpers.Convert(z);
+#if UNITY_5_5_OR_NEWER
+                a.xMultiplier = xMultiplier;
+                a.yMultiplier = yMultiplier;
+                a.zMultiplier = zMultiplier;
+#endif
             }
         }
 
         public struct InheritVelocityModule
         {
             public MinMaxCurve curve;
+#if UNITY_5_5_OR_NEWER
+            public float curveMultiplier;
+#endif
             public bool enabled;
             public ParticleSystemInheritVelocityMode mode;
 
@@ -478,9 +662,22 @@ namespace ModEnabler.Resource.DataObjects
                 return new InheritVelocityModule()
                 {
                     curve = a.curve,
+#if UNITY_5_5_OR_NEWER
+                    curveMultiplier = a.curveMultiplier,
+#endif
                     enabled = a.enabled,
                     mode = a.mode
                 };
+            }
+
+            public void ToUnity(ParticleSystem.InheritVelocityModule a)
+            {
+                a.curve = ParticleSystemHelpers.Convert(curve);
+#if UNITY_5_5_OR_NEWER
+                a.curveMultiplier = curveMultiplier;
+#endif
+                a.enabled = enabled;
+                a.mode = mode;
             }
         }
 
@@ -492,6 +689,12 @@ namespace ModEnabler.Resource.DataObjects
             public MinMaxCurve limitX;
             public MinMaxCurve limitY;
             public MinMaxCurve limitZ;
+#if UNITY_5_5_OR_NEWER
+            public float limitMultiplier;
+            public float limitXMultiplier;
+            public float limitYMultiplier;
+            public float limitZMultiplier;
+#endif
             public bool separateAxes;
             public ParticleSystemSimulationSpace space;
 
@@ -505,9 +708,33 @@ namespace ModEnabler.Resource.DataObjects
                     limitX = a.limitX,
                     limitY = a.limitY,
                     limitZ = a.limitZ,
+#if UNITY_5_5_OR_NEWER
+                    limitMultiplier = a.limitMultiplier,
+                    limitXMultiplier = a.limitXMultiplier,
+                    limitYMultiplier = a.limitYMultiplier,
+                    limitZMultiplier = a.limitZMultiplier,
+#endif
                     separateAxes = a.separateAxes,
                     space = a.space
                 };
+            }
+
+            public void ToUnity(ParticleSystem.LimitVelocityOverLifetimeModule a)
+            {
+                a.dampen = dampen;
+                a.enabled = enabled;
+                a.limit = ParticleSystemHelpers.Convert(limit);
+                a.limitX = ParticleSystemHelpers.Convert(limitX);
+                a.limitY = ParticleSystemHelpers.Convert(limitY);
+                a.limitZ = ParticleSystemHelpers.Convert(limitZ);
+#if UNITY_5_5_OR_NEWER
+                a.limitMultiplier = limitMultiplier;
+                a.limitXMultiplier = limitXMultiplier;
+                a.limitYMultiplier = limitYMultiplier;
+                a.limitZMultiplier = limitZMultiplier;
+#endif
+                a.separateAxes = separateAxes;
+                a.space = space;
             }
         }
 
@@ -528,7 +755,11 @@ namespace ModEnabler.Resource.DataObjects
                     constantMin = a.constantMin,
                     curveMax = new AnimationClipData.AnimationCurveData(a.curveMax),
                     curveMin = new AnimationClipData.AnimationCurveData(a.curveMin),
+#if UNITY_5_5_OR_NEWER
                     curveScalar = a.curveMultiplier,
+#else
+                    curveScalar = a.curveScalar,
+#endif
                     mode = a.mode
                 };
             }
@@ -560,7 +791,11 @@ namespace ModEnabler.Resource.DataObjects
             public float angularVelocity;
             public Vector3 angularVelocity3D;
             public Vector3 axisOfRotation;
+#if UNITY_5_5_OR_NEWER
+            public float remainingLifeTime;
+#else
             public float lifetime;
+#endif
             public Vector3 position;
             public uint randomSeed;
             public float rotation;
@@ -569,6 +804,7 @@ namespace ModEnabler.Resource.DataObjects
             public float startLifetime;
             public float startSize;
             public Vector3 velocity;
+            public Vector3 startSize3D;
 
             public static implicit operator Particle(ParticleSystem.Particle a)
             {
@@ -577,7 +813,11 @@ namespace ModEnabler.Resource.DataObjects
                     angularVelocity = a.angularVelocity,
                     angularVelocity3D = a.angularVelocity3D,
                     axisOfRotation = a.axisOfRotation,
-                    lifetime = a.remainingLifetime,
+#if UNITY_5_5_OR_NEWER
+                    remainingLifeTime = a.remainingLifetime,
+#else
+                    lifetime = a.lifetime,
+#endif
                     position = a.position,
                     randomSeed = a.randomSeed,
                     rotation = a.rotation,
@@ -585,8 +825,30 @@ namespace ModEnabler.Resource.DataObjects
                     startColor = a.startColor,
                     startLifetime = a.startLifetime,
                     startSize = a.startSize,
-                    velocity = a.velocity
+                    startSize3D = a.startSize3D,
+                    velocity = a.velocity,
                 };
+            }
+
+            public void ToUnity(ParticleSystem.Particle a)
+            {
+                a.angularVelocity = angularVelocity;
+                a.angularVelocity3D = angularVelocity3D;
+                a.axisOfRotation = axisOfRotation;
+#if UNITY_5_5_OR_NEWER
+                a.remainingLifetime = remainingLifeTime;
+#else
+                a.lifetime = lifetime;
+#endif
+                a.position = position;
+                a.randomSeed = randomSeed;
+                a.rotation = rotation;
+                a.rotation3D = rotation3D;
+                a.startColor = startColor;
+                a.startLifetime = startLifetime;
+                a.startSize = startSize;
+                a.startSize3D = startSize3D;
+                a.velocity = velocity;
             }
         }
 
@@ -598,6 +860,11 @@ namespace ModEnabler.Resource.DataObjects
             public MinMaxCurve x;
             public MinMaxCurve y;
             public MinMaxCurve z;
+#if UNITY_5_5_OR_NEWER
+            public float xMultiplier;
+            public float yMultiplier;
+            public float zMultiplier;
+#endif
 
             public static implicit operator RotationBySpeedModule(ParticleSystem.RotationBySpeedModule a)
             {
@@ -608,8 +875,28 @@ namespace ModEnabler.Resource.DataObjects
                     separateAxes = a.separateAxes,
                     x = a.x,
                     y = a.y,
-                    z = a.z
+                    z = a.z,
+#if UNITY_5_5_OR_NEWER
+                    xMultiplier = a.xMultiplier,
+                    yMultiplier = a.yMultiplier,
+                    zMultiplier = a.zMultiplier,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.RotationBySpeedModule a)
+            {
+                a.enabled = enabled;
+                a.range = range;
+                a.separateAxes = separateAxes;
+                a.x = ParticleSystemHelpers.Convert(x);
+                a.y = ParticleSystemHelpers.Convert(y);
+                a.z = ParticleSystemHelpers.Convert(z);
+#if UNITY_5_5_OR_NEWER
+                a.xMultiplier = xMultiplier;
+                a.yMultiplier = yMultiplier;
+                a.zMultiplier = zMultiplier;
+#endif
             }
         }
 
@@ -620,6 +907,11 @@ namespace ModEnabler.Resource.DataObjects
             public MinMaxCurve x;
             public MinMaxCurve y;
             public MinMaxCurve z;
+#if UNITY_5_5_OR_NEWER
+            public float xMultiplier;
+            public float yMultiplier;
+            public float zMultiplier;
+#endif
 
             public static implicit operator RotationOverLifetimeModule(ParticleSystem.RotationOverLifetimeModule a)
             {
@@ -629,8 +921,27 @@ namespace ModEnabler.Resource.DataObjects
                     separateAxes = a.separateAxes,
                     x = a.x,
                     y = a.y,
-                    z = a.z
+                    z = a.z,
+#if UNITY_5_5_OR_NEWER
+                    xMultiplier = a.xMultiplier,
+                    yMultiplier = a.yMultiplier,
+                    zMultiplier = a.zMultiplier,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.RotationOverLifetimeModule a)
+            {
+                a.enabled = enabled;
+                a.separateAxes = separateAxes;
+                a.x = ParticleSystemHelpers.Convert(x);
+                a.y = ParticleSystemHelpers.Convert(y);
+                a.z = ParticleSystemHelpers.Convert(z);
+#if UNITY_5_5_OR_NEWER
+                a.xMultiplier = xMultiplier;
+                a.yMultiplier = yMultiplier;
+                a.zMultiplier = zMultiplier;
+#endif
             }
         }
 
@@ -643,15 +954,21 @@ namespace ModEnabler.Resource.DataObjects
             public float length;
             public string mesh;
             public int meshMaterialIndex;
-            public MeshRenderer meshRenderer;
             public ParticleSystemMeshShapeType meshShapeType;
             public float normalOffset;
             public float radius;
+#if !UNITY_5_5_OR_NEWER
             public bool randomDirection;
+#endif
             public ParticleSystemShapeType shapeType;
-            public SkinnedMeshRenderer skinnedMeshRenderer;
             public bool useMeshColors;
             public bool useMeshMaterialIndex;
+#if UNITY_5_5_OR_NEWER
+            public bool alignToDirection;
+            public float meshScale;
+            public float sphericalDirectionAmount;
+            public float randomDirectionAmount;
+#endif
 
             public static implicit operator ShapeModule(ParticleSystem.ShapeModule a)
             {
@@ -667,16 +984,50 @@ namespace ModEnabler.Resource.DataObjects
                     length = a.length,
                     mesh = (a.mesh != null ? a.mesh.name + ".json" : string.Empty),
                     meshMaterialIndex = a.meshMaterialIndex,
-                    meshRenderer = a.meshRenderer,
                     meshShapeType = a.meshShapeType,
                     normalOffset = a.normalOffset,
                     radius = a.radius,
+#if !UNITY_5_5_OR_NEWER
                     randomDirection = a.randomDirection,
+#endif
                     shapeType = a.shapeType,
-                    skinnedMeshRenderer = a.skinnedMeshRenderer,
                     useMeshColors = a.useMeshColors,
-                    useMeshMaterialIndex = a.useMeshMaterialIndex
+                    useMeshMaterialIndex = a.useMeshMaterialIndex,
+#if UNITY_5_5_OR_NEWER
+                    alignToDirection = a.alignToDirection,
+                    meshScale = a.meshScale,
+                    sphericalDirectionAmount = a.sphericalDirectionAmount,
+                    randomDirectionAmount = a.randomDirectionAmount,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.ShapeModule a, GameObject go)
+            {
+                a.angle = angle;
+                a.arc = arc;
+                a.box = box;
+                a.enabled = enabled;
+                a.length = length;
+                if (!string.IsNullOrEmpty(mesh))
+                    a.mesh = ResourceManager.LoadMesh(mesh);
+                a.meshRenderer = go.GetComponent<MeshRenderer>();
+                a.meshMaterialIndex = meshMaterialIndex;
+                a.meshShapeType = meshShapeType;
+                a.normalOffset = normalOffset;
+                a.radius = radius;
+#if !UNITY_5_5_OR_NEWER
+                a.randomDirection = randomDirection;
+#endif
+                a.shapeType = shapeType;
+                a.useMeshColors = useMeshColors;
+                a.useMeshMaterialIndex = useMeshMaterialIndex;
+#if UNITY_5_5_OR_NEWER
+                a.alignToDirection = alignToDirection;
+                a.meshScale = meshScale;
+                a.randomDirectionAmount = randomDirectionAmount;
+                a.sphericalDirectionAmount = sphericalDirectionAmount;
+#endif
             }
         }
 
@@ -684,7 +1035,17 @@ namespace ModEnabler.Resource.DataObjects
         {
             public bool enabled;
             public Vector2 range;
+            public bool seperateAxes;
             public MinMaxCurve size;
+            public MinMaxCurve x;
+            public MinMaxCurve y;
+            public MinMaxCurve z;
+#if UNITY_5_5_OR_NEWER
+            public float sizeMultiplier;
+            public float xMultiplier;
+            public float yMultiplier;
+            public float zMultiplier;
+#endif
 
             public static implicit operator SizeBySpeedModule(ParticleSystem.SizeBySpeedModule a)
             {
@@ -692,43 +1053,143 @@ namespace ModEnabler.Resource.DataObjects
                 {
                     enabled = a.enabled,
                     range = a.range,
-                    size = a.size
+                    seperateAxes = a.separateAxes,
+                    size = a.size,
+                    x = a.x,
+                    y = a.y,
+                    z = a.z,
+#if UNITY_5_5_OR_NEWER
+                    sizeMultiplier = a.sizeMultiplier,
+                    xMultiplier = a.xMultiplier,
+                    yMultiplier = a.yMultiplier,
+                    zMultiplier = a.zMultiplier,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.SizeBySpeedModule a)
+            {
+                a.enabled = enabled;
+                a.range = range;
+                a.separateAxes = seperateAxes;
+                a.size = ParticleSystemHelpers.Convert(size);
+                a.x = ParticleSystemHelpers.Convert(x);
+                a.y = ParticleSystemHelpers.Convert(y);
+                a.z = ParticleSystemHelpers.Convert(z);
+#if UNITY_5_5_OR_NEWER
+                a.sizeMultiplier = sizeMultiplier;
+                a.xMultiplier = xMultiplier;
+                a.yMultiplier = yMultiplier;
+                a.zMultiplier = zMultiplier;
+#endif
             }
         }
 
         public struct SizeOverLifetimeModule
         {
             public bool enabled;
+            public bool seperateAxes;
             public MinMaxCurve size;
+            public MinMaxCurve x;
+            public MinMaxCurve y;
+            public MinMaxCurve z;
+#if UNITY_5_5_OR_NEWER
+            public float sizeMultiplier;
+            public float xMultiplier;
+            public float yMultiplier;
+            public float zMultiplier;
+#endif
 
             public static implicit operator SizeOverLifetimeModule(ParticleSystem.SizeOverLifetimeModule a)
             {
                 return new SizeOverLifetimeModule()
                 {
                     enabled = a.enabled,
-                    size = a.size
+                    seperateAxes = a.separateAxes,
+                    size = a.size,
+                    x = a.x,
+                    y = a.y,
+                    z = a.z,
+#if UNITY_5_5_OR_NEWER
+                    sizeMultiplier = a.sizeMultiplier,
+                    xMultiplier = a.xMultiplier,
+                    yMultiplier = a.yMultiplier,
+                    zMultiplier = a.zMultiplier,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.SizeOverLifetimeModule a)
+            {
+                a.enabled = enabled;
+                a.separateAxes = seperateAxes;
+                a.size = ParticleSystemHelpers.Convert(size);
+                a.x = ParticleSystemHelpers.Convert(x);
+                a.y = ParticleSystemHelpers.Convert(y);
+                a.z = ParticleSystemHelpers.Convert(z);
+#if UNITY_5_5_OR_NEWER
+                a.sizeMultiplier = sizeMultiplier;
+                a.xMultiplier = xMultiplier;
+                a.yMultiplier = yMultiplier;
+                a.zMultiplier = zMultiplier;
+#endif
             }
         }
 
         public struct SubEmittersModule
         {
+            public bool enabled;
+#if UNITY_5_5_OR_NEWER
+            public Emitter[] emitters;
+#else
             public string birth0;
             public string birth1;
             public string collision0;
             public string collision1;
             public string death0;
             public string death1;
-            public bool enabled;
+#endif
 
             public static implicit operator SubEmittersModule(ParticleSystem.SubEmittersModule a)
             {
                 if (a.enabled)
-                    Debug.LogWarning("Sub emitters are not supported for exporting, you should manually assing it in the exported file!");
+                    Debug.LogWarning("Sub emitters are not supported for exporting, you should manually assign it in the exported file! See http://modenabler.greenzonegames.com/wiki/resources.particle-systems.html for more information");
 
                 return new SubEmittersModule();
             }
+
+            public void ToUnity(ParticleSystem.SubEmittersModule a, GameObject go)
+            {
+                a.enabled = enabled;
+#if UNITY_5_5_OR_NEWER
+                foreach (var item in emitters)
+                {
+                    a.AddSubEmitter(ResourceManager.LoadParticleSystem(item.name, go), item.type, item.properties);
+                }
+#else
+                if (!string.IsNullOrEmpty(birth0))
+                    a.birth0 = ResourceManager.LoadParticleSystem(birth0, go);
+                if (!string.IsNullOrEmpty(birth1))
+                    a.birth1 = ResourceManager.LoadParticleSystem(birth1, go);
+                if (!string.IsNullOrEmpty(collision0))
+                    a.collision0 = ResourceManager.LoadParticleSystem(collision0, go);
+                if (!string.IsNullOrEmpty(collision1))
+                    a.collision1 = ResourceManager.LoadParticleSystem(collision1, go);
+                if (!string.IsNullOrEmpty(death0))
+                    a.death0 = ResourceManager.LoadParticleSystem(death0, go);
+                if (!string.IsNullOrEmpty(death1))
+                    a.death1 = ResourceManager.LoadParticleSystem(death1, go);
+#endif
+            }
+
+#if UNITY_5_5_OR_NEWER
+            public struct Emitter
+            {
+                public string name;
+                public ParticleSystemSubEmitterType type;
+                public ParticleSystemSubEmitterProperties properties;
+            }
+#endif
         }
 
         public struct TextureSheetAnimationModule
@@ -741,6 +1202,14 @@ namespace ModEnabler.Resource.DataObjects
             public int numTilesY;
             public int rowIndex;
             public bool useRandomRow;
+#if UNITY_5_5_OR_NEWER
+            public float flipU;
+            public float flipV;
+            public float frameOverTimeMultiplier;
+            public ParticleSystem.MinMaxCurve startFrame;
+            public float startFrameMultiplier;
+            public UVChannelFlags uvChannelMask;
+#endif
 
             public static implicit operator TextureSheetAnimationModule(ParticleSystem.TextureSheetAnimationModule a)
             {
@@ -753,8 +1222,36 @@ namespace ModEnabler.Resource.DataObjects
                     numTilesX = a.numTilesX,
                     numTilesY = a.numTilesY,
                     rowIndex = a.rowIndex,
-                    useRandomRow = a.useRandomRow
+                    useRandomRow = a.useRandomRow,
+#if UNITY_5_5_OR_NEWER
+                    flipU = a.flipU,
+                    flipV = a.flipV,
+                    frameOverTimeMultiplier = a.frameOverTimeMultiplier,
+                    startFrame = a.startFrame,
+                    startFrameMultiplier = a.startFrameMultiplier,
+                    uvChannelMask = a.uvChannelMask,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.TextureSheetAnimationModule a)
+            {
+                a.animation = animation;
+                a.cycleCount = cycleCount;
+                a.enabled = enabled;
+                a.frameOverTime = ParticleSystemHelpers.Convert(frameOverTime);
+                a.numTilesX = numTilesX;
+                a.numTilesY = numTilesY;
+                a.rowIndex = rowIndex;
+                a.useRandomRow = useRandomRow;
+#if UNITY_5_5_OR_NEWER
+                a.flipU = flipU;
+                a.flipV = flipV;
+                a.frameOverTimeMultiplier = frameOverTimeMultiplier;
+                a.startFrame = startFrame;
+                a.startFrameMultiplier = startFrameMultiplier;
+                a.uvChannelMask = uvChannelMask;
+#endif
             }
         }
 
@@ -765,6 +1262,11 @@ namespace ModEnabler.Resource.DataObjects
             public MinMaxCurve x;
             public MinMaxCurve y;
             public MinMaxCurve z;
+#if UNITY_5_5_OR_NEWER
+            public float xMultiplier;
+            public float yMultiplier;
+            public float zMultiplier;
+#endif
 
             public static implicit operator VelocityOverLifetimeModule(ParticleSystem.VelocityOverLifetimeModule a)
             {
@@ -774,8 +1276,27 @@ namespace ModEnabler.Resource.DataObjects
                     space = a.space,
                     x = a.x,
                     y = a.y,
-                    z = a.z
+                    z = a.z,
+#if UNITY_5_5_OR_NEWER
+                    xMultiplier = a.xMultiplier,
+                    yMultiplier = a.yMultiplier,
+                    zMultiplier = a.zMultiplier,
+#endif
                 };
+            }
+
+            public void ToUnity(ParticleSystem.VelocityOverLifetimeModule a)
+            {
+                a.enabled = enabled;
+                a.space = space;
+                a.x = ParticleSystemHelpers.Convert(x);
+                a.y = ParticleSystemHelpers.Convert(y);
+                a.z = ParticleSystemHelpers.Convert(z);
+#if UNITY_5_5_OR_NEWER
+                a.xMultiplier = xMultiplier;
+                a.yMultiplier = yMultiplier;
+                a.zMultiplier = zMultiplier;
+#endif
             }
         }
     }
