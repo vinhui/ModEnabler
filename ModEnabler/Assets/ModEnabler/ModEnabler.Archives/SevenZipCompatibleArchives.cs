@@ -1,6 +1,7 @@
 ﻿using SharpCompress.Archive;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ModEnabler.Archives
 {
@@ -41,8 +42,7 @@ namespace ModEnabler.Archives
             this.stream = stream;
             archive = ArchiveFactory.Open(stream);
 
-            foreach (var item in archive.Entries)
-                _entryCount++;
+            _entryCount = archive.Entries.Count();
         }
 
         /// <summary>
