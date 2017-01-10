@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\AnimationUtils.cs" />
-    <Compile Include="ConvertScene.cs" />
     <Compile Include="Utils\MaterialUtils.cs" />
     <Compile Include="ModEnablerEditor.cs" />
     <Compile Include="ModsSettingsEditor.cs" />
