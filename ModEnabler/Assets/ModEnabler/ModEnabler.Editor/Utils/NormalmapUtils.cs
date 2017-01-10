@@ -11,11 +11,19 @@ namespace ModEnabler.Editor.Utils
             string path = AssetDatabase.GetAssetPath(tex);
             TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
             bool wasReadable = importer.isReadable;
+#if UNITY_5_5_OR_NEWER
+            bool wasNormalmap = importer.textureType == TextureImporterType.NormalMap;
+#else
             bool wasNormalmap = importer.normalmap;
+#endif
 
             if (!wasReadable || wasNormalmap)
             {
+#if UNITY_5_5_OR_NEWER
+                importer.textureType = TextureImporterType.Default;
+#else
                 importer.normalmap = false;
+#endif
                 importer.isReadable = true;
                 importer.SaveAndReimport();
             }
@@ -54,7 +62,12 @@ namespace ModEnabler.Editor.Utils
             if (!wasReadable || wasNormalmap)
             {
                 importer.isReadable = wasReadable;
+#if UNITY_5_5_OR_NEWER
+                if (wasNormalmap)
+                    importer.textureType = TextureImporterType.NormalMap;
+#else
                 importer.normalmap = wasNormalmap;
+#endif
                 importer.SaveAndReimport();
             }
 
