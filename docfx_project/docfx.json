@@ -3,14 +3,14 @@
 			"src" : [{
 					"src" : "../ModEnabler/",
 					"files" : [
-						"ModEnabler.Archives/*.csproj",
-						"ModEnabler.Core/*.csproj",
-						"ModEnabler.Resource/*.csproj",
-						"ModEnabler.Serialization/*.csproj",
+						"ModEnabler.CSharp.csproj",
 					],
 					"exclude" : [
-						"**/obj/**",
-						"**/bin/**",
+						"**/Library/**",
+						"**/Mods/**",
+						"**/ProjectSettings/**",
+						"**/Temp/**",
+						"**/Assets/Demo/**",
 						"_site/**"
 					]
 				}
