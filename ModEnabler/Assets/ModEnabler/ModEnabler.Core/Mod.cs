@@ -223,6 +223,7 @@ namespace ModEnabler
             public static ModThreadWaiter Create(Mod mod, Action callback)
             {
                 GameObject go = new GameObject("Thread Waiter");
+                go.hideFlags = HideFlags.HideAndDontSave;
                 ModThreadWaiter tw = go.AddComponent<ModThreadWaiter>();
                 tw.mod = mod;
                 tw.callback = callback;
