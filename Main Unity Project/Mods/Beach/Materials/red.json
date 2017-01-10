@@ -1,0 +1,22 @@
+{
+	"shader" : "Diffuse",
+	"color" : {
+		"r" : 1.0,
+		"g" : 0,
+		"b" : 0,
+		"a" : 1.0
+	},
+	"mainTexture" : "",
+	"mainTextureOffset" : {
+		"x" : 0.0,
+		"y" : 0.0
+	},
+	"mainTextureScale" : {
+		"x" : 1.0,
+		"y" : 1.0
+	},
+	"passCount" : 6,
+	"renderQueue" : 2000,
+	"shaderKeywords" : [],
+	"globalIlluminationFlags" : 5
+}

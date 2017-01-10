@@ -1,0 +1,204 @@
+﻿{
+	"shader" : "Standard",
+	"color" : {
+		"r" : 1.0,
+		"g" : 1.0,
+		"b" : 1.0,
+		"a" : 1.0
+	},
+	"mainTextureOffset" : {
+		"x" : 0.0,
+		"y" : 0.0
+	},
+	"mainTextureScale" : {
+		"x" : 1.0,
+		"y" : 1.0
+	},
+	"renderQueue" : 2450,
+	"shaderKeywords" : ["_ALPHATEST_ON", "_EMISSION"],
+	"globalIlluminationFlags" : 1,
+	"enableKeywords" : ["_ALPHATEST_ON", "_EMISSION"],
+	"disableKeywords" : [],
+	"shaderProperties" : [{
+			"name" : "_BumpMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_BumpMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_BumpMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_DetailAlbedoMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_DetailAlbedoMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_DetailAlbedoMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_DetailMask",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_DetailMask",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_DetailMask",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_DetailNormalMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_DetailNormalMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_DetailNormalMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_EmissionMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_EmissionMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_EmissionMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_MainTex",
+			"type" : "texture",
+			"value" : "palm.png"
+		}, {
+			"name" : "_MainTex",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_MainTex",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_MetallicGlossMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_MetallicGlossMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_MetallicGlossMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_OcclusionMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_OcclusionMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_OcclusionMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_ParallaxMap",
+			"type" : "texture",
+			"value" : ""
+		}, {
+			"name" : "_ParallaxMap",
+			"type" : "textureScale",
+			"value" : "1,1"
+		}, {
+			"name" : "_ParallaxMap",
+			"type" : "textureOffset",
+			"value" : "0,0"
+		}, {
+			"name" : "_BumpScale",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_Cutoff",
+			"type" : "float",
+			"value" : "0.5"
+		}, {
+			"name" : "_DetailNormalMapScale",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_DstBlend",
+			"type" : "float",
+			"value" : "0"
+		}, {
+			"name" : "_GlossMapScale",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_Glossiness",
+			"type" : "float",
+			"value" : "0.5"
+		}, {
+			"name" : "_GlossyReflections",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_Metallic",
+			"type" : "float",
+			"value" : "0"
+		}, {
+			"name" : "_Mode",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_OcclusionStrength",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_Parallax",
+			"type" : "float",
+			"value" : "0.02"
+		}, {
+			"name" : "_SmoothnessTextureChannel",
+			"type" : "float",
+			"value" : "0"
+		}, {
+			"name" : "_SpecularHighlights",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_SrcBlend",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_UVSec",
+			"type" : "float",
+			"value" : "0"
+		}, {
+			"name" : "_ZWrite",
+			"type" : "float",
+			"value" : "1"
+		}, {
+			"name" : "_Color",
+			"type" : "color",
+			"value" : "1,1,1,1"
+		}, {
+			"name" : "_EmissionColor",
+			"type" : "color",
+			"value" : "0,0,0,1"
+		}
+	]
+}

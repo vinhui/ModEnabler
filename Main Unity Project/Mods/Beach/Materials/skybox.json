@@ -1,0 +1,33 @@
+{
+	"shader" : "Skybox/6 Sided",
+	"passCount" : 6,
+	"renderQueue" : 2000,
+	"shaderKeywords" : [],
+	"globalIlluminationFlags" : 5,
+	"shaderProperties" : [{
+			"name" : "_FrontTex",
+			"type" : "texture",
+			"value" : "Skybox/isle_ft.jpg"
+		}, {
+			"name" : "_BackTex",
+			"type" : "texture",
+			"value" : "Skybox/isle_bk.jpg"
+		}, {
+			"name" : "_LeftTex",
+			"type" : "texture",
+			"value" : "Skybox/isle_lf.jpg"
+		}, {
+			"name" : "_RightTex",
+			"type" : "texture",
+			"value" : "Skybox/isle_rt.jpg"
+		}, {
+			"name" : "_UpTex",
+			"type" : "texture",
+			"value" : "Skybox/isle_up.jpg"
+		}, {
+			"name" : "_DownTex",
+			"type" : "texture",
+			"value" : "Skybox/isle_dn.jpg"
+		}
+	]
+}
