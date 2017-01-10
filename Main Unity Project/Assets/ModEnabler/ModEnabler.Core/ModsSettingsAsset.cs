@@ -91,7 +91,7 @@ namespace ModEnabler
         public string encodingText = "utf-8";
 
         [SerializeField]
-        internal string archiveAssembly = "ModEnabler.Archives, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+        internal string archiveAssembly = "Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
 
         [SerializeField]
         internal string archiveTypeString = "ModEnabler.Archives.SevenZipCompatibleArchives";
@@ -116,7 +116,7 @@ namespace ModEnabler
         }
 
         [SerializeField]
-        internal string serializerAssembly = "ModEnabler.Serialization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+        internal string serializerAssembly = "Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
 
         [SerializeField]
         internal string serializerTypeString = "ModEnabler.Serialization.JsonSerializer";
