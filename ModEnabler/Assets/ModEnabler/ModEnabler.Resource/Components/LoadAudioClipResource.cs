@@ -6,9 +6,16 @@ namespace ModEnabler.Resource.Components
     [HelpURL("http://modenabler.greenzonegames.com/wiki/resources.audio.html")]
     public class LoadAudioClipResource : LoadResourceComponent<AudioSource>
     {
+        public bool loadProgressively = true;
+
         public override void Set()
         {
-            var c = ResourceManager.LoadAudioClip(fileName);
+            AudioClip c;
+            if (loadProgressively)
+                c = ResourceManager.LoadAudioClip(fileName);
+            else
+                c = ResourceManager.LoadAudioClipInstant(fileName);
+
             if (c != null)
             {
                 (componentToSet as AudioSource).clip = c;
