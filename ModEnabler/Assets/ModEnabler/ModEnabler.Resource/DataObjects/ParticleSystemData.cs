@@ -1162,9 +1162,13 @@ namespace ModEnabler.Resource.DataObjects
             {
                 a.enabled = enabled;
 #if UNITY_5_5_OR_NEWER
-                foreach (var item in emitters)
+                if (emitters != null)
                 {
-                    a.AddSubEmitter(ResourceManager.LoadParticleSystem(item.name, go), item.type, item.properties);
+                    foreach (var item in emitters)
+                    {
+                        if (string.IsNullOrEmpty(item.name))
+                            a.AddSubEmitter(ResourceManager.LoadParticleSystem(item.name, go), item.type, item.properties);
+                    }
                 }
 #else
                 if (!string.IsNullOrEmpty(birth0))
