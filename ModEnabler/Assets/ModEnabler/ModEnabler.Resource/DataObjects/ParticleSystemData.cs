@@ -96,6 +96,8 @@ namespace ModEnabler.Resource.DataObjects
             if (ps == null)
                 ps = go.AddComponent<ParticleSystem>();
 
+            ps.Stop();
+
             ps.randomSeed = randomSeed;
             ps.time = time;
 
@@ -142,6 +144,7 @@ namespace ModEnabler.Resource.DataObjects
 
             #endregion Modules
 
+            ps.Play();
             return ps;
         }
 
