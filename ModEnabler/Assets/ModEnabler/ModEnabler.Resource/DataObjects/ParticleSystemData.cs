@@ -39,6 +39,7 @@ namespace ModEnabler.Resource.DataObjects
         public InheritVelocityModule inheritVelocity;
         public LimitVelocityOverLifetimeModule limitVelocityOverLifetime;
 #if UNITY_5_5_OR_NEWER
+        public LightsModule lights;
         public NoiseModule noise;
 #endif
         public RotationBySpeedModule rotationBySpeed;
@@ -81,6 +82,7 @@ namespace ModEnabler.Resource.DataObjects
             inheritVelocity = ps.inheritVelocity;
             limitVelocityOverLifetime = ps.limitVelocityOverLifetime;
 #if UNITY_5_5_OR_NEWER
+            lights = ps.lights;
             noise = ps.noise;
 #endif
             randomSeed = ps.randomSeed;
@@ -139,6 +141,7 @@ namespace ModEnabler.Resource.DataObjects
             inheritVelocity.ToUnity(ps.inheritVelocity);
             limitVelocityOverLifetime.ToUnity(ps.limitVelocityOverLifetime);
 #if UNITY_5_5_OR_NEWER
+            lights.ToUnity(ps.lights);
             noise.ToUnity(ps.noise);
 #endif
             rotationBySpeed.ToUnity(ps.rotationBySpeed);
@@ -692,6 +695,146 @@ namespace ModEnabler.Resource.DataObjects
                 a.mode = mode;
             }
         }
+
+#if UNITY_5_5_OR_NEWER
+        public struct LightsModule
+        {
+            public bool alphaAffectsIntensity;
+            public bool enabled;
+            public MinMaxCurve intensity;
+            public float intensityMultiplier;
+            public Light light;
+            public int maxLights;
+            public MinMaxCurve range;
+            public float rangeMultiplier;
+            public float ratio;
+            public bool sizeAffectsRange;
+            public bool useParticleColor;
+            public bool useRandomDistribution;
+
+            public static implicit operator LightsModule(ParticleSystem.LightsModule a)
+            {
+                return new LightsModule
+                {
+                    alphaAffectsIntensity = a.alphaAffectsIntensity,
+                    enabled = a.enabled,
+                    intensity = a.intensity,
+                    intensityMultiplier = a.intensityMultiplier,
+                    light = a.light,
+                    maxLights = a.maxLights,
+                    range = a.range,
+                    rangeMultiplier = a.rangeMultiplier,
+                    ratio = a.ratio,
+                    sizeAffectsRange = a.sizeAffectsRange,
+                    useParticleColor = a.useParticleColor,
+                    useRandomDistribution = a.useRandomDistribution,
+                };
+            }
+
+            public void ToUnity(ParticleSystem.LightsModule a)
+            {
+                a.alphaAffectsIntensity = alphaAffectsIntensity;
+                a.enabled = enabled;
+                a.intensity = ParticleSystemHelpers.Convert(intensity);
+                a.intensityMultiplier = intensityMultiplier;
+                a.light = light.ToUnity();
+                a.maxLights = maxLights;
+                a.range = ParticleSystemHelpers.Convert(range);
+                a.rangeMultiplier = rangeMultiplier;
+                a.ratio = ratio;
+                a.sizeAffectsRange = sizeAffectsRange;
+                a.useParticleColor = useParticleColor;
+                a.useRandomDistribution = useRandomDistribution;
+            }
+
+            public struct Light
+            {
+                public Vector2 areaSize;
+                public int bakedIndex;
+                public float bounceIntensity;
+                public Color color;
+                public string cookie;
+                public float cookieSize;
+                public int cullingMask;
+                public bool enabled;
+                public float intensity;
+                public LightmappingMode lightmappingMode;
+                public float range;
+                public LightRenderMode renderMode;
+                public float shadowBias;
+                public int shadowCustomResolution;
+                public float shadowNearPlane;
+                public float shadowNormalBias;
+                public LightShadowResolution shadowResolution;
+                public LightShadows shadows;
+                public float shadowStrength;
+                public float spotAngle;
+                public LightType type;
+
+                public static implicit operator Light(UnityEngine.Light a)
+                {
+                    if (a.cookie != null)
+                        Debug.LogWarning("There is a cookie assigned in the Light of the light module, we can only guess the name for it will be '" + a.cookie.name + "' but be sure to check this!");
+                    if (a.flare != null)
+                        Debug.LogWarning("There is a flare assigned in the Light of the light module, this is not supported!");
+
+                    return new Light
+                    {
+                        areaSize = a.areaSize,
+                        bakedIndex = a.bakedIndex,
+                        bounceIntensity = a.bounceIntensity,
+                        color = a.color,
+                        cookie = a.cookie.name,
+                        cookieSize = a.cookieSize,
+                        cullingMask = a.cullingMask,
+                        enabled = a.enabled,
+                        intensity = a.intensity,
+                        lightmappingMode = a.lightmappingMode,
+                        range = a.range,
+                        renderMode = a.renderMode,
+                        shadowBias = a.shadowBias,
+                        shadowCustomResolution = a.shadowCustomResolution,
+                        shadowNearPlane = a.shadowNearPlane,
+                        shadowNormalBias = a.shadowNormalBias,
+                        shadowResolution = a.shadowResolution,
+                        shadows = a.shadows,
+                        shadowStrength = a.shadowStrength,
+                        spotAngle = a.spotAngle,
+                        type = a.type,
+                    };
+                }
+
+                public UnityEngine.Light ToUnity()
+                {
+                    GameObject go = new GameObject("Particle Light");
+                    UnityEngine.Light l = go.AddComponent<UnityEngine.Light>();
+                    l.areaSize = areaSize;
+                    l.bakedIndex = bakedIndex;
+                    l.bounceIntensity = bounceIntensity;
+                    l.color = color;
+                    l.cookie = ResourceManager.LoadTexture(cookie);
+                    l.cookieSize = cookieSize;
+                    l.cullingMask = cullingMask;
+                    l.enabled = enabled;
+                    l.intensity = intensity;
+                    l.lightmappingMode = lightmappingMode;
+                    l.range = range;
+                    l.renderMode = renderMode;
+                    l.shadowBias = shadowBias;
+                    l.shadowCustomResolution = shadowCustomResolution;
+                    l.shadowNearPlane = shadowNearPlane;
+                    l.shadowNormalBias = shadowNormalBias;
+                    l.shadowResolution = shadowResolution;
+                    l.shadows = shadows;
+                    l.shadowStrength = shadowStrength;
+                    l.spotAngle = spotAngle;
+                    l.type = type;
+
+                    return l;
+                }
+            }
+        }
+#endif
 
         public struct LimitVelocityOverLifetimeModule
         {
