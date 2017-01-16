@@ -21,7 +21,7 @@ MonoBehaviour:
   physicMaterialsDirectory: PhysicMaterials
   particleSystemsDirectory: ParticleSystems
   animationClipsDirectory: AnimationClips
-  load: 01010100
+  load: 01010101
   debugLogging: 1
   encodingText: utf-8
   archiveAssembly: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
