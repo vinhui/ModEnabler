@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace ModEnabler.Resource.DataObjects
 {
-    /// <summary>
-    /// A mesh in json format
-    /// </summary>
     [Serializable]
     public class MeshData
     {
-        private static readonly byte[] header = new byte[] { 0x76, 0x69, 0x6e, 0x68, 0x75, 0x69, 0x2d, 0x6d, 0x65, 0x73, 0x68 };
+        private static readonly byte[] headerOld = new byte[] { 0x76, 0x69, 0x6e, 0x68, 0x75, 0x69, 0x2d, 0x6d, 0x65, 0x73, 0x68 };
+        private static readonly byte[] header = new byte[] { 0x47, 0x5a, 0x47, 0x2d, 0x6d, 0x65, 0x73, 0x68 };
+        private const ushort latestVersion = 2;
 
+        public ushort fileVersion;
         public string name = "ModdedMesh";
         public Matrix4x4[] bindposes;
         public BoneWeight[] boneWeights;
@@ -25,7 +25,9 @@ namespace ModEnabler.Resource.DataObjects
         public Vector2[] uv3;
         public Vector2[] uv4;
         public Vector3[] vertices;
+#if !UNITY_5_5_OR_NEWER
         public bool optimize = true;
+#endif
         public bool calculateNormals = false;
 
         /// <summary>
@@ -46,7 +48,10 @@ namespace ModEnabler.Resource.DataObjects
             uv3 = mesh.uv3;
             uv4 = mesh.uv4;
             vertices = mesh.vertices;
+#if !UNITY_5_5_OR_NEWER
             optimize = true;
+#endif
+
             calculateNormals = normals == null || normals.Length == 0;
         }
 
@@ -56,7 +61,19 @@ namespace ModEnabler.Resource.DataObjects
 
         public static MeshData Deserialize(byte[] bytes)
         {
+            bool headerMatch = false;
+            bool oldVersion = false;
+
+
             if (Utils.CompareByteArr(bytes, header, 0, header.Length))
+                headerMatch = true;
+            else if (Utils.CompareByteArr(bytes, headerOld, 0, headerOld.Length))
+            {
+                headerMatch = true;
+                oldVersion = true;
+            }
+
+            if (headerMatch)
             {
                 MeshData meshData = new MeshData();
 
@@ -83,7 +100,14 @@ namespace ModEnabler.Resource.DataObjects
                     {
                         #region Read Header
 
-                        reader.BaseStream.Position = header.Length;
+                        if (oldVersion)
+                            reader.BaseStream.Position = headerOld.Length;
+                        else
+                        {
+                            reader.BaseStream.Position = header.Length;
+                            meshData.fileVersion = reader.ReadByte();
+                        }
+
                         nameLength = reader.ReadByte();
                         meshData.name = Encoding.ASCII.GetString(reader.ReadBytes(nameLength));
                         bindPoseCount = reader.ReadUShort();
@@ -97,7 +121,12 @@ namespace ModEnabler.Resource.DataObjects
                         uv3Count = reader.ReadUShort();
                         uv4Count = reader.ReadUShort();
                         vertexCount = reader.ReadUShort();
-                        meshData.optimize = reader.ReadBoolean();
+                        if (oldVersion)
+#if !UNITY_5_5_OR_NEWER
+                            meshData.optimize = reader.ReadBoolean();
+#else
+                            reader.ReadBoolean();
+#endif
                         meshData.calculateNormals = reader.ReadBoolean();
 
                         #endregion Read Header
@@ -189,7 +218,13 @@ namespace ModEnabler.Resource.DataObjects
                 {
                     #region Write Header
 
+#if UNITY_5_5_OR_NEWER
                     writer.Write(header);
+                    writer.Write(latestVersion);
+#else
+                    writer.Write(headerOld);
+#endif
+
                     writer.Write(nameLength);
                     if (name.Length > byte.MaxValue)
                         writer.Write(Encoding.ASCII.GetBytes(name.Substring(0, byte.MaxValue)));
@@ -206,7 +241,9 @@ namespace ModEnabler.Resource.DataObjects
                     writer.WriteUShort(uv3Count);
                     writer.WriteUShort(uv4Count);
                     writer.WriteUShort(vertexCount);
+#if !UNITY_5_5_OR_NEWER
                     writer.Write(optimize);
+#endif
                     writer.Write(calculateNormals);
 
                     #endregion Write Header
@@ -277,6 +314,11 @@ namespace ModEnabler.Resource.DataObjects
 
             if (calculateNormals)
                 mesh.RecalculateNormals();
+
+#if !UNITY_5_5_OR_NEWER
+            if (optimize)
+                mesh.Optimize();
+#endif
 
             return mesh;
         }
