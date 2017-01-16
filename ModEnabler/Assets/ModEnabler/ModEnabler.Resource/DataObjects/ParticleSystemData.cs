@@ -38,6 +38,9 @@ namespace ModEnabler.Resource.DataObjects
         public ForceOverLifetimeModule forceOverLifetime;
         public InheritVelocityModule inheritVelocity;
         public LimitVelocityOverLifetimeModule limitVelocityOverLifetime;
+#if UNITY_5_5_OR_NEWER
+        public NoiseModule noise;
+#endif
         public RotationBySpeedModule rotationBySpeed;
         public RotationOverLifetimeModule rotationOverLifetime;
         public ShapeModule shape;
@@ -77,6 +80,9 @@ namespace ModEnabler.Resource.DataObjects
             forceOverLifetime = ps.forceOverLifetime;
             inheritVelocity = ps.inheritVelocity;
             limitVelocityOverLifetime = ps.limitVelocityOverLifetime;
+#if UNITY_5_5_OR_NEWER
+            noise = ps.noise;
+#endif
             randomSeed = ps.randomSeed;
             rotationBySpeed = ps.rotationBySpeed;
             rotationOverLifetime = ps.rotationOverLifetime;
@@ -132,6 +138,9 @@ namespace ModEnabler.Resource.DataObjects
             forceOverLifetime.ToUnity(ps.forceOverLifetime);
             inheritVelocity.ToUnity(ps.inheritVelocity);
             limitVelocityOverLifetime.ToUnity(ps.limitVelocityOverLifetime);
+#if UNITY_5_5_OR_NEWER
+            noise.ToUnity(ps.noise);
+#endif
             rotationBySpeed.ToUnity(ps.rotationBySpeed);
             rotationOverLifetime.ToUnity(ps.rotationOverLifetime);
             shape.ToUnity(ps.shape, go);
@@ -788,6 +797,104 @@ namespace ModEnabler.Resource.DataObjects
                 };
             }
         }
+
+#if UNITY_5_5_OR_NEWER
+        public struct NoiseModule
+        {
+            public bool damping;
+            public bool enabled;
+            public float frequency;
+            public int octaveCount;
+            public float octaveMultiplier;
+            public float octaveScale;
+            public ParticleSystemNoiseQuality quality;
+            public MinMaxCurve remap;
+            public bool remapEnabled;
+            public float remapMultiplier;
+            public MinMaxCurve remapX;
+            public float remapXMultiplier;
+            public MinMaxCurve remapY;
+            public float remapYMultiplier;
+            public MinMaxCurve remapZ;
+            public float remapZMultiplier;
+            public MinMaxCurve scrollSpeed;
+            public float scrollSpeedMultiplier;
+            public bool separateAxes;
+            public MinMaxCurve strength;
+            public float strengthMultiplier;
+            public MinMaxCurve strengthX;
+            public float strengthXMultiplier;
+            public MinMaxCurve strengthY;
+            public float strengthYMultiplier;
+            public MinMaxCurve strengthZ;
+            public float strengthZMultiplier;
+
+            public static implicit operator NoiseModule(ParticleSystem.NoiseModule a)
+            {
+                return new NoiseModule
+                {
+                    damping = a.damping,
+                    enabled = a.enabled,
+                    frequency = a.frequency,
+                    octaveCount = a.octaveCount,
+                    octaveMultiplier = a.octaveMultiplier,
+                    octaveScale = a.octaveScale,
+                    quality = a.quality,
+                    remap = a.remap,
+                    remapEnabled = a.remapEnabled,
+                    remapMultiplier = a.remapMultiplier,
+                    remapX = a.remapX,
+                    remapXMultiplier = a.remapXMultiplier,
+                    remapY = a.remapY,
+                    remapYMultiplier = a.remapYMultiplier,
+                    remapZ = a.remapZ,
+                    remapZMultiplier = a.remapZMultiplier,
+                    scrollSpeed = a.scrollSpeed,
+                    scrollSpeedMultiplier = a.scrollSpeedMultiplier,
+                    separateAxes = a.separateAxes,
+                    strength = a.strength,
+                    strengthMultiplier = a.strengthMultiplier,
+                    strengthX = a.strengthX,
+                    strengthXMultiplier = a.strengthXMultiplier,
+                    strengthY = a.strengthY,
+                    strengthYMultiplier = a.strengthYMultiplier,
+                    strengthZ = a.strengthZ,
+                    strengthZMultiplier = a.strengthZMultiplier,
+                };
+            }
+
+            public void ToUnity(ParticleSystem.NoiseModule a)
+            {
+                a.damping = damping;
+                a.enabled = enabled;
+                a.frequency = frequency;
+                a.octaveCount = octaveCount;
+                a.octaveMultiplier = octaveMultiplier;
+                a.octaveScale = octaveScale;
+                a.quality = quality;
+                a.remap = ParticleSystemHelpers.Convert(remap);
+                a.remapEnabled = remapEnabled;
+                a.remapMultiplier = remapMultiplier;
+                a.remapX = ParticleSystemHelpers.Convert(remapX);
+                a.remapXMultiplier = remapXMultiplier;
+                a.remapY = ParticleSystemHelpers.Convert(remapY);
+                a.remapYMultiplier = remapYMultiplier;
+                a.remapZ = ParticleSystemHelpers.Convert(remapZ);
+                a.remapZMultiplier = remapZMultiplier;
+                a.scrollSpeed = ParticleSystemHelpers.Convert(scrollSpeed);
+                a.scrollSpeedMultiplier = scrollSpeedMultiplier;
+                a.separateAxes = separateAxes;
+                a.strength = ParticleSystemHelpers.Convert(strength);
+                a.strengthMultiplier = strengthMultiplier;
+                a.strengthX = ParticleSystemHelpers.Convert(strengthX);
+                a.strengthXMultiplier = strengthXMultiplier;
+                a.strengthY = ParticleSystemHelpers.Convert(strengthY);
+                a.strengthYMultiplier = strengthYMultiplier;
+                a.strengthZ = ParticleSystemHelpers.Convert(strengthZ);
+                a.strengthZMultiplier = strengthZMultiplier;
+            }
+        }
+#endif
 
         public struct Particle
         {
