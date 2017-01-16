@@ -1,6 +1,4 @@
-﻿using FullSerializer;
-using System;
-using System.Linq;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -49,6 +47,10 @@ namespace ModEnabler.Resource.DataObjects
         public SizeOverLifetimeModule sizeOverLifetime;
         public SubEmittersModule subEmitters;
         public TextureSheetAnimationModule textureSheetAnimation;
+#if UNITY_5_5_OR_NEWER
+        public TrailModule trails;
+        public TriggerModule trigger;
+#endif
         public VelocityOverLifetimeModule velocityOverLifetime;
         public Renderer renderer;
 
@@ -93,6 +95,10 @@ namespace ModEnabler.Resource.DataObjects
             sizeOverLifetime = ps.sizeOverLifetime;
             subEmitters = ps.subEmitters;
             textureSheetAnimation = ps.textureSheetAnimation;
+#if UNITY_5_5_OR_NEWER
+            trails = ps.trails;
+            trigger = ps.trigger;
+#endif
             time = ps.time;
             velocityOverLifetime = ps.velocityOverLifetime;
             renderer = new Renderer(ps.GetComponent<ParticleSystemRenderer>());
@@ -151,6 +157,10 @@ namespace ModEnabler.Resource.DataObjects
             sizeOverLifetime.ToUnity(ps.sizeOverLifetime);
             subEmitters.ToUnity(ps.subEmitters, go);
             textureSheetAnimation.ToUnity(ps.textureSheetAnimation);
+#if UNITY_5_5_OR_NEWER
+            trails.ToUnity(ps.trails);
+            trigger.ToUnity(ps.trigger);
+#endif
             velocityOverLifetime.ToUnity(ps.velocityOverLifetime);
             renderer.ToUnity(ps.GetComponent<ParticleSystemRenderer>());
 
@@ -697,6 +707,7 @@ namespace ModEnabler.Resource.DataObjects
         }
 
 #if UNITY_5_5_OR_NEWER
+
         public struct LightsModule
         {
             public bool alphaAffectsIntensity;
@@ -834,6 +845,7 @@ namespace ModEnabler.Resource.DataObjects
                 }
             }
         }
+
 #endif
 
         public struct LimitVelocityOverLifetimeModule
@@ -942,6 +954,7 @@ namespace ModEnabler.Resource.DataObjects
         }
 
 #if UNITY_5_5_OR_NEWER
+
         public struct NoiseModule
         {
             public bool damping;
@@ -1037,6 +1050,7 @@ namespace ModEnabler.Resource.DataObjects
                 a.strengthZMultiplier = strengthZMultiplier;
             }
         }
+
 #endif
 
         public struct Particle
@@ -1440,12 +1454,14 @@ namespace ModEnabler.Resource.DataObjects
             }
 
 #if UNITY_5_5_OR_NEWER
+
             public struct Emitter
             {
                 public string name;
                 public ParticleSystemSubEmitterType type;
                 public ParticleSystemSubEmitterProperties properties;
             }
+
 #endif
         }
 
@@ -1512,6 +1528,104 @@ namespace ModEnabler.Resource.DataObjects
             }
         }
 
+#if UNITY_5_5_OR_NEWER
+
+        public struct TrailModule
+        {
+            public MinMaxGradient colorOverLifetime;
+            public MinMaxGradient colorOverTrail;
+            public bool dieWithParticles;
+            public bool enabled;
+            public bool inheritParticleColor;
+            public ParticleSystem.MinMaxCurve lifetime;
+            public float lifetimeMultiplier;
+            public float minVertexDistance;
+            public float ratio;
+            public bool sizeAffectsLifetime;
+            public bool sizeAffectsWidth;
+            public ParticleSystemTrailTextureMode textureMode;
+            public MinMaxCurve widthOverTrail;
+            public float widthOverTrailMultiplier;
+            public bool worldSpace;
+
+            public static implicit operator TrailModule(ParticleSystem.TrailModule a)
+            {
+                return new TrailModule
+                {
+                    colorOverLifetime = a.colorOverLifetime,
+                    colorOverTrail = a.colorOverTrail,
+                    dieWithParticles = a.dieWithParticles,
+                    enabled = a.enabled,
+                    inheritParticleColor = a.inheritParticleColor,
+                    lifetime = a.lifetime,
+                    lifetimeMultiplier = a.lifetimeMultiplier,
+                    minVertexDistance = a.minVertexDistance,
+                    ratio = a.ratio,
+                    sizeAffectsLifetime = a.sizeAffectsLifetime,
+                    sizeAffectsWidth = a.sizeAffectsWidth,
+                    textureMode = a.textureMode,
+                    widthOverTrail = a.widthOverTrail,
+                    widthOverTrailMultiplier = a.widthOverTrailMultiplier,
+                    worldSpace = a.worldSpace,
+                };
+            }
+
+            public void ToUnity(ParticleSystem.TrailModule a)
+            {
+                a.colorOverLifetime = ParticleSystemHelpers.Convert(colorOverLifetime);
+                a.colorOverTrail = ParticleSystemHelpers.Convert(colorOverTrail);
+                a.dieWithParticles = dieWithParticles;
+                a.enabled = enabled;
+                a.inheritParticleColor = inheritParticleColor;
+                a.lifetime = lifetime;
+                a.lifetimeMultiplier = lifetimeMultiplier;
+                a.minVertexDistance = minVertexDistance;
+                a.ratio = ratio;
+                a.sizeAffectsLifetime = sizeAffectsLifetime;
+                a.sizeAffectsWidth = sizeAffectsWidth;
+                a.textureMode = textureMode;
+                a.widthOverTrail = ParticleSystemHelpers.Convert(widthOverTrail);
+                a.widthOverTrailMultiplier = widthOverTrailMultiplier;
+                a.worldSpace = worldSpace;
+            }
+        }
+
+        public struct TriggerModule
+        {
+            public bool enabled;
+            public ParticleSystemOverlapAction enter;
+            public ParticleSystemOverlapAction exit;
+            public ParticleSystemOverlapAction inside;
+            public ParticleSystemOverlapAction outside;
+            public float radiusScale;
+
+            public static implicit operator TriggerModule(ParticleSystem.TriggerModule a)
+            {
+                if (a.enabled)
+                    Debug.LogWarning("Colliders of the trigger module can not be serialized");
+
+                return new TriggerModule
+                {
+                    enabled = a.enabled,
+                    enter = a.enter,
+                    exit = a.exit,
+                    inside = a.inside,
+                    outside = a.outside,
+                    radiusScale = a.radiusScale,
+                };
+            }
+
+            public void ToUnity(ParticleSystem.TriggerModule a)
+            {
+                a.enabled = enabled;
+                a.enter = enter;
+                a.exit = exit;
+                a.inside = inside;
+                a.outside = outside;
+                a.radiusScale = radiusScale;
+            }
+        }
+
         public struct VelocityOverLifetimeModule
         {
             public bool enabled;
@@ -1557,6 +1671,8 @@ namespace ModEnabler.Resource.DataObjects
             }
         }
     }
+
+#endif
 
     public static class ParticleSystemHelpers
     {
